@@ -18,6 +18,7 @@
   bottom: -50vw;
   left: -22.27vw;
   transform: rotate(15.25deg);
+  z-index: 1;
 }
 
 .App {
@@ -385,4 +386,1110 @@ text {
   padding-right: 12px;
   font-size: 16px;
   min-height: 80px;
+}
+
+/* Creator Dashboard Styles */
+.CreatorDashboard {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  padding: 20px;
+  padding-top: env(safe-area-inset-top); /* iOS notch/status bar height */
+}
+
+.DashboardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.HeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.BackButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.BackButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.BackIcon {
+  width: 16px;
+  height: 16px;
+  transform: rotate(180deg);
+}
+
+.BackText {
+  font-size: 14px;
+  color: #fff;
+}
+
+.DashboardLogo {
+  width: 40px;
+  height: 40px;
+}
+
+.DashboardTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.TabNavigation {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.Tab {
+  flex: 1;
+  padding: 12px 16px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  justify-content: center;
+  align-items: center;
+}
+
+.Tab--active {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.TabText {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.DashboardContent {
+  flex: 1;
+}
+
+.DashboardSection {
+  animation: fadeIn 0.3s ease-in-out;
+  z-index: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.WalletCard {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+.WalletHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.CreatorInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.CreatorAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.CreatorName {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.CreatorHandle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.LastUpdated {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.WalletBalance {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.BalanceLabel {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+}
+
+.BalanceAmount {
+  font-size: 36px;
+  font-weight: 800;
+  color: #4ade80;
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+}
+
+.EarningsSummary {
+  display: flex;
+  gap: 16px;
+}
+
+.EarningsCard {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.EarningsLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+}
+
+.EarningsAmount {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.EarningsChange {
+  font-size: 11px;
+  color: #4ade80;
+}
+
+.QuickStats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.StatCard {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.StatValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.StatLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.SectionHeader {
+  margin-bottom: 24px;
+}
+
+.SectionTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.SectionSubtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.VideoList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.VideoCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.VideoThumbnail {
+  width: 80px;
+  height: 60px;
+  border-radius: 8px;
+}
+
+.VideoInfo {
+  flex: 1;
+}
+
+.VideoTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.VideoStats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.VideoStat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ReceiptsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ReceiptCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ReceiptHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ReceiptAmount {
+  font-size: 18px;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+.ReceiptTime {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ReceiptVideo {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.ReceiptViewer {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+}
+
+.ReceiptScores {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ScoreLabel {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.ChartsContainer {
+  display: flex;
+  height: 67vh;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 1;
+}
+
+.ChartCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ChartTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.ChartPlaceholder {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ChartPlaceholderText {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.ChartData {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.ChartPoint {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.ChartBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.BarLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  flex: 1;
+}
+
+.BarValue {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4ade80;
+}
+
+.QualityDistribution {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.QualityItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+}
+
+.QualityLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.QualityValue {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4ade80;
+}
+
+/* Debug Button Styles */
+.DebugButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.DebugButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.DebugButtonText {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+/* Top Up Screen Styles */
+.TopUpOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 24px;
+}
+
+.TopUpScreen {
+  width: 92vw;
+  max-width: 720px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 16px;
+  align-self: center;
+}
+
+.TopUpHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.TopUpBalanceLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.TopUpBalance {
+  font-size: 36px;
+  font-weight: 800;
+  color: #4ade80;
+  margin-top: 4px;
+}
+
+.BalanceSkeleton {
+  width: 180px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+.TopUpInfo {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 8px;
+}
+
+.TopUpCard {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.PresetChips {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.Chip {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 6px 10px;
+}
+
+.ChipText { font-size: 12px; color: #fff; }
+
+.TopUpInput {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 18px;
+}
+
+.InputHint {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 6px;
+}
+
+.SessionToggleRow {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.SessionToggleRow--disabled { opacity: 0.5; }
+
+.Toggle {
+  width: 44px;
+  height: 26px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 2px;
+}
+
+.Toggle--on { background: rgba(74, 222, 128, 0.35); border-color: rgba(74, 222, 128, 0.6); }
+.Toggle--disabled { opacity: 0.5; }
+
+.ToggleKnob {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.Toggle--on .ToggleKnob { margin-left: 18px; }
+
+.ToggleLabel { font-size: 13px; color: #fff; }
+
+.SessionPreview { font-size: 12px; color: #4ade80; margin-top: 8px; }
+
+.SummaryCard {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 16px;
+}
+
+.SummaryTitle { font-size: 14px; color: #fff; font-weight: 700; margin-bottom: 10px; }
+
+.SummaryRow { display: flex; justify-content: space-between; margin-top: 6px; }
+.SummaryLabel { font-size: 12px; color: rgba(255,255,255,0.75); }
+.SummaryValue { font-size: 14px; color: #fff; font-weight: 600; }
+.SummaryNote { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 10px; }
+
+.TopUpActions { display: flex; gap: 10px; margin-top: 16px; }
+
+.PrimaryButton {
+  flex: 1;
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  border-radius: 12px;
+  padding: 14px;
+  justify-content: center;
+  align-items: center;
+}
+.PrimaryButton--disabled { opacity: 0.5; }
+.PrimaryButtonText { color: #fff; font-size: 16px; font-weight: 700; }
+
+.SecondaryButton {
+  flex: 1;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 14px;
+  justify-content: center;
+  align-items: center;
+}
+.SecondaryButtonText { color: #fff; font-size: 16px; font-weight: 700; }
+
+.NoticeBanner { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; margin-bottom: 12px; }
+.NoticeBanner--error { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.35); }
+.NoticeBanner--success { background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.35); }
+.NoticeBanner--warning { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.35); }
+.NoticeText { color: #fff; font-size: 13px; }
+.NoticeLink { color: #4ade80; font-size: 13px; font-weight: 700; }
+.NoticeAction { padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,0.08); }
+
+/* User Dashboard Styles */
+.UserDashboard {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  padding: 20px;
+  padding-top: env(safe-area-inset-top);
+}
+
+.UserInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.UserAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.UserName {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.UserHandle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.TopUpButton {
+  background: rgba(74, 222, 128, 0.2);
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.TopUpButton:hover {
+  background: rgba(74, 222, 128, 0.3);
+}
+
+.TopUpText {
+  font-size: 14px;
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.SessionCard {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+.SessionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.SessionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.SessionStatus {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.SessionStatus--inactive {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.SessionStatus--active {
+  background: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+}
+
+.SessionStatus--throttled {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+}
+
+.SessionStatus--held {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.SessionStatus--blocked {
+  background: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.StatusText {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.SessionBudget {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.BudgetInfo {
+  flex: 1;
+}
+
+.BudgetLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 4px;
+}
+
+.BudgetAmount {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.BudgetProgress {
+  margin-bottom: 20px;
+}
+
+.ProgressBar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.ProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #4ade80, #22c55e);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.ProgressText {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+.SessionActions {
+  display: flex;
+  gap: 12px;
+}
+
+.StartButton {
+  flex: 1;
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  justify-content: center;
+  align-items: center;
+}
+
+.StartButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(74, 222, 128, 0.3);
+}
+
+.EndButton {
+  flex: 1;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  justify-content: center;
+  align-items: center;
+}
+
+.EndButton:hover {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+.ButtonText {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ComplianceNotice {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid;
+}
+
+.ComplianceNotice--throttled {
+  border-left-color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+}
+
+.ComplianceNotice--held {
+  border-left-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.ComplianceNotice--blocked {
+  border-left-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.ComplianceText {
+  font-size: 14px;
+  color: #fff;
+  flex: 1;
+}
+
+.CloseButton {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.CloseText {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: bold;
+}
+
+.VideoFeed {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.VideoCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.VideoCreator {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+}
+
+.VideoStats {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 12px;
+}
+
+.VideoActions {
+  display: flex;
+  gap: 8px;
+}
+
+.ActionButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+  justify-content: center;
+  align-items: center;
+}
+
+.ActionButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ActionButton--active {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.ActionText {
+  font-size: 16px;
+}
+
+.ReceiptsList {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ReceiptReason {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.ReasonText {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.QseScore {
+  font-size: 12px;
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.AnalyticsContainer {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.CreatorList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.CreatorItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+}
+
+.CreatorName {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.CreatorAmount {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4ade80;
+}
+
+.SecurityCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.SecurityItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.SecurityItem:last-child {
+  border-bottom: none;
+}
+
+.SecurityLabel {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.SecurityValue {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.SecurityValue--success {
+  color: #4ade80;
+}
+
+.StreamingChip {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 16px;
+  padding: 16px;
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.StreamingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.StreamingLabel {
+  font-size: 12px;
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.StreamingScore {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.StreamingPayout {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.StreamingBudget {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
 }

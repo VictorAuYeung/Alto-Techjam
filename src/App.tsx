@@ -7,6 +7,8 @@ import altoLogo from './assets/logos/13.png';
 import arrowIcon from './assets/arrow.png';
 import ViewerSignup from './screens/ViewerSignup.js';
 import CreatorSignup from './screens/CreatorSignup.js';
+import { CreatorDashboard } from './screens/CreatorDashboard.js';
+import { UserDashboard } from './screens/UserDashboard.js';
 
 type Role = 'consumer' | 'creator' | null;
 
@@ -16,7 +18,7 @@ export function App(
   }>,
 ) {
   const [selectedRole, setSelectedRole] = useState<Role>(null);
-  const [stage, setStage] = useState<'home' | 'onboarding' | 'signup'>('home');
+  const [stage, setStage] = useState<'home' | 'onboarding' | 'signup' | 'dashboard' | 'user-dashboard'>('home');
 
   useEffect(() => {
     console.info('Alto: streaming micro-credits for short-form creators');
@@ -54,6 +56,18 @@ export function App(
   const onSignupBack = useCallback(() => {
     setTimeout(() => {
       setStage('onboarding');
+    }, 0);
+  }, []);
+
+  const onDashboardBack = useCallback(() => {
+    setTimeout(() => {
+      setStage('home');
+    }, 0);
+  }, []);
+
+  const onUserDashboardBack = useCallback(() => {
+    setTimeout(() => {
+      setStage('home');
     }, 0);
   }, []);
 
@@ -107,6 +121,12 @@ export function App(
               </view>
             </view>
             <text className="NavHint">Choose your path to get started</text>
+            <view className="DebugButton" bindtap={() => setStage('dashboard')}>
+              <text className="DebugButtonText">Debug: Creator Dashboard</text>
+            </view>
+            <view className="DebugButton" bindtap={() => setStage('user-dashboard')}>
+              <text className="DebugButtonText">Debug: User Dashboard</text>
+            </view>
           </view>
         )}
 
@@ -147,6 +167,14 @@ export function App(
 
         {stage === 'signup' && selectedRole === 'creator' && (
           <CreatorSignup onBack={onSignupBack} onSubmit={onCreatorSubmit} />
+        )}
+
+        {stage === 'dashboard' && (
+          <CreatorDashboard onBack={onDashboardBack} />
+        )}
+
+        {stage === 'user-dashboard' && (
+          <UserDashboard onBack={onUserDashboardBack} />
         )}
       </view>
     </view>
