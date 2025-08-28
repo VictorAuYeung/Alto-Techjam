@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '@lynx-js/react';
 import arrowIcon from '../assets/arrow.png';
 import altoLogo from '../assets/logos/13.png';

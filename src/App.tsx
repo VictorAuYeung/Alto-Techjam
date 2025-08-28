@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import '@lynx-js/react';
 
 import './App.css';
@@ -20,7 +20,7 @@ export function App(
   }>,
 ) {
   const [selectedRole, setSelectedRole] = useState<Role>(null);
-  const [stage, setStage] = useState<'splash' | 'home' | 'onboarding' | 'signup'>('splash');
+  const [stage, setStage] = useState<'splash' | 'home' | 'onboarding' | 'signup' | 'dashboard' | 'user-dashboard'>('splash');
   const [isSplashFading, setIsSplashFading] = useState(false);
   const [isLogoVisible, setIsLogoVisible] = useState(false);
 
