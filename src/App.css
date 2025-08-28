@@ -3,22 +3,216 @@
   --color-text: #fff;
 }
 
+/* Splash Page Styles */
+.Splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1000;
+  background: #000;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.Splash--fading {
+  opacity: 0;
+}
+
+.SplashBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.BananaContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.Banana {
+  position: absolute;
+  z-index: 10;
+  animation: bananaFall 4s linear infinite;
+  animation-fill-mode: forwards;
+}
+
+
+
+.BananaImage {
+  width: 80px;
+  height: 80px;
+  display: block;
+}
+
+@keyframes bananaFall {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(100vh + 200px)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.SplashContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  opacity: 0;
+  animation: logoFadeIn 1s ease-out 2.5s forwards;
+}
+
+
+
+@keyframes logoFadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.SplashLogo {
+  animation: logoExpand 1s ease-out 2.5s forwards;
+}
+
+@keyframes logoExpand {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .Background {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background: radial-gradient(
-    71.43% 62.3% at 46.43% 36.43%,
-    rgba(18, 229, 229, 0) 15%,
-    rgba(255, 155, 233, 0.3) 56.35%,
-    #fe2858 100%
+    circle at 50% 50%,
+    rgba(255, 236, 139, 0.15) 0%,
+    rgba(255, 223, 0, 0.08) 30%,
+    rgba(255, 193, 7, 0.04) 60%,
+    rgba(0, 0, 0, 0.95) 100%
   );
-  box-shadow: 0px 12.93px 28.74px 0px #ffd28db2 inset;
-  border-radius: 50%;
-  width: 200vw;
-  height: 200vw;
-  bottom: -50vw;
-  left: -22.27vw;
-  transform: rotate(15.25deg);
-  z-index: 1;
+  overflow: hidden;
+}
+
+.Background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255, 236, 139, 0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255, 223, 0, 0.4), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255, 193, 7, 0.5), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255, 236, 139, 0.3), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(255, 223, 0, 0.4), transparent),
+    radial-gradient(1px 1px at 200px 60px, rgba(255, 193, 7, 0.3), transparent),
+    radial-gradient(2px 2px at 240px 90px, rgba(255, 236, 139, 0.4), transparent),
+    radial-gradient(1px 1px at 280px 20px, rgba(255, 223, 0, 0.3), transparent),
+    radial-gradient(2px 2px at 320px 70px, rgba(255, 193, 7, 0.4), transparent),
+    radial-gradient(1px 1px at 360px 40px, rgba(255, 236, 139, 0.3), transparent);
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  animation: starfield 20s linear infinite;
+  opacity: 0.6;
+}
+
+.Background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(3px 3px at 50px 50px, rgba(255, 236, 139, 0.4), transparent),
+    radial-gradient(2px 2px at 150px 150px, rgba(255, 223, 0, 0.5), transparent),
+    radial-gradient(3px 3px at 250px 100px, rgba(255, 193, 7, 0.4), transparent),
+    radial-gradient(2px 2px at 350px 200px, rgba(255, 236, 139, 0.3), transparent),
+    radial-gradient(3px 3px at 450px 50px, rgba(255, 223, 0, 0.4), transparent);
+  background-repeat: repeat;
+  background-size: 500px 500px;
+  animation: starfield 15s linear infinite reverse;
+  opacity: 0.4;
+}
+
+@keyframes starfield {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-400px);
+  }
+}
+
+.BananaParticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.BananaParticle {
+  position: absolute;
+  animation: float 30s linear infinite;
+  z-index: 0;
+}
+
+.BananaParticleImage {
+  width: 40px;
+  height: 40px;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 8px rgba(255, 236, 139, 0.3));
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 .App {
@@ -28,6 +222,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  animation: appFadeIn 1s ease-out;
+  z-index: 5;
+}
+
+@keyframes appFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 text {
@@ -47,8 +252,8 @@ text {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 90px;
-  margin-top: -90px;
+  margin-bottom: 40px;
+  margin-top: 0;
 }
 
 .Logo--react {
@@ -102,10 +307,12 @@ text {
 
 .Subtitle {
   font-style: bold;
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 8px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
   text-align: center;
+  color: #ffd700;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
 }
 
 .Description {
@@ -128,18 +335,21 @@ text {
   justify-content: center;
   padding-left: 24px;
   padding-right: 24px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  gap: 12px;
-  z-index: 1;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  gap: 20px;
+  z-index: 10;
+  text-align: center;
+  position: relative;
 }
 
 .Tagline {
   max-width: 640px;
   text-align: center;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 16px;
-  line-height: 22px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  line-height: 26px;
+  margin-bottom: 8px;
 }
 
 .CTAGroup {
@@ -148,21 +358,32 @@ text {
   flex-direction: row;
   gap: 12px;
   z-index: 10;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .CTAButton {
-  background: linear-gradient(135deg, #ff6448 0%, #ef9bff 100%);
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-left: 20px;
-  padding-right: 20px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 24px;
+  padding-right: 24px;
   border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(255, 100, 72, 0.35);
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  min-width: fit-content;
 }
 
 .CTAButton--secondary {
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: none;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
 }
 
 .CTAButtonText {
@@ -176,9 +397,10 @@ text {
 }
 
 .NavHint {
-  margin-top: 8px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 12px;
+  margin-top: 16px;
+  color: rgba(255, 215, 0, 0.7);
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .Onboarding {

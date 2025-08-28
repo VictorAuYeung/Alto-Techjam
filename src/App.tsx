@@ -5,6 +5,8 @@ import '@lynx-js/react';
 import './App.css';
 import altoLogo from './assets/logos/13.png';
 import arrowIcon from './assets/arrow.png';
+import bananaDark from './assets/splash-page/banana_dark.png';
+import bananaLight from './assets/splash-page/banana_light.png';
 import ViewerSignup from './screens/ViewerSignup.js';
 import CreatorSignup from './screens/CreatorSignup.js';
 import { CreatorDashboard } from './screens/CreatorDashboard.js';
@@ -18,11 +20,34 @@ export function App(
   }>,
 ) {
   const [selectedRole, setSelectedRole] = useState<Role>(null);
-  const [stage, setStage] = useState<'home' | 'onboarding' | 'signup' | 'dashboard' | 'user-dashboard'>('home');
+  const [stage, setStage] = useState<'splash' | 'home' | 'onboarding' | 'signup'>('splash');
+  const [isSplashFading, setIsSplashFading] = useState(false);
+  const [isLogoVisible, setIsLogoVisible] = useState(false);
+
 
   useEffect(() => {
     console.info('Alto: streaming micro-credits for short-form creators');
-  }, []);
+    
+    // Logo appears at 2.5 seconds, transition at 5 seconds
+    if (stage === 'splash') {
+      const logoTimer = setTimeout(() => {
+        setIsLogoVisible(true);
+      }, 2500);
+      
+      const transitionTimer = setTimeout(() => {
+        setIsSplashFading(true);
+        setTimeout(() => {
+          setStage('home');
+        }, 800); // Wait for fade transition to complete
+      }, 5000);
+      
+      return () => {
+        clearTimeout(logoTimer);
+        clearTimeout(transitionTimer);
+      };
+    }
+  }, [stage]);
+  
   props.onRender?.();
 
   const onSelectConsumer = useCallback(() => {
@@ -95,14 +120,63 @@ export function App(
   return (
     <view>
       <view className="Background" />
+      <view className="BananaParticles">
+        {Array.from({ length: 15 }).map((_, index) => (
+          <view 
+            key={index} 
+            className="BananaParticle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${15 + Math.random() * 10}s`,
+              opacity: 0.3 + Math.random() * 0.4
+            }}
+          >
+            <image 
+              src={index % 2 === 0 ? bananaLight : bananaDark} 
+              className="BananaParticleImage"
+            />
+          </view>
+        ))}
+      </view>
       <view className="App">
+        {stage === 'splash' && (
+          <view className={`Splash ${isSplashFading ? 'Splash--fading' : ''}`}>
+            <view className="SplashBackground">
+              <view className="BananaContainer">
+                {!isLogoVisible && Array.from({ length: 25 }).map((_, index) => (
+                  <view 
+                    key={index} 
+                    className="Banana"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `-${100 + Math.random() * 200}px`,
+                      animationDelay: `${Math.random() * 1}s`,
+                      animationDuration: `${3 + Math.random() * 2}s`
+                    }}
+                  >
+                    <image 
+                      src={index % 2 === 0 ? bananaLight : bananaDark} 
+                      className="BananaImage"
+                    />
+                  </view>
+                ))}
+              </view>
+            </view>
+            <view className={`SplashContent ${isLogoVisible ? 'SplashContent--visible' : ''}`}>
+              <view className="SplashLogo">
+                <image src={altoLogo} className="Logo--lynx" />
+              </view>
+            </view>
+          </view>
+        )}
+
         {stage === 'home' && (
           <view className="Hero">
             <view className="Logo">
               <image src={altoLogo} className="Logo--lynx" />
             </view>
-            <text className="Title">Alto</text>
-            <text className="Subtitle">Fair & real‑time Value Sharing</text>
+            <text className="Subtitle">Make every watch count — for creators and viewers</text>
             <text className="Tagline">
               Streaming micro‑credits from engaged viewers to creators,
               transparently and compliantly — no fraud, no guesswork.

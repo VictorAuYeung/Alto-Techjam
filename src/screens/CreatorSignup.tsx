@@ -159,7 +159,7 @@ export function CreatorSignup(
             bindtap={submit}
           >
             <image src={arrowIcon} className="CTAButtonIcon" />
-            <text className="CTAButtonText">Create creator account</text>
+            <text className="CTAButtonText">Create account</text>
           </view>
           <view
             className="CTAButton CTAButton--secondary"
