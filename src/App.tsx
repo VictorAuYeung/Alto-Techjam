@@ -1,9 +1,12 @@
 /* eslint-disable react/no-unknown-property */
-import { useCallback, useEffect, useState } from '@lynx-js/react'
+import { useCallback, useEffect, useState } from 'react'
+import '@lynx-js/react'
 
 import './App.css'
-import lynxLogo from './assets/lynx-logo.png'
+import altoLogo from './assets/logos/13.png'
 import arrowIcon from './assets/arrow.png'
+import ViewerSignup from './screens/ViewerSignup.js'
+import CreatorSignup from './screens/CreatorSignup.js'
 
 type Role = 'consumer' | 'creator' | null
 
@@ -11,6 +14,7 @@ export function App(props: Readonly<{
   onRender?: () => void
 }>) {
   const [selectedRole, setSelectedRole] = useState<Role>(null)
+  const [stage, setStage] = useState<'home' | 'onboarding' | 'signup'>('home')
 
   useEffect(() => {
     console.info('Alto: streaming micro-credits for short-form creators')
@@ -18,30 +22,60 @@ export function App(props: Readonly<{
   props.onRender?.()
 
   const onSelectConsumer = useCallback(() => {
-    setSelectedRole('consumer')
+    setTimeout(() => {
+      setSelectedRole('consumer')
+      setStage('onboarding')
+    }, 0)
   }, [])
 
   const onSelectCreator = useCallback(() => {
-    setSelectedRole('creator')
+    setTimeout(() => {
+      setSelectedRole('creator')
+      setStage('onboarding')
+    }, 0)
   }, [])
 
   const onBackHome = useCallback(() => {
-    setSelectedRole(null)
+    setTimeout(() => {
+      setSelectedRole(null)
+      setStage('home')
+    }, 0)
   }, [])
 
   const onContinue = useCallback(() => {
-    // Placeholder entry point action for now
-    console.info('Proceed with role:', selectedRole)
+    if (!selectedRole) return
+    setTimeout(() => {
+      setStage('signup')
+    }, 0)
   }, [selectedRole])
+
+  const onSignupBack = useCallback(() => {
+    setTimeout(() => {
+      setStage('onboarding')
+    }, 0)
+  }, [])
+
+  const onViewerSubmit = useCallback((payload: { name: string; email: string; interests: string }) => {
+    console.info('Viewer signup submit', payload)
+    // integrate API here when backend is ready
+  }, [])
+
+  const onCreatorSubmit = useCallback(
+    (payload: { displayName: string; email: string; handle: string; niche: string }) => {
+      console.info('Creator signup submit', payload)
+      // integrate API here when backend is ready
+    },
+    []
+  )
 
   return (
     <view>
       <view className='Background' />
       <view className='App'>
-        {selectedRole === null && (
+        {stage === 'home' && (
           <view className='Hero'>
             <view className='Logo'>
-              <image src={lynxLogo} className='Logo--lynx' />
+              <image src={altoLogo} className='Logo--lynx' />
             </view>
             <text className='Title'>Alto</text>
             <text className='Subtitle'>Fair & real‑time Value Sharing</text>
@@ -63,7 +97,7 @@ export function App(props: Readonly<{
           </view>
         )}
 
-        {selectedRole !== null && (
+        {stage === 'onboarding' && selectedRole !== null && (
           <view className='Onboarding'>
             <text className='OnboardingTitle'>
               {selectedRole === 'consumer' ? 'Join as a Viewer' : 'Join as a Creator'}
@@ -84,6 +118,14 @@ export function App(props: Readonly<{
               </view>
             </view>
           </view>
+        )}
+
+        {stage === 'signup' && selectedRole === 'consumer' && (
+          <ViewerSignup onBack={onSignupBack} onSubmit={onViewerSubmit} />
+        )}
+
+        {stage === 'signup' && selectedRole === 'creator' && (
+          <CreatorSignup onBack={onSignupBack} onSubmit={onCreatorSubmit} />
         )}
       </view>
     </view>

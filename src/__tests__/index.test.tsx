@@ -35,54 +35,67 @@ test('App', async () => {
           class="App"
         >
           <view
-            class="Banner"
+            class="Hero"
           >
             <view
               class="Logo"
             >
               <image
                 class="Logo--lynx"
-                src="/src/assets/lynx-logo.png"
+                src="/src/assets/logos/13.png"
               />
             </view>
             <text
               class="Title"
             >
-              React
+              Alto
             </text>
             <text
               class="Subtitle"
             >
-              on Lynx
-            </text>
-          </view>
-          <view
-            class="Content"
-          >
-            <image
-              class="Arrow"
-              src="/src/assets/arrow.png"
-            />
-            <text
-              class="Description"
-            >
-              Tap the logo and have fun!
+              Fair & real‑time Value Sharing
             </text>
             <text
-              class="Hint"
+              class="Tagline"
             >
-              Edit
-              <text
-                style="font-style:italic;color:rgba(255, 255, 255, 0.85)"
+              Streaming micro‑credits from engaged viewers to creators, transparently and compliantly — no fraud, no guesswork.
+            </text>
+            <view
+              class="CTAGroup"
+            >
+              <view
+                class="CTAButton"
               >
-                 src/App.tsx 
-              </text>
-              to see updates!
+                <image
+                  class="CTAButtonIcon"
+                  src="/src/assets/arrow.png"
+                />
+                <text
+                  class="CTAButtonText"
+                >
+                  I’m a Viewer
+                </text>
+              </view>
+              <view
+                class="CTAButton CTAButton--secondary"
+              >
+                <image
+                  class="CTAButtonIcon"
+                  src="/src/assets/arrow.png"
+                />
+                <text
+                  class="CTAButtonText"
+                >
+                  I’m a Creator
+                </text>
+              </view>
+            </view>
+            <text
+              class="NavHint"
+            >
+              Choose your path to get started
             </text>
           </view>
-          <view
-            style="flex:1"
-          />
         </view>
       </view>
     </page>
@@ -90,13 +103,13 @@ test('App', async () => {
   const {
     findByText,
   } = getQueriesForElement(elementTree.root!)
-  const element = await findByText('Tap the logo and have fun!')
+  const element = await findByText('Alto')
   expect(element).toBeInTheDocument()
   expect(element).toMatchInlineSnapshot(`
     <text
-      class="Description"
+      class="Title"
     >
-      Tap the logo and have fun!
+      Alto
     </text>
   `)
 })

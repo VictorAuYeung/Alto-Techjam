@@ -52,14 +52,13 @@ text {
 
 .Logo--react {
   width: 100px;
-  height: 100px;
+
   animation: Logo--spin infinite 20s linear;
 }
 
 .Logo--lynx {
-  width: 100px;
+  width: 200px;
   height: 100px;
-  animation: Logo--shake infinite 0.5s ease;
 }
 
 @keyframes Logo--spin {
@@ -171,6 +170,10 @@ text {
   font-weight: 700;
 }
 
+.CTAButton--disabled {
+  opacity: 0.6;
+}
+
 .NavHint {
   margin-top: 8px;
   color: rgba(255, 255, 255, 0.6);
@@ -198,6 +201,88 @@ text {
   color: rgba(255, 255, 255, 0.85);
   font-size: 16px;
   line-height: 22px;
+}
+
+/* Signup screens */
+.Signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 32px;
+  padding-bottom: 40px;
+  gap: 16px;
+}
+
+.SignupHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.SignupLogo {
+  width: 64px;
+  height: 64px;
+}
+
+.SignupTitle {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.SignupSubtitle {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+}
+
+.FormCard {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.FormField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.FormLabel {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.FormInput {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border-radius: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 16px;
+}
+
+.FormHint {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+.FormError {
+  color: #ff8a8a;
+  font-size: 12px;
 }
 
 .home-container {
@@ -281,4 +366,17 @@ text {
   color: #fff;
   font-size: 16px;
   font-weight: bold;
+}
+
+.FormTextarea {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border-radius: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 16px;
+  min-height: 80px;
 }
