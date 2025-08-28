@@ -8,15 +8,15 @@
   background: radial-gradient(
     71.43% 62.3% at 46.43% 36.43%,
     rgba(18, 229, 229, 0) 15%,
-    rgba(239, 155, 255, 0.3) 56.35%,
-    #ff6448 100%
+    rgba(255, 155, 233, 0.3) 56.35%,
+    #fe2858 100%
   );
   box-shadow: 0px 12.93px 28.74px 0px #ffd28db2 inset;
   border-radius: 50%;
   width: 200vw;
   height: 200vw;
-  top: -60vw;
-  left: -14.27vw;
+  bottom: -50vw;
+  left: -22.27vw;
   transform: rotate(15.25deg);
 }
 
@@ -46,7 +46,8 @@ text {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 90px;
+  margin-top: -90px;
 }
 
 .Logo--react {
@@ -96,24 +97,188 @@ text {
 
 .Title {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .Subtitle {
-  font-style: italic;
+  font-style: bold;
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .Description {
   font-size: 20px;
   color: rgba(255, 255, 255, 0.85);
-  margin: 15rpx;
+  margin: 15px;
 }
 
 .Hint {
   font-size: 12px;
   margin: 5px;
   color: rgba(255, 255, 255, 0.65);
+}
+
+/* Alto homepage styles */
+.Hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  gap: 12px;
+  z-index: 1;
+}
+
+.Tagline {
+  max-width: 640px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.CTAGroup {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  z-index: 10;
+}
+
+.CTAButton {
+  background: linear-gradient(135deg, #ff6448 0%, #ef9bff 100%);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(255, 100, 72, 0.35);
+}
+
+.CTAButton--secondary {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: none;
+}
+
+.CTAButtonText {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.NavHint {
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+.Onboarding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  gap: 12px;
+}
+
+.OnboardingTitle {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.OnboardingCopy {
+  max-width: 640px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.home-container {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+}
+
+.home-logo {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.home-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.home-subtitle {
+  font-size: 16px;
+  color: #aaa;
+  text-align: center;
+  margin-bottom: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.home-button {
+  background-color: #e91e63;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 25px;
+  margin-top: 15px;
+}
+
+.home-buttonText {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.onboarding-container {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  padding: 20px;
+}
+
+.onboarding-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.onboarding-subtitle {
+  font-size: 16px;
+  color: #aaa;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.onboarding-button {
+  background-color: #e91e63;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.onboarding-buttonText {
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
 }
