@@ -19,5 +19,3 @@ npm run dev
 Download the **LynxExplorer App**!!!
 
 Scan the QRCode in the terminal with your LynxExplorer App to debug live.
-
-

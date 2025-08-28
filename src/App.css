@@ -224,8 +224,8 @@ text {
 }
 
 .SignupLogo {
-  width: 64px;
-  height: 64px;
+  width: 200px;
+  height: 100px;
 }
 
 .SignupTitle {
@@ -273,6 +273,12 @@ text {
   padding-left: 12px;
   padding-right: 12px;
   font-size: 16px;
+  z-index: 2;
+}
+
+.FormInput::placeholder {
+  color: rgba(255, 255, 255, 0.219);
+  opacity: 1;
 }
 
 .FormHint {
