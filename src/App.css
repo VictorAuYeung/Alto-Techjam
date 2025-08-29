@@ -914,10 +914,11 @@ text {
 }
 
 .SectionTitle {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
   color: #fff;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
 }
 
 .SectionSubtitle {
@@ -929,6 +930,7 @@ text {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: 60vh;
 }
 
 .VideoCard {
@@ -938,6 +940,8 @@ text {
   display: flex;
   gap: 16px;
   border: 1px solid rgba(255, 215, 0, 0.1);
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .VideoThumbnail {
@@ -973,6 +977,7 @@ text {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  height: 60vh;
 }
 
 .ReceiptCard {
@@ -980,6 +985,8 @@ text {
   border-radius: 12px;
   padding: 16px;
   border: 1px solid rgba(255, 215, 0, 0.1);
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .ReceiptHeader {
@@ -1238,23 +1245,45 @@ text {
 
 .Chip {
   background: rgba(255, 215, 0, 0.1);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  border-radius: 20px;
-  padding: 6px 10px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 24px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.ChipText { font-size: 12px; color: #fff; }
+.Chip:hover {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+}
+
+.ChipText { 
+  font-size: 14px; 
+  color: #fff; 
+  font-weight: 600;
+}
 
 .TopUpInput {
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
   color: #fff;
-  border-radius: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 12px;
-  padding-right: 12px;
-  font-size: 18px;
+  border-radius: 12px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.TopUpInput:focus {
+  outline: none;
+  border-color: #ffd700;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
 }
 
 .InputHint {
@@ -1298,34 +1327,109 @@ text {
 .SessionPreview { font-size: 12px; color: #ffd700; margin-top: 8px; }
 
 .SummaryCard {
-  background: rgba(255, 215, 0, 0.06);
-  border-radius: 12px;
-  padding: 16px;
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  margin-top: 16px;
+  background: rgba(255, 215, 0, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  border: 2px solid rgba(255, 215, 0, 0.25);
+  margin-top: 20px;
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.1);
 }
 
-.SummaryTitle { font-size: 14px; color: #fff; font-weight: 700; margin-bottom: 10px; }
+.SummaryTitle { 
+  font-size: 16px; 
+  color: #fff; 
+  font-weight: 800; 
+  margin-bottom: 16px; 
+  letter-spacing: 0.5px;
+}
 
-.SummaryRow { display: flex; justify-content: space-between; margin-top: 6px; }
-.SummaryLabel { font-size: 12px; color: rgba(255,255,255,0.75); }
-.SummaryValue { font-size: 14px; color: #fff; font-weight: 600; }
-.SummaryNote { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 10px; }
+.SummaryRow { 
+  display: flex; 
+  justify-content: space-between; 
+  margin-top: 12px; 
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.SummaryRow:last-child {
+  border-bottom: none;
+}
+
+.SummaryLabel { 
+  font-size: 14px; 
+  color: rgba(255,255,255,0.8); 
+  font-weight: 500;
+}
+
+.SummaryValue { 
+  font-size: 16px; 
+  color: #fff; 
+  font-weight: 700; 
+}
+
+.SummaryNote { 
+  font-size: 12px; 
+  color: rgba(255,255,255,0.7); 
+  margin-top: 16px; 
+  font-style: italic;
+}
 
 .TopUpActions { display: flex; gap: 10px; margin-top: 16px; }
 
 .PrimaryButton {
   flex: 1;
   background: linear-gradient(135deg, #ffd700, #ffb347);
-  border-radius: 12px;
-  padding: 14px;
+  border-radius: 16px;
+  padding: 18px;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
-  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
-.PrimaryButton--disabled { opacity: 0.5; }
-.PrimaryButtonText { color: #000; font-size: 16px; font-weight: 700; }
+
+.PrimaryButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.PrimaryButton:hover::before {
+  left: 100%;
+}
+
+.PrimaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255, 215, 0, 0.6);
+  border-color: rgba(255, 215, 0, 0.5);
+}
+
+.PrimaryButton:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+}
+
+.PrimaryButton--disabled { 
+  opacity: 0.5; 
+  transform: none !important;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2) !important;
+}
+
+.PrimaryButtonText { 
+  color: #000; 
+  font-size: 18px; 
+  font-weight: 800; 
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+}
 
 .SecondaryButton {
   flex: 1;
@@ -1632,7 +1736,7 @@ text {
   gap: 16px;
 }
 
-.VideoCard {
+.VideoCardAlt {
   background: rgba(255, 215, 0, 0.05);
   border-radius: 12px;
   padding: 16px;
@@ -1647,7 +1751,7 @@ text {
   margin-bottom: 8px;
 }
 
-.VideoStats {
+.VideoStatsAlt {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 12px;
@@ -1682,7 +1786,7 @@ text {
   font-size: 16px;
 }
 
-.ReceiptsList {
+.ReceiptsListAlt {
   height: 60vh;
   display: flex;
   flex-direction: column;
@@ -1735,7 +1839,7 @@ text {
   border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
-.CreatorName {
+.CreatorNameAlt {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.8);
 }
@@ -1820,6 +1924,276 @@ text {
 .StreamingBudget {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.7);
+}
+
+/* Cash Out Screen Styles */
+.CashOutScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  padding: 20px;
+  padding-top: env(safe-area-inset-top);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.CashOutContent {
+  flex: 1;
+  padding-bottom: 20px;
+}
+
+.CashOutHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+  text-align: center;
+  padding: 24px;
+  background: rgba(255, 215, 0, 0.05);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.CashOutBalanceLabel {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.CashOutBalance {
+  font-size: 56px;
+  font-weight: 800;
+  color: #ffd700;
+  margin-bottom: 12px;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  letter-spacing: 1px;
+}
+
+.CashOutInfo {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.CashOutCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.PaymentMethodOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.PaymentMethodOption {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.PaymentMethodOption:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.PaymentMethodOption--selected {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.2);
+}
+
+.PaymentMethodLabel {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.PaymentMethodDescription {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.PaymentDetails {
+  margin-top: 16px;
+}
+
+.GiftCardOptions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.GiftCardOption {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.GiftCardOption--selected {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.4);
+}
+
+.GiftCardLabel {
+  font-size: 12px;
+  color: #fff;
+}
+
+.KYCDescription {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.KYCDocuments {
+  margin-bottom: 20px;
+}
+
+.DocumentOptions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.DocumentOption {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.DocumentOption--selected {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.4);
+}
+
+.DocumentLabel {
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+}
+
+.KYCActions {
+  display: flex;
+  gap: 12px;
+}
+
+.CashOutActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Enhanced Dashboard Styles */
+.PendingCredits {
+  font-size: 14px;
+  color: #ffd700;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.CashOutButton {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+  border-radius: 16px;
+  padding: 16px 32px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  min-width: 140px;
+  text-align: center;
+}
+
+.CashOutButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.CashOutButton:hover::before {
+  left: 100%;
+}
+
+.CashOutButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 215, 0, 0.6);
+  border-color: rgba(255, 215, 0, 0.5);
+}
+
+.CashOutButton:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+}
+
+.CashOutButtonText {
+  color: #000;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+}
+
+.EmptyState {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.EmptyStateText {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+}
+
+.EmptyStateSubtext {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ReceiptAmount--positive {
+  color: #ffd700;
+}
+
+.ReceiptAmount--negative {
+  color: #ef4444;
+}
+
+.ReceiptLedger {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
 }
 
 /* Add Video Modal Styles */
@@ -2028,7 +2402,7 @@ text {
 }
 
 /* Section Header with Add Button */
-.SectionHeader {
+.SectionHeaderWithButton {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2037,11 +2411,11 @@ text {
   gap: 12px;
 }
 
-.SectionHeader .SectionTitle {
+.SectionHeaderWithButton .SectionTitle {
   margin-bottom: 0;
 }
 
-.SectionHeader .SectionSubtitle {
+.SectionHeaderWithButton .SectionSubtitle {
   margin-bottom: 0;
   flex: 1;
   min-width: 200px;
