@@ -12,27 +12,21 @@ import banana4 from './assets/splash-page/bananas/4.png';
 import banana5 from './assets/splash-page/bananas/5.png';
 import banana6 from './assets/splash-page/bananas/6.png';
 import banana7 from './assets/splash-page/bananas/7.png';
-import ViewerSignup from './screens/ViewerSignup.js';
 import CreatorSignup from './screens/CreatorSignup.js';
 import { CreatorDashboard } from './screens/CreatorDashboard.js';
-import { UserDashboard } from './screens/UserDashboard.js';
-
-type Role = 'consumer' | 'creator' | null;
 
 export function App(
   props: Readonly<{
     onRender?: () => void;
   }>,
 ) {
-  const [selectedRole, setSelectedRole] = useState<Role>(null);
-  const [stage, setStage] = useState<'splash' | 'home' | 'onboarding' | 'signup' | 'dashboard' | 'user-dashboard'>('splash');
+  const [stage, setStage] = useState<'splash' | 'home' | 'signup' | 'dashboard'>('splash');
   const [isSplashFading, setIsSplashFading] = useState(false);
   const [isLogoVisible, setIsLogoVisible] = useState(false);
 
   const bananas = useMemo(() => [banana1, banana2, banana3, banana4, banana5, banana6, banana7], []);
   const particleCount = 20;
   const splashBananaCount = 35;
-
 
   useEffect(() => {
     console.info('Alto: streaming micro-credits for short-form creators');
@@ -59,37 +53,27 @@ export function App(
   
   props.onRender?.();
 
-  const onSelectConsumer = useCallback(() => {
+  const onSelectCreator = useCallback(() => {
     setTimeout(() => {
-      setSelectedRole('consumer');
-      setStage('onboarding');
+      setStage('signup');
     }, 0);
   }, []);
 
-  const onSelectCreator = useCallback(() => {
+  const onLogin = useCallback(() => {
     setTimeout(() => {
-      setSelectedRole('creator');
-      setStage('onboarding');
+      setStage('dashboard');
     }, 0);
   }, []);
 
   const onBackHome = useCallback(() => {
     setTimeout(() => {
-      setSelectedRole(null);
       setStage('home');
     }, 0);
   }, []);
 
-  const onContinue = useCallback(() => {
-    if (!selectedRole) return;
-    setTimeout(() => {
-      setStage('signup');
-    }, 0);
-  }, [selectedRole]);
-
   const onSignupBack = useCallback(() => {
     setTimeout(() => {
-      setStage('onboarding');
+      setStage('home');
     }, 0);
   }, []);
 
@@ -98,20 +82,6 @@ export function App(
       setStage('home');
     }, 0);
   }, []);
-
-  const onUserDashboardBack = useCallback(() => {
-    setTimeout(() => {
-      setStage('home');
-    }, 0);
-  }, []);
-
-  const onViewerSubmit = useCallback(
-    (payload: { name: string; email: string; interests: string }) => {
-      console.info('Viewer signup submit', payload);
-      // integrate API here when backend is ready
-    },
-    [],
-  );
 
   const onCreatorSubmit = useCallback(
     (payload: {
@@ -187,79 +157,34 @@ export function App(
             <view className="Logo">
               <image src={altoLogo} className="Logo--alto" />
             </view>
-            <text className="Subtitle">Make every watch count — for creators and viewers</text>
+            <text className="Subtitle">Real-Time Value for Every View</text>
             <text className="Tagline">
-              Streaming micro‑credits from viewers to creators,
-              transparently and compliantly — no fraud, no guesswork.
+              Transparency. Analytics. Compliance.
+              Micro‑credits from viewers to you, in real time.
             </text>
-            <view className="CTAGroup">
-              <view className="CTAButton" bindtap={onSelectConsumer}>
-                <image src={arrowIcon} className="CTAButtonIcon" />
-                <text className="CTAButtonText">I’m a Viewer</text>
+                          <view className="CTAGroup">
+                <view className="CTAButton" bindtap={onSelectCreator}>
+                  <image src={arrowIcon} className="CTAButtonIcon" />
+                  <text className="CTAButtonText">Join Now</text>
+                </view>
+                <view className="CTAButton CTAButton--secondary" bindtap={onLogin}>
+                  <image src={arrowIcon} className="CTAButtonIcon" />
+                  <text className="CTAButtonText">Login</text>
+                </view>
               </view>
-              <view
-                className="CTAButton CTAButton--secondary"
-                bindtap={onSelectCreator}
-              >
-                <image src={arrowIcon} className="CTAButtonIcon" />
-                <text className="CTAButtonText">I’m a Creator</text>
-              </view>
-            </view>
-            <text className="NavHint">Choose your path to get started</text>
+            <text className="NavHint">Start earning from your content</text>
             <view className="DebugButton" bindtap={() => setStage('dashboard')}>
               <text className="DebugButtonText">Debug: Creator Dashboard</text>
             </view>
-            <view className="DebugButton" bindtap={() => setStage('user-dashboard')}>
-              <text className="DebugButtonText">Debug: User Dashboard</text>
-            </view>
           </view>
         )}
 
-        {stage === 'onboarding' && selectedRole !== null && (
-          <view className="Onboarding">
-            <text className="OnboardingTitle">
-              {selectedRole === 'consumer'
-                ? 'Join as a Viewer'
-                : 'Join as a Creator'}
-            </text>
-            <text className="OnboardingCopy">
-              {selectedRole === 'consumer'
-                ? 'Support creators you love as you watch. Alto streams micro‑credits tied to your genuine engagement — no extra steps required.'
-                : 'Earn fairly in real time. Alto streams micro‑credits from engaged viewers to you, with transparency, analytics, and compliance baked in.'}
-            </text>
-            <view className="CTAGroup">
-              <view className="CTAButton" bindtap={onContinue}>
-                <image src={arrowIcon} className="CTAButtonIcon" />
-                <text className="CTAButtonText">Continue</text>
-              </view>
-              <view
-                className="CTAButton CTAButton--secondary"
-                bindtap={onBackHome}
-              >
-                <image
-                  src={arrowIcon}
-                  className="CTAButtonIcon CTAButtonIcon--back"
-                />
-                <text className="CTAButtonText">Back</text>
-              </view>
-            </view>
-          </view>
-        )}
-
-        {stage === 'signup' && selectedRole === 'consumer' && (
-          <ViewerSignup onBack={onSignupBack} onSubmit={onViewerSubmit} />
-        )}
-
-        {stage === 'signup' && selectedRole === 'creator' && (
+        {stage === 'signup' && (
           <CreatorSignup onBack={onSignupBack} onSubmit={onCreatorSubmit} />
         )}
 
         {stage === 'dashboard' && (
           <CreatorDashboard onBack={onDashboardBack} />
-        )}
-
-        {stage === 'user-dashboard' && (
-          <UserDashboard onBack={onUserDashboardBack} />
         )}
       </view>
     </view>

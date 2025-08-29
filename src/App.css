@@ -307,9 +307,8 @@ text {
 
 .Subtitle {
   font-style: bold;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 700;
-  margin-bottom: 16px;
   text-align: center;
   color: #ffd700;
   text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
@@ -347,7 +346,7 @@ text {
   max-width: 640px;
   text-align: center;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 26px;
   margin-bottom: 8px;
 }
@@ -375,7 +374,6 @@ text {
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
   white-space: nowrap;
   min-width: fit-content;
 }
@@ -944,7 +942,7 @@ text {
 
 .VideoThumbnail {
   width: 80px;
-  height: 60px;
+  height: 142px;
   border-radius: 8px;
 }
 
@@ -1826,18 +1824,19 @@ text {
 
 /* Add Video Modal Styles */
 .AddVideoButton {
-  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
   border-radius: 8px;
   padding: 8px 16px;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: none;
+  border: 1px solid rgba(255, 215, 0, 0.2);
   margin-left: auto;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
 }
 
 .AddVideoButton:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
 }
 
 .AddVideoButtonText {
@@ -1860,12 +1859,18 @@ text {
 }
 
 .ModalContent {
-  background: #1a1a1a;
+  background: #000 radial-gradient(
+    circle at 20% 80%,
+    rgba(255, 236, 139, 0.1) 0%,
+    rgba(255, 223, 0, 0.05) 0%,
+    rgba(255, 193, 7, 0.1) 30%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
   border-radius: 16px;
   padding: 24px;
   width: 90%;
   max-width: 480px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
@@ -1930,8 +1935,9 @@ text {
 
 .VideoUrlInput:focus {
   outline: none;
-  border-color: #4ade80;
+  border-color: #ffd700;
   background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
 }
 
 .VideoUrlInput::placeholder {
@@ -1976,13 +1982,15 @@ text {
 }
 
 .ModalButton--primary {
-  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
   color: #000;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
 }
 
 .ModalButton--primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
 }
 
 .ModalButton--primary:disabled {

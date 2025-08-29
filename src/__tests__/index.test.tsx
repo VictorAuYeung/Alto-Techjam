@@ -46,19 +46,15 @@ test('App', async () => {
               />
             </view>
             <text
-              class="Title"
-            >
-              Alto
-            </text>
-            <text
               class="Subtitle"
             >
-              Fair & real‑time Value Sharing
+              Real-Time Value for Every View
             </text>
             <text
               class="Tagline"
             >
-              Streaming micro‑credits from engaged viewers to creators, transparently and compliantly — no fraud, no guesswork.
+              Transparency. Analytics. Compliance.
+              Micro‑credits from viewers to you, in real time.
             </text>
             <view
               class="CTAGroup"
@@ -73,7 +69,7 @@ test('App', async () => {
                 <text
                   class="CTAButtonText"
                 >
-                  I’m a Viewer
+                  Join Now
                 </text>
               </view>
               <view
@@ -86,14 +82,14 @@ test('App', async () => {
                 <text
                   class="CTAButtonText"
                 >
-                  I’m a Creator
+                  Login
                 </text>
               </view>
             </view>
             <text
               class="NavHint"
             >
-              Choose your path to get started
+              Start earning from your content
             </text>
           </view>
         </view>
@@ -101,13 +97,13 @@ test('App', async () => {
     </page>
   `);
   const { findByText } = getQueriesForElement(elementTree.root!);
-  const element = await findByText('Alto');
+  const element = await findByText('Real-Time Value for Every View');
   expect(element).toBeInTheDocument();
   expect(element).toMatchInlineSnapshot(`
     <text
-      class="Title"
+      class="Subtitle"
     >
-      Alto
+      Real-Time Value for Every View
     </text>
   `);
 });
