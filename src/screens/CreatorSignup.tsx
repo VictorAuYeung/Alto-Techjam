@@ -2,7 +2,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import '@lynx-js/react';
 import arrowIcon from '../assets/arrow.png';
-import altoLogo from '../assets/logos/13.png';
+import altoLogo from '../assets/logos/alto-logo.png';
 
 export function CreatorSignup(
   props: Readonly<{

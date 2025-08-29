@@ -41,8 +41,8 @@ test('App', async () => {
               class="Logo"
             >
               <image
-                class="Logo--lynx"
-                src="/src/assets/logos/13.png"
+                class="Logo--alto"
+                src="/src/assets/logos/alto-logo.png"
               />
             </view>
             <text

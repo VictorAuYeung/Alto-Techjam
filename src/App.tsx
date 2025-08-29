@@ -3,10 +3,15 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import '@lynx-js/react';
 
 import './App.css';
-import altoLogo from './assets/logos/13.png';
+import altoLogo from './assets/logos/alto-logo.png';
 import arrowIcon from './assets/arrow.png';
-import bananaDark from './assets/splash-page/banana_dark.png';
-import bananaLight from './assets/splash-page/banana_light.png';
+import banana1 from './assets/splash-page/bananas/1.png';
+import banana2 from './assets/splash-page/bananas/2.png';
+import banana3 from './assets/splash-page/bananas/3.png';
+import banana4 from './assets/splash-page/bananas/4.png';
+import banana5 from './assets/splash-page/bananas/5.png';
+import banana6 from './assets/splash-page/bananas/6.png';
+import banana7 from './assets/splash-page/bananas/7.png';
 import ViewerSignup from './screens/ViewerSignup.js';
 import CreatorSignup from './screens/CreatorSignup.js';
 import { CreatorDashboard } from './screens/CreatorDashboard.js';
@@ -23,6 +28,10 @@ export function App(
   const [stage, setStage] = useState<'splash' | 'home' | 'onboarding' | 'signup' | 'dashboard' | 'user-dashboard'>('splash');
   const [isSplashFading, setIsSplashFading] = useState(false);
   const [isLogoVisible, setIsLogoVisible] = useState(false);
+
+  const bananas = useMemo(() => [banana1, banana2, banana3, banana4, banana5, banana6, banana7], []);
+  const particleCount = 20;
+  const splashBananaCount = 35;
 
 
   useEffect(() => {
@@ -120,43 +129,45 @@ export function App(
   return (
     <view>
       <view className="Background" />
+      {stage === 'home' && (
       <view className="BananaParticles">
-        {Array.from({ length: 15 }).map((_, index) => (
+        {Array.from({ length: particleCount }).map((_, index) => (
           <view 
             key={index} 
             className="BananaParticle"
             style={{
-              left: `${Math.random() * 100}%`,
+              left: `${Math.min(100, Math.max(0, ((index + 0.5) / particleCount) * 100 + (Math.random() * 15 - 7.5)))}%`,
               animationDelay: `${Math.random() * 5}s`,
               animationDuration: `${15 + Math.random() * 10}s`,
               opacity: 0.3 + Math.random() * 0.4
             }}
           >
             <image 
-              src={index % 2 === 0 ? bananaLight : bananaDark} 
+              src={bananas[index % bananas.length]} 
               className="BananaParticleImage"
             />
           </view>
         ))}
       </view>
+      )}
       <view className="App">
         {stage === 'splash' && (
           <view className={`Splash ${isSplashFading ? 'Splash--fading' : ''}`}>
             <view className="SplashBackground">
               <view className="BananaContainer">
-                {!isLogoVisible && Array.from({ length: 25 }).map((_, index) => (
+                {!isLogoVisible && Array.from({ length: splashBananaCount }).map((_, index) => (
                   <view 
                     key={index} 
                     className="Banana"
                     style={{
-                      left: `${Math.random() * 100}%`,
-                      top: `-${100 + Math.random() * 200}px`,
+                      left: `${Math.min(100, Math.max(0, ((index + 0.5) / splashBananaCount) * 100 + (Math.random() * 15 - 7.5)))}%`,
+                      top: `-${120 + Math.random() * 500}px`,
                       animationDelay: `${Math.random() * 1}s`,
                       animationDuration: `${3 + Math.random() * 2}s`
                     }}
                   >
                     <image 
-                      src={index % 2 === 0 ? bananaLight : bananaDark} 
+                      src={bananas[index % bananas.length]} 
                       className="BananaImage"
                     />
                   </view>
@@ -165,7 +176,7 @@ export function App(
             </view>
             <view className={`SplashContent ${isLogoVisible ? 'SplashContent--visible' : ''}`}>
               <view className="SplashLogo">
-                <image src={altoLogo} className="Logo--lynx" />
+                <image src={altoLogo} className="Logo--alto" />
               </view>
             </view>
           </view>
@@ -174,11 +185,11 @@ export function App(
         {stage === 'home' && (
           <view className="Hero">
             <view className="Logo">
-              <image src={altoLogo} className="Logo--lynx" />
+              <image src={altoLogo} className="Logo--alto" />
             </view>
             <text className="Subtitle">Make every watch count — for creators and viewers</text>
             <text className="Tagline">
-              Streaming micro‑credits from engaged viewers to creators,
+              Streaming micro‑credits from viewers to creators,
               transparently and compliantly — no fraud, no guesswork.
             </text>
             <view className="CTAGroup">

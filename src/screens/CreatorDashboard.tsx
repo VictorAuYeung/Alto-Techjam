@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import '@lynx-js/react';
 import arrowIcon from '../assets/arrow.png';
-import altoLogo from '../assets/logos/13.png';
+import altoLogo from '../assets/logos/alto-logo.png';
 
 type Tab = 'overview' | 'videos' | 'receipts' | 'analytics';
 
@@ -182,11 +182,17 @@ export function CreatorDashboard(
         <view className="HeaderLeft">
           <view className="BackButton" bindtap={props.onBack}>
             <image src={arrowIcon} className="BackIcon" />
-            <text className="BackText">Back</text>
+            <text className="BackText">Debug</text>
           </view>
+        </view>
+        <view className="HeaderCenter">
           <image src={altoLogo} className="DashboardLogo" />
         </view>
-        <text className="DashboardTitle">Creator Dashboard</text>
+        <view className="HeaderRight">
+          <view className="ProfileIcon">
+            <image src={altoLogo} className="ProfileAvatar" />
+          </view>
+        </view>
       </view>
 
       <view className="TabNavigation">

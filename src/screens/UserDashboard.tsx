@@ -2,10 +2,12 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
 import '@lynx-js/react';
 import arrowIcon from '../assets/arrow.png';
-import altoLogo from '../assets/logos/13.png';
+import altoLogo from '../assets/logos/alto-logo.png';
+import coinBanana from '../assets/coins/coin-banana.png';
+import coinBananas from '../assets/coins/coin-bananas.png';
 import { TopUp } from './TopUp.js';
 
-type Tab = 'session' | 'feed' | 'receipts' | 'analytics' | 'security';
+type Tab = 'receipts' | 'analytics' | 'security';
 type SessionStatus = 'inactive' | 'active' | 'throttled' | 'held' | 'blocked';
 
 export function UserDashboard(
@@ -13,7 +15,7 @@ export function UserDashboard(
     onBack: () => void;
   }>,
 ) {
-  const [activeTab, setActiveTab] = useState<Tab>('session');
+  const [activeTab, setActiveTab] = useState<Tab>('receipts');
   const [walletCredits, setWalletCredits] = useState(25.67);
   const [sessionBudget, setSessionBudget] = useState(1.00);
   const [sessionSpent, setSessionSpent] = useState(0.00);
@@ -35,7 +37,7 @@ export function UserDashboard(
   }, []);
 
   const formatCredits = (amount: number) => {
-    return `${amount.toFixed(4)} credits`;
+    return `${amount.toFixed(4)}`;
   };
 
   const formatPercentage = (value: number) => {
@@ -77,7 +79,7 @@ export function UserDashboard(
     if (engagementIntervalRef.current) clearInterval(engagementIntervalRef.current);
   }, []);
 
-  const renderSessionControls = () => (
+  const renderCreditsCard = () => (
     <view className="DashboardSection">
       {walletCredits === 0 && (
         <view className="NoticeBanner NoticeBanner--warning" aria-live="polite">
@@ -96,73 +98,22 @@ export function UserDashboard(
         </view>
       )}
       <view className="WalletCard">
-        <view className="WalletHeader">
-          <view className="UserInfo">
-            <image src={altoLogo} className="UserAvatar" />
-            <view className="UserDetails">
-              <text className="UserName">John Doe</text>
-              <text className="UserHandle">@johndoe</text>
-            </view>
-          </view>
+        <view className="TopUpButtonContainer">
           <view className="TopUpButton" bindtap={() => setShowTopUp(true)}>
             <text className="TopUpText">Top Up</text>
           </view>
         </view>
-        
+
         <view className="WalletBalance">
-          <text className="BalanceLabel">Wallet Credits</text>
-          <text className="BalanceAmount">{formatCredits(walletCredits)}</text>
+          <view className="BalanceHeader">
+            <image src={coinBananas} className="BalanceIcon" />
+            <text className="BalanceAmount">{formatCredits(walletCredits)}</text>
+          </view>
+          <text className="BalanceLabel">Nana Coins</text>
         </view>
       </view>
 
-      <view className="SessionCard">
-        <view className="SessionHeader">
-          <text className="SessionTitle">Session Controls</text>
-          <view className={`SessionStatus SessionStatus--${sessionStatus}`}>
-            <text className="StatusText">
-              {sessionStatus === 'active' ? 'Active' : 
-               sessionStatus === 'throttled' ? 'Throttled' :
-               sessionStatus === 'held' ? 'Held' :
-               sessionStatus === 'blocked' ? 'Blocked' : 'Inactive'}
-            </text>
-          </view>
-        </view>
 
-        <view className="SessionBudget">
-          <view className="BudgetInfo">
-            <text className="BudgetLabel">Session Budget</text>
-            <text className="BudgetAmount">{formatCredits(sessionBudget)}</text>
-          </view>
-          <view className="BudgetInfo">
-            <text className="BudgetLabel">Remaining</text>
-            <text className="BudgetAmount">{formatCredits(sessionBudget - sessionSpent)}</text>
-          </view>
-        </view>
-
-        <view className="BudgetProgress">
-          <view className="ProgressBar">
-            <view 
-              className="ProgressFill" 
-              style={{ width: `${(sessionSpent / sessionBudget) * 100}%` }}
-            />
-          </view>
-          <text className="ProgressText">
-            {formatPercentage(sessionSpent / sessionBudget)} utilized
-          </text>
-        </view>
-
-        <view className="SessionActions">
-          {sessionStatus === 'inactive' ? (
-            <view className="StartButton" bindtap={handleStartSession}>
-              <text className="ButtonText">Start Session</text>
-            </view>
-          ) : (
-            <view className="EndButton" bindtap={handleEndSession}>
-              <text className="ButtonText">End Session</text>
-            </view>
-          )}
-        </view>
-      </view>
     </view>
   );
 
@@ -208,7 +159,7 @@ export function UserDashboard(
       <scroll-view className="ReceiptsList" scroll-y>
         <view className="ReceiptCard">
           <view className="ReceiptHeader">
-            <text className="ReceiptAmount">-0.0064 credits</text>
+            <text className="ReceiptAmount">-0.0064 Nana Coins</text>
             <text className="ReceiptTime">2 min ago</text>
           </view>
           <text className="ReceiptVideo">How to Make Perfect Coffee</text>
@@ -322,26 +273,24 @@ export function UserDashboard(
         <view className="HeaderLeft">
           <view className="BackButton" bindtap={props.onBack}>
             <image src={arrowIcon} className="BackIcon" />
-            <text className="BackText">Back</text>
+            <text className="BackText">Debug</text>
           </view>
+        </view>
+        <view className="HeaderCenter">
           <image src={altoLogo} className="DashboardLogo" />
         </view>
-        <text className="DashboardTitle">User Dashboard</text>
+        <view className="HeaderRight">
+          <view className="ProfileIcon">
+            <image src={altoLogo} className="ProfileAvatar" />
+          </view>
+        </view>
+      </view>
+
+      <view className="DashboardContent">
+        {renderCreditsCard()}
       </view>
 
       <view className="TabNavigation">
-        <view 
-          className={`Tab ${activeTab === 'session' ? 'Tab--active' : ''}`}
-          bindtap={() => setActiveTab('session')}
-        >
-          <text className="TabText">Session</text>
-        </view>
-        <view 
-          className={`Tab ${activeTab === 'feed' ? 'Tab--active' : ''}`}
-          bindtap={() => setActiveTab('feed')}
-        >
-          <text className="TabText">Feed</text>
-        </view>
         <view 
           className={`Tab ${activeTab === 'receipts' ? 'Tab--active' : ''}`}
           bindtap={() => setActiveTab('receipts')}
@@ -363,8 +312,6 @@ export function UserDashboard(
       </view>
 
       <view className="DashboardContent">
-        {activeTab === 'session' && renderSessionControls()}
-        {activeTab === 'feed' && renderVideoFeed()}
         {activeTab === 'receipts' && renderReceipts()}
         {activeTab === 'analytics' && renderAnalytics()}
         {activeTab === 'security' && renderSecurity()}

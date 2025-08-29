@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import '@lynx-js/react';
 import arrowIcon from '../assets/arrow.png';
-import altoLogo from '../assets/logos/13.png';
+import altoLogo from '../assets/logos/alto-logo.png';
 
 const MIN_TOPUP = 0.10;
 const MAX_TOPUP = 10.0;
@@ -145,7 +145,7 @@ export function TopUp(
           </view>
           <image src={altoLogo} className="DashboardLogo" />
         </view>
-        <text className="DashboardTitle">Top Up Credits</text>
+        <text className="DashboardTitle">Top Up Nana Coins</text>
       </view>
 
       <view className="TopUpHeader">
@@ -155,7 +155,7 @@ export function TopUp(
         ) : (
           <text className="TopUpBalance" aria-live="polite">{formattedBalance}</text>
         )}
-        <text className="TopUpInfo">Demo credits only. No real money.</text>
+        <text className="TopUpInfo">Demo Nana Coins only. No real money.</text>
       </view>
 
       {errorMsg && (

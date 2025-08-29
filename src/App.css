@@ -3,6 +3,11 @@
   --color-text: #fff;
 }
 
+/* Global font family */
+* {
+  font-family: 'Nexa', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
 /* Splash Page Styles */
 .Splash {
   position: fixed;
@@ -49,8 +54,8 @@
 
 
 .BananaImage {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   display: block;
 }
 
@@ -120,10 +125,10 @@
   width: 100vw;
   height: 100vh;
   background: radial-gradient(
-    circle at 50% 50%,
-    rgba(255, 236, 139, 0.15) 0%,
-    rgba(255, 223, 0, 0.08) 30%,
-    rgba(255, 193, 7, 0.04) 60%,
+    circle at 20% 80%,
+    rgba(255, 236, 139, 0.3) 0%,
+    rgba(255, 223, 0, 0.08) 0%,
+    rgba(255, 193, 7, 0.2) 30%,
     rgba(0, 0, 0, 0.95) 100%
   );
   overflow: hidden;
@@ -193,20 +198,21 @@
 
 .BananaParticle {
   position: absolute;
+  top: -100px;
   animation: float 30s linear infinite;
   z-index: 0;
 }
 
 .BananaParticleImage {
-  width: 40px;
-  height: 40px;
+  width: 64px;
+  height: 64px;
   opacity: 0.6;
   filter: drop-shadow(0 0 8px rgba(255, 236, 139, 0.3));
 }
 
 @keyframes float {
   0% {
-    transform: translateY(100vh) rotate(0deg);
+    transform: translateY(120vh) rotate(0deg);
     opacity: 0.6;
   }
   100% {
@@ -256,15 +262,9 @@ text {
   margin-top: 0;
 }
 
-.Logo--react {
-  width: 100px;
-
-  animation: Logo--spin infinite 20s linear;
-}
-
-.Logo--lynx {
-  width: 200px;
-  height: 100px;
+.Logo--alto {
+  width: 160px;
+  height: 120px;
 }
 
 @keyframes Logo--spin {
@@ -307,7 +307,7 @@ text {
 
 .Subtitle {
   font-style: bold;
-  font-size: 28px;
+  font-size: 25px;
   font-weight: 700;
   margin-bottom: 16px;
   text-align: center;
@@ -447,8 +447,8 @@ text {
 }
 
 .SignupLogo {
-  width: 200px;
-  height: 100px;
+  width: 160px;
+  height: 120px;
 }
 
 .SignupTitle {
@@ -522,8 +522,8 @@ text {
 }
 
 .home-logo {
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 120px;
   margin-bottom: 20px;
 }
 
@@ -614,7 +614,13 @@ text {
 .CreatorDashboard {
   min-height: 100vh;
   width: 100vw;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: radial-gradient(
+    circle at 20% 80%,
+    rgba(255, 236, 139, 0.3) 0%,
+    rgba(255, 223, 0, 0.08) 0%,
+    rgba(255, 193, 7, 0.2) 30%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
   padding: 20px;
   padding-top: env(safe-area-inset-top); /* iOS notch/status bar height */
 }
@@ -624,14 +630,16 @@ text {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  position: relative;
 }
 
 .HeaderLeft {
   display: flex;
   align-items: center;
   gap: 20px;
+  flex: 1;
 }
 
 .BackButton {
@@ -639,14 +647,17 @@ text {
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .BackButton:hover {
-  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
 }
 
 .BackIcon {
@@ -657,27 +668,61 @@ text {
 
 .BackText {
   font-size: 14px;
-  color: #fff;
+  color: #000;
+  font-weight: 700;
 }
 
 .DashboardLogo {
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  height: 60px;
 }
 
-.DashboardTitle {
-  font-size: 24px;
-  font-weight: 700;
-  color: #fff;
+.HeaderCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
+
+.HeaderRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.ProfileIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ProfileAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ProfileAvatar:hover {
+  transform: scale(1.1);
+  border-color: rgba(255, 215, 0, 0.6);
+}
+
+/* ProfileScreen, MainDashboard, and ProfileTitle removed - no longer needed */
+
+/* DashboardTitle removed - logo is now centered */
 
 .TabNavigation {
   display: flex;
   gap: 4px;
   margin-bottom: 30px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 215, 0, 0.1);
   border-radius: 12px;
   padding: 4px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .Tab {
@@ -686,20 +731,26 @@ text {
   text-align: center;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   justify-content: center;
   align-items: center;
 }
 
 .Tab--active {
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .TabText {
   font-size: 12px;
   font-weight: 600;
   color: #fff;
+}
+
+.Tab--active .TabText {
+  color: #000;
+  font-weight: 700;
 }
 
 .DashboardContent {
@@ -723,12 +774,13 @@ text {
 }
 
 .WalletCard {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 215, 0, 0.08);
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
   z-index: 1;
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.1);
 }
 
 .WalletHeader {
@@ -770,20 +822,33 @@ text {
 
 .WalletBalance {
   text-align: center;
-  margin-bottom: 24px;
+  align-items: center;
+}
+
+.BalanceHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.BalanceIcon {
+  width: 50px;
+  height: 50px;
 }
 
 .BalanceLabel {
-  font-size: 14px;
+  font-size: 18px;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .BalanceAmount {
-  font-size: 36px;
+  font-size: 50px;
   font-weight: 800;
-  color: #4ade80;
-  text-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+  color: #ffd700;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  margin-bottom: 10px;
 }
 
 .EarningsSummary {
@@ -793,10 +858,11 @@ text {
 
 .EarningsCard {
   flex: 1;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 215, 0, 0.05);
   border-radius: 12px;
   padding: 16px;
   text-align: center;
+  border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .EarningsLabel {
@@ -814,7 +880,8 @@ text {
 
 .EarningsChange {
   font-size: 11px;
-  color: #4ade80;
+  color: #ffd700;
+  font-weight: 600;
 }
 
 .QuickStats {
@@ -825,10 +892,11 @@ text {
 
 .StatCard {
   flex: 1;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 215, 0, 0.05);
   border-radius: 12px;
   padding: 16px;
   text-align: center;
+  border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .StatValue {
@@ -866,12 +934,12 @@ text {
 }
 
 .VideoCard {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 215, 0, 0.05);
   border-radius: 12px;
   padding: 16px;
   display: flex;
   gap: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .VideoThumbnail {
@@ -910,10 +978,10 @@ text {
 }
 
 .ReceiptCard {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 215, 0, 0.05);
   border-radius: 12px;
   padding: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .ReceiptHeader {
@@ -926,7 +994,7 @@ text {
 .ReceiptAmount {
   font-size: 18px;
   font-weight: 700;
-  color: #4ade80;
+  color: #ffd700;
 }
 
 .ReceiptTime {
@@ -956,9 +1024,10 @@ text {
 .ScoreLabel {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 215, 0, 0.1);
   padding: 4px 8px;
   border-radius: 6px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .ChartsContainer {
@@ -970,10 +1039,10 @@ text {
 }
 
 .ChartCard {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 215, 0, 0.05);
   border-radius: 12px;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.1);
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -1035,7 +1104,7 @@ text {
 .BarValue {
   font-size: 12px;
   font-weight: 600;
-  color: #4ade80;
+  color: #ffd700;
 }
 
 .QualityDistribution {
@@ -1062,7 +1131,7 @@ text {
 .QualityValue {
   font-size: 12px;
   font-weight: 600;
-  color: #4ade80;
+  color: #ffd700;
 }
 
 /* Debug Button Styles */
@@ -1104,8 +1173,14 @@ text {
 .TopUpScreen {
   width: 92vw;
   max-width: 720px;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: radial-gradient(
+    circle at 20% 80%,
+    rgba(255, 236, 139, 0.3) 0%,
+    rgba(255, 223, 0, 0.08) 0%,
+    rgba(255, 193, 7, 0.2) 30%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: 16px;
   padding: 16px;
   align-self: center;
@@ -1126,8 +1201,9 @@ text {
 .TopUpBalance {
   font-size: 36px;
   font-weight: 800;
-  color: #4ade80;
+  color: #ffd700;
   margin-top: 4px;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
 }
 
 .BalanceSkeleton {
@@ -1150,10 +1226,10 @@ text {
 }
 
 .TopUpCard {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 215, 0, 0.08);
   border-radius: 12px;
   padding: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .PresetChips {
@@ -1163,8 +1239,8 @@ text {
 }
 
 .Chip {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: 20px;
   padding: 6px 10px;
 }
@@ -1207,7 +1283,7 @@ text {
   padding: 2px;
 }
 
-.Toggle--on { background: rgba(74, 222, 128, 0.35); border-color: rgba(74, 222, 128, 0.6); }
+.Toggle--on { background: rgba(255, 215, 0, 0.35); border-color: rgba(255, 215, 0, 0.6); }
 .Toggle--disabled { opacity: 0.5; }
 
 .ToggleKnob {
@@ -1221,13 +1297,13 @@ text {
 
 .ToggleLabel { font-size: 13px; color: #fff; }
 
-.SessionPreview { font-size: 12px; color: #4ade80; margin-top: 8px; }
+.SessionPreview { font-size: 12px; color: #ffd700; margin-top: 8px; }
 
 .SummaryCard {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 215, 0, 0.06);
   border-radius: 12px;
   padding: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 215, 0, 0.2);
   margin-top: 16px;
 }
 
@@ -1242,14 +1318,16 @@ text {
 
 .PrimaryButton {
   flex: 1;
-  background: linear-gradient(135deg, #4ade80, #22c55e);
+  background: linear-gradient(135deg, #ffd700, #ffb347);
   border-radius: 12px;
   padding: 14px;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.2);
 }
 .PrimaryButton--disabled { opacity: 0.5; }
-.PrimaryButtonText { color: #fff; font-size: 16px; font-weight: 700; }
+.PrimaryButtonText { color: #000; font-size: 16px; font-weight: 700; }
 
 .SecondaryButton {
   flex: 1;
@@ -1267,16 +1345,23 @@ text {
 .NoticeBanner--success { background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.35); }
 .NoticeBanner--warning { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.35); }
 .NoticeText { color: #fff; font-size: 13px; }
-.NoticeLink { color: #4ade80; font-size: 13px; font-weight: 700; }
+.NoticeLink { color: #ffd700; font-size: 13px; font-weight: 700; }
 .NoticeAction { padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,0.08); }
 
 /* User Dashboard Styles */
 .UserDashboard {
   min-height: 100vh;
   width: 100vw;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: radial-gradient(
+    circle at 20% 80%,
+    rgba(255, 236, 139, 0.3) 0%,
+    rgba(255, 223, 0, 0.08) 0%,
+    rgba(255, 193, 7, 0.2) 30%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
   padding: 20px;
   padding-top: env(safe-area-inset-top);
+  overflow-y: auto;
 }
 
 .UserInfo {
@@ -1304,32 +1389,51 @@ text {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.TopUpButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .TopUpButton {
-  background: rgba(74, 222, 128, 0.2);
-  border: 1px solid rgba(74, 222, 128, 0.4);
-  border-radius: 8px;
-  padding: 8px 16px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+  border: 2px solid rgba(255, 215, 0, 0.6);
+  border-radius: 16px;
+  padding: 16px 32px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
+  min-width: 120px;
+  text-align: center;
 }
 
 .TopUpButton:hover {
-  background: rgba(74, 222, 128, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 215, 0, 0.5);
+  border-color: rgba(255, 215, 0, 0.8);
+}
+
+.TopUpButton:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
 
 .TopUpText {
-  font-size: 14px;
-  color: #4ade80;
-  font-weight: 600;
+  font-size: 18px;
+  color: #000;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
 .SessionCard {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 215, 0, 0.08);
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
   z-index: 1;
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.1);
 }
 
 .SessionHeader {
@@ -1358,8 +1462,8 @@ text {
 }
 
 .SessionStatus--active {
-  background: rgba(74, 222, 128, 0.2);
-  color: #4ade80;
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
 }
 
 .SessionStatus--throttled {
@@ -1419,7 +1523,7 @@ text {
 
 .ProgressFill {
   height: 100%;
-  background: linear-gradient(90deg, #4ade80, #22c55e);
+  background: linear-gradient(90deg, #ffd700, #ffb347);
   border-radius: 4px;
   transition: width 0.3s ease;
 }
@@ -1437,18 +1541,20 @@ text {
 
 .StartButton {
   flex: 1;
-  background: linear-gradient(135deg, #4ade80, #22c55e);
+  background: linear-gradient(135deg, #ffd700, #ffb347);
   border-radius: 12px;
   padding: 16px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .StartButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(74, 222, 128, 0.3);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
 }
 
 .EndButton {
@@ -1470,7 +1576,7 @@ text {
 .ButtonText {
   font-size: 16px;
   font-weight: 700;
-  color: #fff;
+  color: #000;
 }
 
 .ComplianceNotice {
@@ -1529,12 +1635,12 @@ text {
 }
 
 .VideoCard {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 215, 0, 0.05);
   border-radius: 12px;
   padding: 16px;
   display: flex;
   gap: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .VideoCreator {
@@ -1595,14 +1701,15 @@ text {
 .ReasonText {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 215, 0, 0.1);
   padding: 4px 8px;
   border-radius: 6px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .QseScore {
   font-size: 12px;
-  color: #4ade80;
+  color: #ffd700;
   font-weight: 600;
 }
 
@@ -1625,8 +1732,9 @@ text {
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 215, 0, 0.05);
   border-radius: 6px;
+  border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .CreatorName {
@@ -1637,14 +1745,14 @@ text {
 .CreatorAmount {
   font-size: 12px;
   font-weight: 600;
-  color: #4ade80;
+  color: #ffd700;
 }
 
 .SecurityCard {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 215, 0, 0.05);
   border-radius: 12px;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .SecurityItem {
@@ -1671,7 +1779,7 @@ text {
 }
 
 .SecurityValue--success {
-  color: #4ade80;
+  color: #ffd700;
 }
 
 .StreamingChip {
@@ -1679,7 +1787,7 @@ text {
   bottom: 20px;
   right: 20px;
   background: rgba(0, 0, 0, 0.9);
-  border: 1px solid rgba(74, 222, 128, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: 16px;
   padding: 16px;
   min-width: 200px;
@@ -1695,7 +1803,7 @@ text {
 
 .StreamingLabel {
   font-size: 12px;
-  color: #4ade80;
+  color: #ffd700;
   font-weight: 600;
 }
 
