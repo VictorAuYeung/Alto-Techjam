@@ -1823,3 +1823,218 @@ text {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.7);
 }
+
+/* Add Video Modal Styles */
+.AddVideoButton {
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  margin-left: auto;
+}
+
+.AddVideoButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+}
+
+.AddVideoButtonText {
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ModalContent {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.ModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ModalTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ModalClose {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ModalClose:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ModalCloseText {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ModalBody {
+  margin-bottom: 24px;
+}
+
+.InputLabel {
+  display: block;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.VideoUrlInput {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.VideoUrlInput:focus {
+  outline: none;
+  border-color: #4ade80;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.VideoUrlInput::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.ErrorMessage {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 8px;
+  display: block;
+}
+
+.ModalFooter {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.ModalButton {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  min-width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ModalButton--secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ModalButton--secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.ModalButton--primary {
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  color: #000;
+}
+
+.ModalButton--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+}
+
+.ModalButton--primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.ModalButtonText {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Loading Spinner */
+.LoadingSpinner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.LoadingText {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Section Header with Add Button */
+.SectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.SectionHeader .SectionTitle {
+  margin-bottom: 0;
+}
+
+.SectionHeader .SectionSubtitle {
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 200px;
+}
