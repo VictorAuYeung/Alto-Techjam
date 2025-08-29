@@ -3,8 +3,21 @@ import { useEffect, useState } from 'react';
 import '@lynx-js/react';
 import arrowIcon from '../assets/arrow.png';
 import altoLogo from '../assets/logos/13.png';
+import { mockAnalyzeVideoAPI } from '../services/videoAnalysis.js';
+import type { VideoAnalysisRequest } from '../services/videoAnalysis.js';
 
 type Tab = 'overview' | 'videos' | 'receipts' | 'analytics';
+
+interface VideoData {
+  id: string;
+  title: string;
+  viewCount: string;
+  thumbnail: string;
+  url: string;
+  qseScore?: number;
+  credits?: number;
+  isAnalyzing?: boolean;
+}
 
 export function CreatorDashboard(
   props: Readonly<{
@@ -16,6 +29,23 @@ export function CreatorDashboard(
   const [todayEarnings, setTodayEarnings] = useState(12.45);
   const [weekEarnings, setWeekEarnings] = useState(89.23);
   const [lastUpdated, setLastUpdated] = useState(new Date());
+  
+  // Video management state
+  const [videos, setVideos] = useState<VideoData[]>([
+    {
+      id: '1',
+      title: 'How to Make Perfect Coffee',
+      viewCount: '15,420',
+      thumbnail: altoLogo,
+      url: 'https://www.tiktok.com/@alexcreates/video/123456789',
+      qseScore: 87,
+      credits: 23.45
+    }
+  ]);
+  const [showAddVideoModal, setShowAddVideoModal] = useState(false);
+  const [tiktokUrl, setTiktokUrl] = useState('');
+  const [isAddingVideo, setIsAddingVideo] = useState(false);
+  const [addVideoError, setAddVideoError] = useState('');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,6 +56,136 @@ export function CreatorDashboard(
 
   const formatCredits = (amount: number) => {
     return `${amount.toFixed(3)} credits`;
+  };
+
+  // Extract video ID from TikTok URL
+  const extractTikTokVideoId = (url: string): string | null => {
+    const patterns = [
+      /tiktok\.com\/@[\w.-]+\/video\/(\d+)/,
+      /vm\.tiktok\.com\/(\w+)/,
+      /tiktok\.com\/t\/(\w+)/
+    ];
+    
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) {
+        return match[1];
+      }
+    }
+    return null;
+  };
+
+  // Fetch TikTok video data using oEmbed API
+  const fetchTikTokVideoData = async (url: string): Promise<Partial<VideoData>> => {
+    try {
+      // Use TikTok oEmbed API
+      const oembedUrl = `https://www.tiktok.com/oembed?url=${encodeURIComponent(url)}`;
+      const response = await fetch(oembedUrl);
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch video data');
+      }
+      
+      const data = await response.json();
+      
+      return {
+        title: data.title || 'Untitled Video',
+        thumbnail: data.thumbnail_url || altoLogo,
+        url: url
+      };
+    } catch (error) {
+      console.error('Error fetching TikTok data:', error);
+      // Fallback: create basic video data
+      const videoId = extractTikTokVideoId(url);
+      return {
+        title: `TikTok Video ${videoId || 'Unknown'}`,
+        thumbnail: altoLogo,
+        url: url,
+        viewCount: '0' // Will be updated by backend analysis
+      };
+    }
+  };
+
+  // Analyze video with backend API
+  const analyzeVideo = async (videoId: string): Promise<{ qseScore: number; credits: number; viewCount: string }> => {
+    try {
+      const request: VideoAnalysisRequest = {
+        videoId,
+        url: tiktokUrl
+      };
+
+      const result = await mockAnalyzeVideoAPI(request);
+      
+      return {
+        qseScore: result.qseScore,
+        credits: result.credits,
+        viewCount: result.viewCount
+      };
+    } catch (error) {
+      console.error('Error analyzing video:', error);
+      // Fallback data for demo
+      return {
+        qseScore: Math.floor(Math.random() * 30) + 70,
+        credits: Math.random() * 50,
+        viewCount: Math.floor(Math.random() * 100000).toLocaleString()
+      };
+    }
+  };
+
+  // Add new video
+  const handleAddVideo = async () => {
+    if (!tiktokUrl || !tiktokUrl.trim()) {
+      setAddVideoError('Please enter a TikTok video URL');
+      return;
+    }
+
+    const videoId = extractTikTokVideoId(tiktokUrl);
+    if (!videoId) {
+      setAddVideoError('Invalid TikTok video URL');
+      return;
+    }
+
+    setIsAddingVideo(true);
+    setAddVideoError('');
+
+    try {
+      // Fetch basic video data
+      const videoData = await fetchTikTokVideoData(tiktokUrl);
+      
+      // Create temporary video entry
+      const tempVideo: VideoData = {
+        id: videoId,
+        title: videoData.title || 'Loading...',
+        viewCount: videoData.viewCount || '0',
+        thumbnail: videoData.thumbnail || altoLogo,
+        url: tiktokUrl,
+        isAnalyzing: true
+      };
+
+      setVideos(prev => [tempVideo, ...prev]);
+      setShowAddVideoModal(false);
+      setTiktokUrl('');
+
+      // Analyze video in background
+      const analysisResult = await analyzeVideo(videoId);
+      
+      // Update video with analysis results
+      setVideos(prev => prev.map(video => 
+        video.id === videoId 
+          ? { 
+              ...video, 
+              ...analysisResult, 
+              isAnalyzing: false 
+            }
+          : video
+      ));
+
+    } catch (error) {
+      console.error('Error adding video:', error);
+      setAddVideoError('Failed to add video. Please try again.');
+    } finally {
+      setIsAddingVideo(false);
+    }
   };
 
   const renderOverview = () => (
@@ -85,30 +245,87 @@ export function CreatorDashboard(
       <view className="SectionHeader">
         <text className="SectionTitle">By-Video Breakdown</text>
         <text className="SectionSubtitle">Performance and earnings by video</text>
+        <view className="AddVideoButton" bindtap={() => setShowAddVideoModal(true)}>
+          <text className="AddVideoButtonText">+ Add Video</text>
+        </view>
       </view>
       
       <view className="VideoList">
-        <view className="VideoCard">
-          <image src={altoLogo} className="VideoThumbnail" />
-          <view className="VideoInfo">
-            <text className="VideoTitle">How to Make Perfect Coffee</text>
-            <view className="VideoStats">
-              <view className="VideoStat">
-                <text className="StatLabel">Views</text>
-                <text className="StatValue">15,420</text>
+        {videos.map((video) => (
+          <view key={video.id} className="VideoCard">
+            <image src={video.thumbnail} className="VideoThumbnail" />
+            <view className="VideoInfo">
+              <text className="VideoTitle">{video.title}</text>
+              <view className="VideoStats">
+                <view className="VideoStat">
+                  <text className="StatLabel">Views</text>
+                  <text className="StatValue">{video.viewCount}</text>
+                </view>
+                <view className="VideoStat">
+                  <text className="StatLabel">Credits</text>
+                  <text className="StatValue">
+                    {video.isAnalyzing ? 'Analyzing...' : `${video.credits?.toFixed(3) || '0.000'} credits`}
+                  </text>
+                </view>
+                <view className="VideoStat">
+                  <text className="StatLabel">QSE Score</text>
+                  <text className="StatValue">
+                    {video.isAnalyzing ? (
+                      <view className="LoadingSpinner">
+                        <text className="LoadingText">Analyzing...</text>
+                      </view>
+                    ) : (
+                      `${video.qseScore || 0}%`
+                    )}
+                  </text>
+                </view>
               </view>
-              <view className="VideoStat">
-                <text className="StatLabel">Credits</text>
-                <text className="StatValue">23.450 credits</text>
+            </view>
+          </view>
+        ))}
+      </view>
+
+      {/* Add Video Modal */}
+      {showAddVideoModal && (
+        <view className="ModalOverlay" bindtap={() => setShowAddVideoModal(false)}>
+          <view className="ModalContent" bindtap={(e) => e.stopPropagation()}>
+            <view className="ModalHeader">
+              <text className="ModalTitle">Add TikTok Video</text>
+              <view className="ModalClose" bindtap={() => setShowAddVideoModal(false)}>
+                <text className="ModalCloseText">×</text>
               </view>
-              <view className="VideoStat">
-                <text className="StatLabel">QSE Score</text>
-                <text className="StatValue">87%</text>
+            </view>
+            
+            <view className="ModalBody">
+              <text className="InputLabel">TikTok Video URL</text>
+              {/* @ts-ignore */}
+              <input 
+                className="VideoUrlInput"
+                placeholder="https://www.tiktok.com/@username/video/123456789"
+                value={tiktokUrl}
+                bindinput={(e: any) => {
+                  const value = e?.detail?.value ?? e?.target?.value ?? '';
+                  setTiktokUrl(value);
+                }}
+              />
+              {addVideoError && (
+                <text className="ErrorMessage">{addVideoError}</text>
+              )}
+            </view>
+            
+            <view className="ModalFooter">
+              <view className="ModalButton ModalButton--secondary" bindtap={() => setShowAddVideoModal(false)}>
+                <text className="ModalButtonText">Cancel</text>
+              </view>
+              <view className="ModalButton ModalButton--primary" bindtap={handleAddVideo}>
+                <text className="ModalButtonText">
+                  {isAddingVideo ? 'Adding...' : 'Add Video'}
+                </text>
               </view>
             </view>
           </view>
         </view>
-      </view>
+      )}
     </view>
   );
 
