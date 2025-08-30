@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import { useCallback, useEffect, useState } from 'react';
 import '@lynx-js/react';
-import arrowIcon from '../assets/arrow.png';
+import backArrowIcon from '../assets/icons/back-arrow.png';
 import altoLogo from '../assets/logos/alto-logo.png';
 import { 
   requestCashOut, 
@@ -35,6 +35,9 @@ export function CashOut(
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [showKYCForm, setShowKYCForm] = useState(false);
   const [kycDocuments, setKycDocuments] = useState<string[]>([]);
+  
+  // Exchange rate state
+  const [exchangeRate, setExchangeRate] = useState(0.25); // 1 Nana = $0.25 USD
 
   useEffect(() => {
     loadKYCStatus();
@@ -163,24 +166,27 @@ export function CashOut(
     status !== 'loading';
 
   const formatNanas = (value: number) => `${value.toFixed(2)} Nanas`;
+  
+  const formatUSD = (value: number) => `$${value.toFixed(2)}`;
+  
+  const convertNanasToUSD = (nanas: number) => nanas * exchangeRate;
 
   return (
     <view className="CashOutScreen">
       <view className="DashboardHeader">
         <view className="HeaderLeft">
-          <view className="BackButton" bindtap={props.onCancel}>
-            <image src={arrowIcon} className="BackIcon" />
-            <text className="BackText">Back</text>
+          <view className="BackButton" bindtap={props.onCancel} style="padding: 8px; cursor: pointer;">
+            <image src={backArrowIcon} style="width: 24px; height: 24px;" />
           </view>
-          <image src={altoLogo} className="DashboardLogo" />
         </view>
-        <text className="DashboardTitle">Cash Out</text>
+        <text className="DashboardTitle" style="position: absolute; left: 50%; transform: translateX(-50%); font-size: 20px; font-weight: 700; color: #fff;">Cash Out</text>
       </view>
 
       <scroll-view className="CashOutContent" scroll-y>
         <view className="CashOutHeader">
           <text className="CashOutBalanceLabel">Available Balance</text>
           <text className="CashOutBalance">{formatNanas(props.currentBalance)}</text>
+          <text className="ExchangeRate">1 Nana = {formatUSD(exchangeRate)} USD</text>
           <text className="CashOutInfo">Convert your Nanas to real money</text>
         </view>
 
@@ -198,41 +204,20 @@ export function CashOut(
 
         <view className="CashOutCard">
           <text className="SectionTitle">Amount</text>
-          <view className="PresetChips">
-            <view className="Chip" bindtap={() => {
-              setAmount(10);
-              setAmountInput('10');
-              checkEligibility(10);
-            }}>
-              <text className="ChipText">$10.00</text>
-            </view>
-            <view className="Chip" bindtap={() => {
-              setAmount(25);
-              setAmountInput('25');
-              checkEligibility(25);
-            }}>
-              <text className="ChipText">$25.00</text>
-            </view>
-            <view className="Chip" bindtap={() => {
-              setAmount(50);
-              setAmountInput('50');
-              checkEligibility(50);
-            }}>
-              <text className="ChipText">$50.00</text>
-            </view>
-          </view>
 
           {/* @ts-ignore */}
           <input
             className="TopUpInput"
-            type="digit"
-            step="0.01"
-            min="5"
-            max={props.currentBalance}
+            type="text"
             placeholder="0.00"
             value={amountInput}
             bindinput={handleAmountChange}
           />
+          {amount > 0 && (
+            <text className="USDConversion">
+              {formatNanas(amount)} = {formatUSD(convertNanasToUSD(amount))}
+            </text>
+          )}
           <text className="InputHint">Min 5.00 Nanas · Max {formatNanas(props.currentBalance)}</text>
 
           {eligibility && !eligibility.eligible && (
@@ -394,6 +379,12 @@ export function CashOut(
             <text className="SummaryLabel">Cash-out amount</text>
             <text className="SummaryValue">{formatNanas(amount)}</text>
           </view>
+          {amount > 0 && (
+            <view className="SummaryRow">
+              <text className="SummaryLabel">USD value</text>
+              <text className="SummaryValue">{formatUSD(convertNanasToUSD(amount))}</text>
+            </view>
+          )}
           <view className="SummaryRow">
             <text className="SummaryLabel">Payment method</text>
             <text className="SummaryValue">
