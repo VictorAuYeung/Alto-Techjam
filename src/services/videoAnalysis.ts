@@ -65,26 +65,36 @@ export interface LedgerEntry {
   };
 }
 
-// Simulate TikTok oEmbed API call
+// Fetch TikTok oEmbed API data
 const fetchTikTokOEmbed = async (url: string): Promise<any> => {
   try {
-    // In a real implementation, this would call TikTok's oEmbed API
-    // https://www.tiktok.com/oembed?url={url}
-    
-    // For demo purposes, we'll simulate the response
-    await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000)); // Simulate network delay
-    
+    const oembedUrl = `https://www.tiktok.com/oembed?url=${encodeURIComponent(url)}`;
+    const response = await fetch(oembedUrl);
+
+    if (!response.ok) {
+      throw new Error(`TikTok oEmbed API returned ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    // Return the actual TikTok data
+    return {
+      title: data.title || 'Untitled TikTok Video',
+      thumbnail_url: data.thumbnail_url || '',
+      author_name: data.author_name || '',
+      provider_name: 'TikTok'
+    };
+  } catch (error) {
+    console.error('Error fetching TikTok oEmbed:', error);
+
+    // Fallback to simulated data if API fails
     const videoId = extractVideoIdFromUrl(url);
-    
     return {
       title: `TikTok Video ${videoId}`,
       thumbnail_url: `https://p16-sign-va.tiktokcdn.com/obj/tos-maliva-p-0068/${videoId}/image.jpg`,
       author_name: `@user_${Math.floor(Math.random() * 1000)}`,
       provider_name: 'TikTok'
     };
-  } catch (error) {
-    console.error('Error fetching TikTok oEmbed:', error);
-    throw new Error('Failed to fetch video metadata');
   }
 };
 

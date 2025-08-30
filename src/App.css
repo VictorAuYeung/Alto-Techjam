@@ -513,14 +513,6 @@ text {
   transform: scale(1.1);
 }
 
-.StatValue {
-  font-size: clamp(16px, 4.5vw, 20px);
-  color: #ffd700;
-  font-weight: 800;
-  text-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
-  letter-spacing: -0.5px;
-}
-
 .StatLabel {
   font-size: clamp(10px, 3vw, 12px);
   color: rgba(255, 255, 255, 0.7);
@@ -771,10 +763,6 @@ text {
   .StatCard {
     padding: 12px 16px;
     min-width: 100px;
-  }
-  
-  .StatValue {
-    font-size: 20px;
   }
   
   .Logo--alto {
@@ -1626,9 +1614,9 @@ text {
 }
 
 .StatValue {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
-  color: #fff;
+  color: rgb(255, 255, 255);
   margin-bottom: 4px;
 }
 
@@ -3827,4 +3815,605 @@ text {
   margin-bottom: 0;
   flex: 1;
   min-width: 200px;
+}
+
+/* Video Detail Screen Styles */
+.VideoDetailScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  z-index: 3000;
+  padding: 16px;
+  padding-top: env(safe-area-inset-top);
+  display: flex;
+  flex-direction: column;
+}
+
+.DetailHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
+  padding-top: 40px;
+}
+
+.BackButton {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.BackIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.DetailTitle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.DetailContent {
+  flex: 1;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.DetailCard {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 0 8px 20px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.CardTitle {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.DetailThumbnail {
+  width: 101px;
+  height: 180px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.DetailVideoInfo {
+  flex: 1;
+}
+
+.DetailVideoTitle {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.DetailStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.DetailStat {
+  flex: 1;
+  min-width: 80px;
+}
+
+.DetailStatLabel {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+
+  letter-spacing: 0.5px;
+}
+
+.DetailStatValue {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Score Grid */
+.ScoreGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+.ScoreItem {
+  text-align: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.ScoreLabel {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 8px;
+
+  letter-spacing: 0.5px;
+}
+
+.ScoreValue {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.ScoreValue.grade-high {
+  color: #4CAF50;
+}
+
+.ScoreValue.grade-medium {
+  color: #FFC107;
+}
+
+.ScoreValue.grade-low {
+  color: #F44336;
+}
+
+/* AI Generated Indicator */
+.AIGenerated {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.AIGeneratedLabel {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 12px;
+}
+
+.AIGeneratedValue {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.AIGeneratedValue.ai-yes {
+  background: #2196F3;
+  color: #fff;
+}
+
+.AIGeneratedValue.ai-no {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Summary Text */
+.SummaryText {
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* Scores List */
+.ScoresList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ScoreRow {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.ScoreRow:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.ScoreRowLabel {
+  flex: 1;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.ScoreBar {
+  flex: 2;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  margin: 0 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ScoreBar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  border-radius: 6px;
+}
+
+.ScoreBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 25%, #FFC107 50%, #FF9800 75%, #F44336 100%);
+  border-radius: 6px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.ScoreRowValue {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Calculation List */
+.CalculationList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.CalculationRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.CalculationRow.total {
+  border-top: 1px solid #333;
+  padding-top: 16px;
+  margin-top: 8px;
+}
+
+.CalculationLabel {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.CalculationValue {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.CalculationValue.penalty {
+  color: #F44336;
+}
+
+.CalculationValue.bonus {
+  color: #4CAF50;
+}
+
+.CalculationValue.total {
+  color: #FFC107;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Compliance Info */
+.ComplianceInfo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.ComplianceItem {
+  text-align: center;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.ComplianceLabel {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 8px;
+
+  letter-spacing: 0.5px;
+}
+
+.ComplianceValue {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ComplianceValue.safe {
+  color: #4CAF50;
+}
+
+.ComplianceValue.warning {
+  color: #FFC107;
+}
+
+.ComplianceValue.danger {
+  color: #F44336;
+}
+
+/* Violations */
+.ViolationsList {
+  margin-top: 16px;
+}
+
+.ViolationsTitle {
+  color: #FFC107;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.ViolationItem {
+  padding: 12px;
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.ViolationFlag {
+  color: #FFC107;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+
+}
+
+.ViolationDescription {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Issues */
+.IssuesList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.IssueItem {
+  padding: 12px;
+  background: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  border-radius: 8px;
+}
+
+.IssueType {
+  color: #F44336;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+
+}
+
+.IssueDescription {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Actionable Tips */
+.TipsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.TipItem {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px;
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  border-radius: 8px;
+}
+
+.TipNumber {
+  color: #4CAF50;
+  font-size: 16px;
+  font-weight: 700;
+  margin-right: 12px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.TipText {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* Payout Info */
+.PayoutInfo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+}
+
+.PayoutItem {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.PayoutItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.PayoutLabel {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.PayoutValue {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.PayoutSubtext {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .VideoDetailScreen {
+    padding: 12px;
+  }
+
+  .DetailHeader {
+    padding-top: 32px;
+    margin-bottom: 20px;
+  }
+
+  .DetailCard {
+    margin: 0 4px 16px 4px;
+    padding: 20px;
+  }
+
+  .DetailThumbnail {
+    width: 87px;
+    height: 155px;
+  }
+
+  .DetailVideoTitle {
+    font-size: 18px;
+  }
+
+  .CardTitle {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .ScoreGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ComplianceInfo {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .PayoutInfo {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+  }
+
+  .PayoutItem {
+    padding: 16px;
+  }
+
+  .PayoutValue {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .VideoDetailScreen {
+    padding: 8px;
+  }
+
+  .DetailCard {
+    margin: 0 2px 12px 2px;
+    padding: 16px;
+  }
+
+  .DetailStats {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .DetailStat {
+    min-width: auto;
+  }
+
+  .ScoreGrid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .ScoreRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .ScoreBar {
+    width: 100%;
+    margin: 0;
+  }
+
+  .ScoreRowValue {
+    text-align: left;
+  }
+
+  .CardTitle {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .PayoutInfo {
+    gap: 12px;
+  }
+
+  .PayoutItem {
+    padding: 12px;
+  }
+
+  .PayoutValue {
+    font-size: 18px;
+  }
+
+  .DetailThumbnail {
+    width: 72px;
+    height: 128px;
+  }
 }
