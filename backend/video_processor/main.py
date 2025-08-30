@@ -4,7 +4,6 @@ from typing import Any, Dict, Tuple
 from google import genai
 from google.genai.errors import ServerError
 
-
 from utils import _parse_json_strict, selected_model, PayoutWeights, ScoreWeights
 from prompts import video_evaluation_prompt, video_compliance_prompt
 
