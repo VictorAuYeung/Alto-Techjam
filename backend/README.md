@@ -77,7 +77,7 @@ export GEMINI_API_KEY="your_api_key_here"
 
 ### 5. Put some .mp4 files from your device into the `videos/` folder.
 ```
-cp ~/your_videos_folder_path/your_videos_folder .
+cp -r ~/your_videos_folder_path/your_videos_folder .
 mv your_videos_folder videos
 ```
 
