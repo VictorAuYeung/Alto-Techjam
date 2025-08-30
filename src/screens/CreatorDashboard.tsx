@@ -18,6 +18,7 @@ import {
 } from '../services/wallet.js';
 import altoLogo from '../assets/logos/alto-logo.png';
 import coinIcon from '../assets/coins/coin-banana.png';
+import profilePicture from '../assets/profile-picture.png';
 import { CashOut } from './CashOut.js';
 import { BalanceChart } from '../components/BalanceChart.js';
 import { BarChart } from '../components/BarChart.js';
@@ -1286,7 +1287,7 @@ export function CreatorDashboard(
         </view>
         <view className="HeaderRight">
           <view className="ProfileIcon" bindtap={handleProfileClick}>
-            <image src={altoLogo} className="ProfileAvatar" />
+            <image src={profilePicture} className="ProfileAvatar" />
           </view>
         </view>
       </view>
@@ -1353,7 +1354,7 @@ export function CreatorDashboard(
             </view>
 
             <view className="ProfileInfo" style="text-align: center; margin-bottom: 30px; display: flex; flex-direction: column; align-items: center;">
-              <image src={altoLogo} className="ProfileLargeAvatar" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #ffd700; margin-bottom: 16px;" />
+              <image src={profilePicture} className="ProfileLargeAvatar" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #ffd700; margin-bottom: 16px;" />
               <text className="ProfileName" style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 4px;">Alex Chen</text>
               <text className="ProfileUsername" style="font-size: 16px; color: rgba(255, 255, 255, 0.7); margin-bottom: 12px;">@alexcreates</text>
               <text className="ProfileBio" style="font-size: 14px; color: rgba(255, 255, 255, 0.8); line-height: 1.5; max-width: 300px; text-align: center;">Content creator passionate about sharing knowledge and creativity</text>
