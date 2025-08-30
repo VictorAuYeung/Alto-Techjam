@@ -1,0 +1,42 @@
+{
+  "evaluation": {
+    "summary": "The video features a series of AI-generated images of sad, crying cats in the rain, accompanied by a melancholic 'meow meow' song. It effectively evokes emotion for an audience interested in cute, sentimental animal content.",
+    "scores": {
+      "hook": 0.8,
+      "retention": 0.7,
+      "clarity": 0.9,
+      "usefulness_originality": 0.5,
+      "audience_specific_value": 0.8,
+      "engagement": 0.7
+    },
+    "ai_generated": true,
+    "issues": [],
+    "actionable_tips": [
+      "Consider introducing a subtle narrative or a resolution to the sadness in some images.",
+      "Experiment with slightly different artistic styles or cat breeds for variety.",
+      "Add a brief, relevant text overlay to share a positive message or a question to encourage comments."
+    ]
+  },
+  "compliance": {
+    "regulatory_flags": "none",
+    "critical_violation": false,
+    "compliance_risk": 0.0,
+    "violations": []
+  },
+  "calculation": {
+    "base": 67.5,
+    "penalty": 0.0,
+    "bonus_niche": 2.0,
+    "bonus_aigc": 0.0,
+    "overall": 69.5,
+    "tier": "medium"
+  },
+  "payout": {
+    "video_grade": "medium",
+    "payout": 0.24,
+    "max_payout": 1.0,
+    "overall_score": 69.5,
+    "min_payout_threshold": 40.0
+  },
+  "model": "gemini-2.5-flash"
+}

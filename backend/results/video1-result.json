@@ -1,0 +1,58 @@
+{
+  "evaluation": {
+    "summary": "This video features AI-generated images of sad, rainy cats with meowing sounds. While visually striking, it lacks a clear narrative or educational value.",
+    "scores": {
+      "hook": 0.4,
+      "retention": 0.3,
+      "clarity": 0.8,
+      "usefulness_originality": 0.2,
+      "audience_specific_value": 0.5,
+      "engagement": 0.3
+    },
+    "ai_generated": true,
+    "issues": [
+      {
+        "timestamp": "00:00",
+        "issue": "hook",
+        "description": "Hook is a bit slow, could be more impactful with immediate visual of the sad cats."
+      },
+      {
+        "timestamp": "00:00",
+        "issue": "retention",
+        "description": "Pacing is somewhat monotonous with repeating meow sounds; a slight variation in audio or visual could improve retention."
+      },
+      {
+        "timestamp": "00:00",
+        "issue": "usefulness_originality",
+        "description": "Content is purely aesthetic and lacks utility or a unique creative angle."
+      }
+    ],
+    "actionable_tips": [
+      "Consider adding a narrative element to give the sad cats more context.",
+      "Experiment with varied soundscapes or subtle animations to enhance viewer engagement.",
+      "Explore adding a call to action or a prompt for user interaction."
+    ]
+  },
+  "compliance": {
+    "regulatory_flags": "none",
+    "critical_violation": false,
+    "compliance_risk": 0.1,
+    "violations": []
+  },
+  "calculation": {
+    "base": 35.0,
+    "penalty": 0.6,
+    "bonus_niche": 0.0,
+    "bonus_aigc": 0.0,
+    "overall": 34.4,
+    "tier": "none"
+  },
+  "payout": {
+    "video_grade": "none",
+    "payout": 0.0,
+    "max_payout": 1.0,
+    "overall_score": 34.4,
+    "min_payout_threshold": 40.0
+  },
+  "model": "gemini-2.5-flash-lite"
+}
