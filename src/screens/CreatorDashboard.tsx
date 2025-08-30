@@ -983,12 +983,9 @@ export function CreatorDashboard(
           <text className="BalanceUSD">
             ≈ {formatUSD(walletBalance.nanas * exchangeRate)} USD
           </text>
-          <text className="ExchangeRate">
-            Tier 1 Creator: 1 NANA = {formatUSD(exchangeRate)} USD
-          </text>
           {walletBalance.pendingNanas > 0 && (
             <text className="PendingCredits">
-              +{formatNanas(walletBalance.pendingNanas)} pending
+              -{formatNanas(walletBalance.pendingNanas)} pending
               {` (≈ ${formatUSD(walletBalance.pendingNanas * exchangeRate)} USD)`}
             </text>
           )}

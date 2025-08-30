@@ -3,13 +3,13 @@ import { useCallback, useEffect, useState } from 'react';
 import '@lynx-js/react';
 import backArrowIcon from '../assets/icons/back-arrow.png';
 import altoLogo from '../assets/logos/alto-logo.png';
-import { 
-  requestCashOut, 
-  getCashOutEligibility, 
-  getKYCStatus, 
+import {
+  requestCashOut,
+  getCashOutEligibility,
+  getKYCStatus,
   submitKYCDocuments,
   type CashOutRequest,
-  type KYCStatus 
+  type KYCStatus
 } from '../services/wallet.js';
 
 export function CashOut(
@@ -28,14 +28,14 @@ export function CashOut(
     accountNumber: '',
     giftCardType: 'amazon'
   });
-  
+
   const [kycStatus, setKycStatus] = useState<KYCStatus | null>(null);
   const [eligibility, setEligibility] = useState<any>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [showKYCForm, setShowKYCForm] = useState(false);
   const [kycDocuments, setKycDocuments] = useState<string[]>([]);
-  
+
   // Exchange rate state
   const [exchangeRate, setExchangeRate] = useState(0.25); // 1 Nana = $0.25 USD
 
@@ -67,12 +67,12 @@ export function CashOut(
 
   const checkEligibility = useCallback(async (value: number) => {
     if (!validateAmount(value)) return;
-    
+
     try {
       setStatus('loading');
       const eligibility = await getCashOutEligibility(value);
       setEligibility(eligibility);
-      
+
       if (!eligibility.eligible && eligibility.kycRequired) {
         setShowKYCForm(true);
       }
@@ -86,10 +86,10 @@ export function CashOut(
   const handleAmountChange = useCallback((e: any) => {
     const value = e?.detail?.value ?? e?.target?.value ?? '';
     setAmountInput(value);
-    
+
     const numValue = parseFloat(value) || 0;
     setAmount(numValue);
-    
+
     if (numValue > 0) {
       checkEligibility(numValue);
     } else {
@@ -138,7 +138,7 @@ export function CashOut(
 
   const handleSubmit = useCallback(async () => {
     if (!validateAmount(amount)) return;
-    
+
     // Validate payment details
     if (paymentMethod === 'paypal' && !paymentDetails.paypalEmail) {
       setErrorMsg('Please enter PayPal email');
@@ -160,15 +160,15 @@ export function CashOut(
     }
   }, [amount, paymentMethod, paymentDetails, validateAmount, props]);
 
-  const canSubmit = amount > 0 && 
-    eligibility?.eligible && 
-    status !== 'submitting' && 
+  const canSubmit = amount > 0 &&
+    eligibility?.eligible &&
+    status !== 'submitting' &&
     status !== 'loading';
 
   const formatNanas = (value: number) => `${value.toFixed(2)} Nanas`;
-  
+
   const formatUSD = (value: number) => `$${value.toFixed(2)}`;
-  
+
   const convertNanasToUSD = (nanas: number) => nanas * exchangeRate;
 
   return (
@@ -179,7 +179,7 @@ export function CashOut(
             <image src={backArrowIcon} style="width: 24px; height: 24px;" />
           </view>
         </view>
-        <text className="DashboardTitle" style="position: absolute; left: 50%; transform: translateX(-50%); font-size: 20px; font-weight: 700; color: #fff;">Cash Out</text>
+        <text className="DashboardTitle" style="position: absolute; left: 50%; transform: translateX(-50%); font-size: 20px; font-weight: 700; color: #fff;">Withdraw Funds</text>
       </view>
 
       <scroll-view className="CashOutContent" scroll-y>
@@ -187,7 +187,7 @@ export function CashOut(
           <text className="CashOutBalanceLabel">Available Balance</text>
           <text className="CashOutBalance">{formatNanas(props.currentBalance)}</text>
           <text className="ExchangeRate">1 Nana = {formatUSD(exchangeRate)} USD</text>
-          <text className="CashOutInfo">Convert your Nanas to real money</text>
+          <text className="CashOutInfo">Request to convert your Nanas safely and securely to real money.</text>
         </view>
 
         {errorMsg && (
@@ -208,7 +208,7 @@ export function CashOut(
           {/* @ts-ignore */}
           <input
             className="TopUpInput"
-            type="text"
+            type="number"
             placeholder="0.00"
             value={amountInput}
             bindinput={handleAmountChange}
@@ -389,14 +389,14 @@ export function CashOut(
             <text className="SummaryLabel">Payment method</text>
             <text className="SummaryValue">
               {paymentMethod === 'paypal' ? 'PayPal' :
-               paymentMethod === 'bank_transfer' ? 'Bank Transfer' : 'Gift Card'}
+                paymentMethod === 'bank_transfer' ? 'Bank Transfer' : 'Gift Card'}
             </text>
           </view>
           <view className="SummaryRow">
             <text className="SummaryLabel">Processing time</text>
             <text className="SummaryValue">
               {paymentMethod === 'paypal' ? '1-2 business days' :
-               paymentMethod === 'bank_transfer' ? '3-5 business days' : 'Instant'}
+                paymentMethod === 'bank_transfer' ? '3-5 business days' : 'Instant'}
             </text>
           </view>
           <text className="SummaryNote">
@@ -406,16 +406,17 @@ export function CashOut(
       </scroll-view>
 
       <view className="CashOutActions">
+
+        <view className="SecondaryButton" bindtap={props.onCancel}>
+          <text className="SecondaryButtonText">Cancel</text>
+        </view>
         <view
           className={`PrimaryButton ${!canSubmit ? 'PrimaryButton--disabled' : ''}`}
           bindtap={handleSubmit}
         >
           <text className="PrimaryButtonText">
-            {status === 'submitting' ? 'Processing…' : 'Request Cash-out'}
+            {status === 'submitting' ? 'Processing…' : 'Request Withdrawal'}
           </text>
-        </view>
-        <view className="SecondaryButton" bindtap={props.onCancel}>
-          <text className="SecondaryButtonText">Cancel</text>
         </view>
       </view>
     </view>

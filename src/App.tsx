@@ -176,7 +176,7 @@ export function App(
                   </text>
                   <text className="Tagline">
                   Alto rewards creators fairly.
-                  Your content is scored for quality and converted into nanas — a transparent, secure way to earn that
+                  Your content is scored for quality and converted into nanas — a transparent, secure and fair way to earn money that
                   safeguards against fraud and rewards high quality content creators.
                   </text>
                 </view>
