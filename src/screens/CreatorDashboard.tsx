@@ -17,6 +17,8 @@ import {
 import altoLogo from '../assets/logos/alto-logo.png';
 import { CashOut } from './CashOut.js';
 import { BalanceChart } from '../components/BalanceChart.js';
+import { BarChart } from '../components/BarChart.js';
+import { HorizontalBarChart } from '../components/HorizontalBarChart.js';
 
 type Tab = 'overview' | 'videos' | 'receipts' | 'analytics';
 
@@ -49,16 +51,16 @@ export function CreatorDashboard(
 ) {
   const [activeTab, setActiveTab] = useState<Tab>('overview');
   const [walletBalance, setWalletBalance] = useState<WalletBalance>({
-    nanas: 57.35,
-    pendingNanas: 12.45,
-    totalEarned: 89.23,
+    nanas: 15.46,
+    pendingNanas: 0,
+    totalEarned: 15.46,
     lastUpdated: Date.now()
   });
   const [earningsAnalytics, setEarningsAnalytics] = useState({
-    todayEarnings: 12.45,
-    weekEarnings: 89.23,
-    monthEarnings: 156.78,
-    totalViews: 36680,
+    todayEarnings: 0.00,
+    weekEarnings: 10.23,
+    monthEarnings: 10.23,
+    totalViews: 15420,
     avgQseScore: 87
   });
   const [lastUpdated, setLastUpdated] = useState(new Date());
@@ -79,7 +81,7 @@ export function CreatorDashboard(
       thumbnail: altoLogo,
       url: 'https://www.tiktok.com/@alexcreates/video/123456789',
       qseScore: 87,
-      nanas: 23.45,
+      nanas: 15.23,
       impactScore: 78,
       qualityScore: 92,
       fairnessMultiplier: 1.2,
@@ -88,7 +90,7 @@ export function CreatorDashboard(
       creatorTier: 'small',
       ledgerEntryId: 'ledger_001',
       analysisTimestamp: Date.now() - 86400000
-    }
+    },
   ]);
   const [showAddVideoModal, setShowAddVideoModal] = useState(false);
   const [tiktokUrl, setTiktokUrl] = useState('');
@@ -154,9 +156,10 @@ export function CreatorDashboard(
     const patterns = [
       /tiktok\.com\/@[\w.-]+\/video\/(\d+)/,
       /vm\.tiktok\.com\/(\w+)/,
-      /tiktok\.com\/t\/(\w+)/
+      /tiktok\.com\/t\/(\w+)/,
+      /vt\.tiktok\.com\/(\w+)/
     ];
-    
+
     for (const pattern of patterns) {
       const match = pattern.exec(url);
       if (match) {
@@ -468,7 +471,7 @@ export function CreatorDashboard(
               {/* @ts-ignore */}
               <input 
                 className="VideoUrlInput"
-                placeholder="https://www.tiktok.com/@username/video/123456789"
+                placeholder="https://www.tiktok.com/@username/video/123456789 or https://vt.tiktok.com/ABC123"
                 value={tiktokUrl}
                 bindinput={(e: any) => {
                   const value = e?.detail?.value ?? e?.target?.value ?? '';
@@ -534,16 +537,56 @@ export function CreatorDashboard(
     </view>
   );
 
+  // Prepare chart data
+  const topEarningVideosData = videos
+    .filter(video => video.nanas && video.nanas > 0)
+    .sort((a, b) => (b.nanas || 0) - (a.nanas || 0))
+    .slice(0, 5)
+    .map(video => ({
+      label: video.title,
+      value: video.nanas || 0,
+      color: `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`
+    }));
+
+  const qseScoreDistribution = videos
+    .filter(video => video.qseScore)
+    .reduce((acc, video) => {
+      const score = video.qseScore || 0;
+      let category = '';
+      if (score >= 90) category = 'Excellent (90-100)';
+      else if (score >= 80) category = 'Very Good (80-89)';
+      else if (score >= 70) category = 'Good (70-79)';
+      else if (score >= 60) category = 'Average (60-69)';
+      else category = 'Needs Improvement (<60)';
+
+      acc[category] = (acc[category] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+  const getQseColor = (label: string): string => {
+    if (label.includes('Excellent')) return '#4CAF50';
+    if (label.includes('Very Good')) return '#8BC34A';
+    if (label.includes('Good')) return '#FFC107';
+    if (label.includes('Average')) return '#FF9800';
+    return '#F44336';
+  };
+
+  const qsePieData = Object.entries(qseScoreDistribution).map(([label, value]) => ({
+    label,
+    value,
+    color: getQseColor(label)
+  }));
+
   const renderAnalytics = () => (
     <view className="DashboardSection">
       <view className="SectionHeader">
         <text className="SectionTitle">Analytics & Charts</text>
         <text className="SectionSubtitle">Performance insights and trends</text>
       </view>
-      
+
       <scroll-view className="ChartsContainer" scroll-y>
         <view className="ChartCard">
-          <text className="ChartTitle">Balance History (30 days)</text>
+          <text className="ChartTitle">Wallet Balance History (30 days)</text>
           <BalanceChart
             data={balanceHistory}
             width={300}
@@ -554,22 +597,47 @@ export function CreatorDashboard(
 
         <view className="ChartCard">
           <text className="ChartTitle">Top Earning Videos</text>
-          <view className="ChartPlaceholder">
-            <text className="ChartPlaceholderText">Bar chart of top 3 videos</text>
-          </view>
+          {topEarningVideosData.length > 0 ? (
+            <BarChart
+              data={topEarningVideosData}
+              width={300}
+              height={220}
+              showValues={true}
+              className="ChartContent"
+            />
+          ) : (
+            <view className="ChartPlaceholder">
+              <text className="ChartPlaceholderText">No earning data available yet</text>
+              <text className="ChartPlaceholderSubtext">Add videos to start tracking earnings</text>
+            </view>
+          )}
         </view>
 
         <view className="ChartCard">
-          <text className="ChartTitle">Engagement Quality Distribution</text>
-          <view className="ChartPlaceholder">
-            <text className="ChartPlaceholderText">Pie chart of QSE score distribution</text>
-          </view>
+          <text className="ChartTitle">QSE Score Distribution</text>
+          {qsePieData.length > 0 ? (
+            <HorizontalBarChart
+              data={qsePieData}
+              width={320}
+              height={200}
+              showPercentages={true}
+              showValues={false}
+              animated={true}
+              className="ChartContent"
+            />
+          ) : (
+            <view className="ChartPlaceholder">
+              <text className="ChartPlaceholderText">No QSE data available</text>
+              <text className="ChartPlaceholderSubtext">Add and analyze videos to see score distribution</text>
+            </view>
+          )}
         </view>
-        
+
         <view className="ChartCard">
-          <text className="ChartTitle">Engagement Quality Distribution</text>
+          <text className="ChartTitle">Monthly Earnings Trend</text>
           <view className="ChartPlaceholder">
-            <text className="ChartPlaceholderText">Pie chart of QSE score distribution</text>
+            <text className="ChartPlaceholderText">Line chart showing earnings over time</text>
+            <text className="ChartPlaceholderSubtext">Coming soon with more data</text>
           </view>
         </view>
       </scroll-view>

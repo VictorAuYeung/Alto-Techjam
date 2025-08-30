@@ -49,9 +49,9 @@ export interface BalanceHistoryPoint {
 
 // Simulated wallet data store
 let walletData: WalletBalance = {
-  nanas: 57.35,
-  pendingNanas: 12.45,
-  totalEarned: 89.23,
+  nanas: 15.23,
+  pendingNanas: 0,
+  totalEarned: 15.23,
   lastUpdated: Date.now()
 };
 
@@ -60,12 +60,21 @@ let transactions: Transaction[] = [
   {
     id: 'txn_001',
     type: 'nana',
-    amount: 23.45,
+    amount: 10.23,
     description: 'Video earnings: How to Make Perfect Coffee',
-    timestamp: Date.now() - 86400000, // 1 day ago
+    timestamp: Date.now() - 86400000 * 1, // 1 days ago
     relatedVideoId: '1',
     ledgerEntryId: 'ledger_001'
-  }
+  },
+  {
+    id: 'txn_001',
+    type: 'nana',
+    amount: 5.23,
+    description: 'Video earnings: How to Make Perfect Coffee',
+    timestamp: Date.now() - 86400000 * 30, // 30 days ago
+    relatedVideoId: '1',
+    ledgerEntryId: 'ledger_001'
+  },
 ];
 
 let kycStatus: KYCStatus = {

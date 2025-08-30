@@ -93,16 +93,17 @@ const extractVideoIdFromUrl = (url: string): string => {
   const patterns = [
     /tiktok\.com\/@[\w.-]+\/video\/(\d+)/,
     /vm\.tiktok\.com\/(\w+)/,
-    /tiktok\.com\/t\/(\w+)/
+    /tiktok\.com\/t\/(\w+)/,
+    /vt\.tiktok\.com\/(\w+)/
   ];
-  
+
   for (const pattern of patterns) {
     const match = pattern.exec(url);
     if (match) {
       return match[1];
     }
   }
-  
+
   // Fallback: generate a random ID
   return Math.random().toString(36).substring(2, 15);
 };
