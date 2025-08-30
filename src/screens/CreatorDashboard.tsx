@@ -4,7 +4,19 @@ import '@lynx-js/react';
 import arrowIcon from '../assets/arrow.png';
 import { mockAnalyzeVideoAPI } from '../services/videoAnalysis.js';
 import type { VideoAnalysisRequest } from '../services/videoAnalysis.js';
+import {
+  getWalletBalance,
+  addNanas,
+  getEarningsAnalytics,
+  getTransactionHistory,
+  getBalanceHistory,
+  type WalletBalance,
+  type Transaction,
+  type BalanceHistoryPoint
+} from '../services/wallet.js';
 import altoLogo from '../assets/logos/alto-logo.png';
+import { CashOut } from './CashOut.js';
+import { BalanceChart } from '../components/BalanceChart.js';
 
 type Tab = 'overview' | 'videos' | 'receipts' | 'analytics';
 
@@ -13,11 +25,21 @@ interface VideoData {
   title: string;
   viewCount: string;
   likeCount: string;
+  commentCount: string;
+  shareCount: string;
   thumbnail: string;
   url: string;
   qseScore?: number;
-  credits?: number;
+  nanas?: number;
   isAnalyzing?: boolean;
+  impactScore?: number;
+  qualityScore?: number;
+  fairnessMultiplier?: number;
+  totalScore?: number;
+  category?: string;
+  creatorTier?: string;
+  ledgerEntryId?: string;
+  analysisTimestamp?: number;
 }
 
 export function CreatorDashboard(
@@ -26,10 +48,24 @@ export function CreatorDashboard(
   }>,
 ) {
   const [activeTab, setActiveTab] = useState<Tab>('overview');
-  const [walletBalance, setWalletBalance] = useState(57.35);
-  const [todayEarnings, setTodayEarnings] = useState(12.45);
-  const [weekEarnings, setWeekEarnings] = useState(89.23);
+  const [walletBalance, setWalletBalance] = useState<WalletBalance>({
+    nanas: 57.35,
+    pendingNanas: 12.45,
+    totalEarned: 89.23,
+    lastUpdated: Date.now()
+  });
+  const [earningsAnalytics, setEarningsAnalytics] = useState({
+    todayEarnings: 12.45,
+    weekEarnings: 89.23,
+    monthEarnings: 156.78,
+    totalViews: 36680,
+    avgQseScore: 87
+  });
   const [lastUpdated, setLastUpdated] = useState(new Date());
+  const [showCashOut, setShowCashOut] = useState(false);
+
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [balanceHistory, setBalanceHistory] = useState<BalanceHistoryPoint[]>([]);
   
   // Video management state
   const [videos, setVideos] = useState<VideoData[]>([
@@ -38,10 +74,20 @@ export function CreatorDashboard(
       title: 'How to Make Perfect Coffee',
       viewCount: '15,420',
       likeCount: '2,847',
+      commentCount: '156',
+      shareCount: '89',
       thumbnail: altoLogo,
       url: 'https://www.tiktok.com/@alexcreates/video/123456789',
       qseScore: 87,
-      credits: 23.45
+      nanas: 23.45,
+      impactScore: 78,
+      qualityScore: 92,
+      fairnessMultiplier: 1.2,
+      totalScore: 83,
+      category: 'education',
+      creatorTier: 'small',
+      ledgerEntryId: 'ledger_001',
+      analysisTimestamp: Date.now() - 86400000
     }
   ]);
   const [showAddVideoModal, setShowAddVideoModal] = useState(false);
@@ -49,15 +95,58 @@ export function CreatorDashboard(
   const [isAddingVideo, setIsAddingVideo] = useState(false);
   const [addVideoError, setAddVideoError] = useState('');
 
-  useEffect(() => {
+    useEffect(() => {
+    loadWalletData();
+    loadAnalytics();
+    loadTransactions();
+    loadBalanceHistory();
+
     const interval = setInterval(() => {
       setLastUpdated(new Date());
     }, 30000);
     return () => clearInterval(interval);
   }, []);
 
-  const formatCredits = (amount: number) => {
-    return `\$${amount.toFixed(3)}`;
+  const loadWalletData = async () => {
+    try {
+      const balance = await getWalletBalance();
+      setWalletBalance(balance);
+    } catch (error) {
+      console.error('Failed to load wallet data:', error);
+    }
+  };
+
+  const loadAnalytics = async () => {
+    try {
+      const analytics = await getEarningsAnalytics();
+      setEarningsAnalytics(analytics);
+    } catch (error) {
+      console.error('Failed to load analytics:', error);
+    }
+  };
+
+
+
+  const loadTransactions = async () => {
+    try {
+      const txns = await getTransactionHistory(20);
+      setTransactions(txns);
+    } catch (error) {
+      console.error('Failed to load transactions:', error);
+    }
+  };
+
+  const loadBalanceHistory = async () => {
+    try {
+      const history = await getBalanceHistory(30); // Last 30 days
+      setBalanceHistory(history);
+    } catch (error) {
+      console.error('Failed to load balance history:', error);
+    }
+  };
+
+  const formatNanas = (amount: number) => {
+    return `${amount.toFixed(3)} Nanas`;
   };
 
   // Extract video ID from TikTok URL
@@ -69,7 +158,7 @@ export function CreatorDashboard(
     ];
     
     for (const pattern of patterns) {
-      const match = url.match(pattern);
+      const match = pattern.exec(url);
       if (match) {
         return match[1];
       }
@@ -122,7 +211,21 @@ export function CreatorDashboard(
   };
 
   // Analyze video with backend API
-  const analyzeVideo = async (videoId: string): Promise<{ qseScore: number; credits: number; viewCount: string; likeCount: string }> => {
+  const analyzeVideo = async (videoId: string): Promise<{
+    qseScore: number;
+    nanas: number;
+    viewCount: string;
+    likeCount: string;
+    commentCount: string;
+    shareCount: string;
+    impactScore: number;
+    qualityScore: number;
+    fairnessMultiplier: number;
+    totalScore: number;
+    category: string;
+    creatorTier: string;
+    ledgerEntryId: string;
+  }> => {
     try {
       const request: VideoAnalysisRequest = {
         videoId,
@@ -131,34 +234,50 @@ export function CreatorDashboard(
 
       const result = await mockAnalyzeVideoAPI(request);
       
-      // Generate realistic like count based on view count
-      const viewCountNum = parseInt(result.viewCount.replace(/,/g, '')) || 0;
-      const likeCount = Math.floor(viewCountNum * (Math.random() * 0.1 + 0.05)).toLocaleString(); // 5-15% like rate
-      
       return {
         qseScore: result.qseScore,
-        credits: result.credits,
+        nanas: result.nanas,
         viewCount: result.viewCount,
-        likeCount: likeCount
+        likeCount: result.likeCount,
+        commentCount: result.commentCount,
+        shareCount: result.shareCount,
+        impactScore: result.impactScore,
+        qualityScore: result.qualityScore,
+        fairnessMultiplier: result.fairnessMultiplier,
+        totalScore: result.totalScore,
+        category: result.category,
+        creatorTier: result.creatorTier,
+        ledgerEntryId: result.ledgerEntryId
       };
     } catch (error) {
       console.error('Error analyzing video:', error);
       // Fallback data for demo
       const randomViews = Math.floor(Math.random() * 100000);
       const randomLikes = Math.floor(randomViews * (Math.random() * 0.1 + 0.05));
+      const randomComments = Math.floor(randomViews * (Math.random() * 0.05 + 0.005));
+      const randomShares = Math.floor(randomViews * (Math.random() * 0.03 + 0.002));
       
       return {
         qseScore: Math.floor(Math.random() * 30) + 70,
-        credits: Math.random() * 50,
+        nanas: Math.random() * 50,
         viewCount: randomViews.toLocaleString(),
-        likeCount: randomLikes.toLocaleString()
+        likeCount: randomLikes.toLocaleString(),
+        commentCount: randomComments.toLocaleString(),
+        shareCount: randomShares.toLocaleString(),
+        impactScore: Math.floor(Math.random() * 40) + 60,
+        qualityScore: Math.floor(Math.random() * 30) + 70,
+        fairnessMultiplier: 1.0,
+        totalScore: Math.floor(Math.random() * 30) + 70,
+        category: 'general',
+        creatorTier: 'small',
+        ledgerEntryId: `ledger_fallback_${Date.now()}`
       };
     }
   };
 
   // Add new video
   const handleAddVideo = async () => {
-    if (!tiktokUrl || !tiktokUrl.trim()) {
+    if (!tiktokUrl?.trim()) {
       setAddVideoError('Please enter a TikTok video URL');
       return;
     }
@@ -182,6 +301,8 @@ export function CreatorDashboard(
         title: videoData.title || 'Loading...',
         viewCount: videoData.viewCount || '0',
         likeCount: videoData.likeCount || '0',
+        commentCount: videoData.commentCount || '0',
+        shareCount: videoData.shareCount || '0',
         thumbnail: videoData.thumbnail || altoLogo,
         url: tiktokUrl,
         isAnalyzing: true
@@ -204,6 +325,17 @@ export function CreatorDashboard(
             }
           : video
       ));
+
+      // Add nanas to wallet
+      try {
+        await addNanas(analysisResult.nanas, videoData.title || videoId, analysisResult.ledgerEntryId);
+        await loadWalletData();
+        await loadAnalytics();
+        await loadTransactions(); // Refresh transaction history after adding video earnings
+        await loadBalanceHistory(); // Refresh balance history after adding video earnings
+      } catch (error) {
+        console.error('Failed to add nanas to wallet:', error);
+      }
 
     } catch (error) {
       console.error('Error adding video:', error);
@@ -231,18 +363,24 @@ export function CreatorDashboard(
         
         <view className="WalletBalance">
           <text className="BalanceLabel">Total Wallet Balance</text>
-          <text className="BalanceAmount">{formatCredits(walletBalance)}</text>
+          <text className="BalanceAmount">{formatNanas(walletBalance.nanas)}</text>
+          {walletBalance.pendingNanas > 0 && (
+            <text className="PendingCredits">+{formatNanas(walletBalance.pendingNanas)} pending</text>
+          )}
+          <view className="CashOutButton" bindtap={() => setShowCashOut(true)}>
+            <text className="CashOutButtonText">Cash Out</text>
+          </view>
         </view>
 
         <view className="EarningsSummary">
           <view className="EarningsCard">
             <text className="EarningsLabel">Today's Earnings</text>
-            <text className="EarningsAmount">{formatCredits(todayEarnings)}</text>
+            <text className="EarningsAmount">{formatNanas(earningsAnalytics.todayEarnings)}</text>
             <text className="EarningsChange">+12.5% from yesterday</text>
           </view>
           <view className="EarningsCard">
             <text className="EarningsLabel">Past 7 Days</text>
-            <text className="EarningsAmount">{formatCredits(weekEarnings)}</text>
+            <text className="EarningsAmount">{formatNanas(earningsAnalytics.weekEarnings)}</text>
             <text className="EarningsChange">+8.3% from last week</text>
           </view>
         </view>
@@ -267,7 +405,7 @@ export function CreatorDashboard(
 
   const renderVideos = () => (
     <view className="DashboardSection">
-      <view className="SectionHeader">
+      <view className="SectionHeaderWithButton">
         <text className="SectionTitle">By-Video Breakdown</text>
         <text className="SectionSubtitle">Performance and earnings by video</text>
         <view className="AddVideoButton" bindtap={() => setShowAddVideoModal(true)}>
@@ -275,7 +413,7 @@ export function CreatorDashboard(
         </view>
       </view>
       
-      <view className="VideoList">
+      <scroll-view className="VideoList" scroll-y>
         {videos.map((video) => (
           <view key={video.id} className="VideoCard">
             <image src={video.thumbnail} className="VideoThumbnail" />
@@ -291,9 +429,9 @@ export function CreatorDashboard(
                   <text className="StatValue">{video.likeCount}</text>
                 </view>
                 <view className="VideoStat">
-                  <text className="StatLabel">Credits</text>
+                  <text className="StatLabel">Nanas</text>
                   <text className="StatValue">
-                    {video.isAnalyzing ? 'Analyzing...' : formatCredits(video.credits || 0)}
+                    {video.isAnalyzing ? 'Analyzing...' : formatNanas(video.nanas || 0)}
                   </text>
                 </view>
                 <view className="VideoStat">
@@ -312,7 +450,7 @@ export function CreatorDashboard(
             </view>
           </view>
         ))}
-      </view>
+      </scroll-view>
 
       {/* Add Video Modal */}
       {showAddVideoModal && (
@@ -361,25 +499,38 @@ export function CreatorDashboard(
   const renderReceipts = () => (
     <view className="DashboardSection">
       <view className="SectionHeader">
-        <text className="SectionTitle">Recent Receipts</text>
-        <text className="SectionSubtitle">Live stream of incoming transactions</text>
+        <text className="SectionTitle">Transaction History</text>
+        <text className="SectionSubtitle">All credits earned and cash-outs</text>
       </view>
       
-      <view className="ReceiptsList">
-        <view className="ReceiptCard">
-          <view className="ReceiptHeader">
-            <text className="ReceiptAmount">+0.006 credits</text>
-            <text className="ReceiptTime">2 min ago</text>
+      <scroll-view className="ReceiptsList" scroll-y>
+        {transactions.length === 0 ? (
+          <view className="EmptyState">
+            <text className="EmptyStateText">No transactions yet</text>
+            <text className="EmptyStateSubtext">Add videos to start earning credits</text>
           </view>
-          <text className="ReceiptVideo">How to Make Perfect Coffee</text>
-          <text className="ReceiptViewer">From: follower_abc123</text>
-          <view className="ReceiptScores">
-            <text className="ScoreLabel">QSE: 87%</text>
-            <text className="ScoreLabel">Watch: 95%</text>
-            <text className="ScoreLabel">Engagement: 92%</text>
-          </view>
-        </view>
-      </view>
+        ) : (
+          transactions.map((transaction) => (
+            <view key={transaction.id} className="ReceiptCard">
+              <view className="ReceiptHeader">
+                <text className={`ReceiptAmount ${transaction.type === 'nana' ? 'ReceiptAmount--positive' : 'ReceiptAmount--negative'}`}>
+                  {transaction.type === 'nana' ? '+' : ''}{formatNanas(transaction.amount)}
+                </text>
+                <text className="ReceiptTime">
+                  {new Date(transaction.timestamp).toLocaleDateString()}
+                </text>
+              </view>
+              <text className="ReceiptVideo">{transaction.description}</text>
+              {transaction.relatedVideoId && (
+                <text className="ReceiptViewer">Video ID: {transaction.relatedVideoId}</text>
+              )}
+              {transaction.ledgerEntryId && (
+                <text className="ReceiptLedger">Ledger: {transaction.ledgerEntryId}</text>
+              )}
+            </view>
+          ))
+        )}
+      </scroll-view>
     </view>
   );
 
@@ -392,10 +543,13 @@ export function CreatorDashboard(
       
       <scroll-view className="ChartsContainer" scroll-y>
         <view className="ChartCard">
-          <text className="ChartTitle">Earnings Over Time (24h)</text>
-          <view className="ChartPlaceholder">
-            <text className="ChartPlaceholderText">Line chart showing hourly earnings</text>
-          </view>
+          <text className="ChartTitle">Balance History (30 days)</text>
+          <BalanceChart
+            data={balanceHistory}
+            width={300}
+            height={150}
+            className="ChartContent"
+          />
         </view>
 
         <view className="ChartCard">
@@ -474,6 +628,19 @@ export function CreatorDashboard(
         {activeTab === 'receipts' && renderReceipts()}
         {activeTab === 'analytics' && renderAnalytics()}
       </view>
+
+      {showCashOut && (
+        <CashOut
+          currentBalance={walletBalance.nanas}
+          onCancel={() => setShowCashOut(false)}
+          onSuccess={(request) => {
+            setShowCashOut(false);
+            loadWalletData();
+            loadTransactions();
+            loadBalanceHistory();
+          }}
+        />
+      )}
     </view>
   );
 }

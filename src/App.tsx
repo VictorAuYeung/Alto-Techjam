@@ -71,11 +71,7 @@ export function App(
     }, 0);
   }, []);
 
-  const onBackHome = useCallback(() => {
-    setTimeout(() => {
-      setStage('home');
-    }, 0);
-  }, []);
+
 
   const onSignupBack = useCallback(() => {
     setTimeout(() => {
@@ -107,23 +103,27 @@ export function App(
       <view className="Background" />
       {stage === 'home' && (
       <view className="BananaParticles">
-        {Array.from({ length: particleCount }).map((_, index) => (
-          <view 
-            key={index} 
-            className="BananaParticle"
-            style={{
-              left: `${Math.min(100, Math.max(0, ((index + 0.5) / particleCount) * 100 + (Math.random() * 15 - 7.5)))}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${15 + Math.random() * 10}s`,
-              opacity: 0.3 + Math.random() * 0.4
-            }}
-          >
-            <image 
-              src={bananas[index % bananas.length]} 
-              className="BananaParticleImage"
-            />
-          </view>
-        ))}
+        {Array.from({ length: particleCount }).map((_, index) => {
+          const particleId = `particle-${index}`;
+          const bananaIndex = index % bananas.length;
+          return (
+            <view
+              key={particleId}
+              className="BananaParticle"
+              style={{
+                left: `${Math.min(100, Math.max(0, ((index + 0.5) / particleCount) * 100 + (Math.random() * 15 - 7.5)))}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${15 + Math.random() * 10}s`,
+                opacity: 0.3 + Math.random() * 0.4
+              }}
+            >
+              <image
+                src={bananas[bananaIndex]}
+                className="BananaParticleImage"
+              />
+            </view>
+          );
+        })}
       </view>
       )}
       <view className="App">
@@ -131,23 +131,27 @@ export function App(
           <view className={`Splash ${isSplashFading ? 'Splash--fading' : ''}`}>
             <view className="SplashBackground">
               <view className="BananaContainer">
-                {!isLogoVisible && Array.from({ length: splashBananaCount }).map((_, index) => (
-                  <view 
-                    key={index} 
-                    className="Banana"
-                    style={{
-                      left: `${Math.min(100, Math.max(0, ((index + 0.5) / splashBananaCount) * 100 + (Math.random() * 15 - 7.5)))}%`,
-                      top: `-${120 + Math.random() * 500}px`,
-                      animationDelay: `${Math.random() * 1}s`,
-                      animationDuration: `${3 + Math.random() * 2}s`
-                    }}
-                  >
-                    <image 
-                      src={bananas[index % bananas.length]} 
-                      className="BananaImage"
-                    />
-                  </view>
-                ))}
+                {!isLogoVisible && Array.from({ length: splashBananaCount }).map((_, index) => {
+                  const bananaId = `splash-banana-${index}`;
+                  const bananaIndex = index % bananas.length;
+                  return (
+                    <view
+                      key={bananaId}
+                      className="Banana"
+                      style={{
+                        left: `${Math.min(100, Math.max(0, ((index + 0.5) / splashBananaCount) * 100 + (Math.random() * 15 - 7.5)))}%`,
+                        top: `-${120 + Math.random() * 500}px`,
+                        animationDelay: `${Math.random() * 1}s`,
+                        animationDuration: `${3 + Math.random() * 2}s`
+                      }}
+                    >
+                      <image
+                        src={bananas[bananaIndex]}
+                        className="BananaImage"
+                      />
+                    </view>
+                  );
+                })}
               </view>
             </view>
             <view className={`SplashContent ${isLogoVisible ? 'SplashContent--visible' : ''}`}>
