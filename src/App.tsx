@@ -4,7 +4,6 @@ import '@lynx-js/react';
 
 import './App.css';
 import altoLogo from './assets/logos/alto-logo.png';
-import arrowIcon from './assets/arrow.png';
 import banana1 from './assets/splash-page/bananas/1.png';
 import banana2 from './assets/splash-page/bananas/2.png';
 import banana3 from './assets/splash-page/bananas/3.png';
@@ -12,12 +11,6 @@ import banana4 from './assets/splash-page/bananas/4.png';
 import banana5 from './assets/splash-page/bananas/5.png';
 import banana6 from './assets/splash-page/bananas/6.png';
 import banana7 from './assets/splash-page/bananas/7.png';
-import banana8 from './assets/splash-page/bananas/8.png';
-import banana9 from './assets/splash-page/bananas/9.png';
-import banana10 from './assets/splash-page/bananas/10.png';
-import banana11 from './assets/splash-page/bananas/11.png';
-import banana12 from './assets/splash-page/bananas/12.png';
-import banana13 from './assets/splash-page/bananas/13.png';
 import coinBanana from './assets/coins/coin-banana.png';
 import coinBananas from './assets/coins/coin-bananas.png';
 import groupIcon from './assets/icons/group.png';
@@ -36,7 +29,6 @@ export function App(
 
   const bananas = useMemo(() => [banana1, banana2, banana3, banana4, banana5, banana6, banana7], []);
   const particleCount = 20;
-  const splashBananaCount = 35;
 
   useEffect(() => {
     console.info('Alto: streaming micro-credits for short-form creators');
@@ -139,31 +131,6 @@ export function App(
         {stage === 'splash' && (
           <view className={`Splash ${isSplashFading ? 'Splash--fading' : ''}`}>
             <view className="SplashBackground">
-              {/* Commented out bananas falling animation - keeping as alternative */}
-              {/* <view className="BananaContainer">
-                {!isLogoVisible && Array.from({ length: splashBananaCount }).map((_, index) => {
-                  const bananaId = `splash-banana-${index}`;
-                  const bananaIndex = index % bananas.length;
-                  return (
-                    <view
-                      key={bananaId}
-                      className="Banana"
-                      style={{
-                        left: `${Math.min(100, Math.max(0, ((index + 0.5) / splashBananaCount) * 100 + (Math.random() * 15 - 7.5)))}%`,
-                        top: `-${120 + Math.random() * 500}px`,
-                        animationDelay: `${Math.random() * 1}s`,
-                        animationDuration: `${3 + Math.random() * 2}s`
-                      }}
-                    >
-                      <image
-                        src={bananas[bananaIndex]}
-                        className="BananaImage"
-                      />
-                    </view>
-                  );
-                })}
-              </view> */}
-              
               {/* New singular banana coin animation - bouncing and spinning */}
               {!isLogoVisible && (
                 <view className="CoinContainer">
@@ -205,7 +172,7 @@ export function App(
                   </view>
                   
                   <text className="Tagline" style={{ marginBottom: '0px', fontWeight: 'bold', fontSize: '18px', color: 'rgba(255, 255, 255, 0.75)' }}>
-                    Transparency, Analytics, Compliance.
+                    Transparent, Secure, and Fair.
                   </text>
                   <text className="Tagline">
                   Alto rewards creators fairly.
@@ -227,10 +194,6 @@ export function App(
               </view>
 
               <text className="NavHint">Start earning from your content today.</text>
-
-              {/* <view className="DebugButton" bindtap={() => setStage('dashboard')}>
-                <text className="DebugButtonText">Debug: Creator Dashboard</text>
-              </view> */}
             </view>
           </view>
         )}

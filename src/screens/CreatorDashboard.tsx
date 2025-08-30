@@ -4,6 +4,8 @@ import '@lynx-js/react';
 
 import backArrowIcon from '../assets/icons/back-arrow.png';
 import graphIcon from '../assets/graph-bg.png';
+import groupIcon from '../assets/icons/group.png';
+
 import { mockAnalyzeVideoAPI } from '../services/videoAnalysis.js';
 import type { VideoAnalysisRequest } from '../services/videoAnalysis.js';
 import {
@@ -461,10 +463,10 @@ export function CreatorDashboard(
   });
   const [earningsAnalytics, setEarningsAnalytics] = useState({
     todayEarnings: 0.00,
-    weekEarnings: 10.23,
-    monthEarnings: 10.23,
-    totalViews: 15420,
-    avgQseScore: 87
+    weekEarnings: 50.70,
+    monthEarnings: 122.29,
+    totalViews: 366680,
+    avgQseScore: 78
   });
   const [lastUpdated, setLastUpdated] = useState(new Date());
   const [showCashOut, setShowCashOut] = useState(false);
@@ -975,15 +977,23 @@ export function CreatorDashboard(
         </view>
 
         <view className="WalletBalance">
-          <text className="BalanceLabel">Total Wallet Balance</text>
+          <text className="BalanceLabel">Wallet Balance</text>
           <text className="BalanceAmount">{formatNanas(walletBalance.nanas)}</text>
-          <text className="ExchangeRate">Tier 1 Creator: 1 NANA = {formatUSD(exchangeRate)} USD</text>
+          <text className="BalanceUSD">
+            ≈ {formatUSD(walletBalance.nanas * exchangeRate)} USD
+          </text>
+          <text className="ExchangeRate">
+            Tier 1 Creator: 1 NANA = {formatUSD(exchangeRate)} USD
+          </text>
           {walletBalance.pendingNanas > 0 && (
-            <text className="PendingCredits">+{formatNanas(walletBalance.pendingNanas)} pending</text>
+            <text className="PendingCredits">
+              +{formatNanas(walletBalance.pendingNanas)} pending
+              {` (≈ ${formatUSD(walletBalance.pendingNanas * exchangeRate)} USD)`}
+            </text>
           )}
           <view className="CashOutButton" bindtap={() => setShowCashOut(true)}>
             <image src={coinIcon} className="CashOutButtonIcon" />
-            <text className="CashOutButtonText">Cash Out</text>
+            <text className="CashOutButtonText">Withdraw</text>
           </view>
         </view>
 
@@ -991,28 +1001,40 @@ export function CreatorDashboard(
           <view className="EarningsCard">
             <text className="EarningsLabel">Today's Earnings</text>
             <text className="EarningsAmount">{formatNanas(earningsAnalytics.todayEarnings)}</text>
-            <text className="EarningsChange">+12.5% from yesterday</text>
+            <text className="EarningsChange">No earnings yet today</text>
           </view>
           <view className="EarningsCard">
             <text className="EarningsLabel">Past 7 Days</text>
             <text className="EarningsAmount">{formatNanas(earningsAnalytics.weekEarnings)}</text>
-            <text className="EarningsChange">+8.3% from last week</text>
+            <text className="EarningsChange">+23.4% from last week</text>
           </view>
         </view>
       </view>
 
       <view className="QuickStats">
-        <view className="StatCard">
-          <text className="StatValue">36,680</text>
+        <view className="StatCard stat-card-views">
+          <view className="StatCardIcon">
+            <image src={graphIcon} className="StatIcon" />
+          </view>
+          <text className="StatValue">366,680</text>
           <text className="StatLabel">Total Views</text>
+          <text className="StatChange stat-positive">+12.5% this week</text>
         </view>
-        <view className="StatCard">
-          <text className="StatValue">1,247</text>
+        <view className="StatCard stat-card-followers">
+          <view className="StatCardIcon">
+            <image src={groupIcon} className="StatIcon" />
+          </view>
+          <text className="StatValue">12,456</text>
           <text className="StatLabel">Active Followers</text>
+          <text className="StatChange stat-positive">+8.3% this month</text>
         </view>
-        <view className="StatCard">
-          <text className="StatValue">87%</text>
+        <view className="StatCard stat-card-qse">
+          <view className="StatCardIcon">
+            <image src={analyticsYellow} className="StatIcon" />
+          </view>
+          <text className="StatValue">78%</text>
           <text className="StatLabel">Avg QSE Score</text>
+          <text className="StatChange stat-positive">+2.1% this week</text>
         </view>
       </view>
     </scroll-view>
@@ -1059,7 +1081,7 @@ export function CreatorDashboard(
                   </text>
                 </view>
                 <view className="VideoStat">
-                  <text className="StatLabel">Nanas</text>
+                  <text className="StatLabel">Nanas Ratio</text>
                   <text className="StatValue">
                     {video.isAnalyzing ?
                       <view className="LoadingSpinner">
@@ -1361,15 +1383,15 @@ export function CreatorDashboard(
 
             <view className="ProfileStats">
               <view className="ProfileStat">
-                <text className="StatNumber">1,247</text>
+                <text className="StatNumber">12,456</text>
                 <text className="StatLabel">Followers</text>
               </view>
               <view className="ProfileStat">
-                <text className="StatNumber">89</text>
+                <text className="StatNumber">7</text>
                 <text className="StatLabel">Videos</text>
               </view>
               <view className="ProfileStat">
-                <text className="StatNumber">87%</text>
+                <text className="StatNumber">78%</text>
                 <text className="StatLabel">Avg QSE</text>
               </view>
             </view>

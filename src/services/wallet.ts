@@ -49,32 +49,191 @@ export interface BalanceHistoryPoint {
 
 // Simulated wallet data store
 let walletData: WalletBalance = {
-  nanas: 15.23,
+  nanas: 183.65,
   pendingNanas: 0,
-  totalEarned: 15.23,
+  totalEarned: 208.65,
   lastUpdated: Date.now()
 };
 
 let cashOutRequests: CashOutRequest[] = [];
 let transactions: Transaction[] = [
+  // Recent transactions (last 7 days)
   {
-    id: 'txn_001',
+    id: 'txn_recent_001',
     type: 'nana',
-    amount: 10.23,
-    description: 'Video earnings: How to Make Perfect Coffee',
-    timestamp: Date.now() - 86400000 * 1, // 1 days ago
-    relatedVideoId: '1',
-    ledgerEntryId: 'ledger_001'
+    amount: 8.45,
+    description: 'Video earnings: Creative Visual Hook Ideas for Videos',
+    timestamp: Date.now() - 86400000 * 2, // 2 days ago
+    relatedVideoId: '7',
+    ledgerEntryId: 'ledger_visual_hooks'
   },
   {
-    id: 'txn_001',
+    id: 'txn_recent_002',
     type: 'nana',
-    amount: 5.23,
-    description: 'Video earnings: How to Make Perfect Coffee',
-    timestamp: Date.now() - 86400000 * 30, // 30 days ago
-    relatedVideoId: '1',
-    ledgerEntryId: 'ledger_001'
+    amount: 12.67,
+    description: 'Video earnings: How Road Rollers Work - Engineering Explained',
+    timestamp: Date.now() - 86400000 * 3, // 3 days ago
+    relatedVideoId: '3',
+    ledgerEntryId: 'ledger_road_roller'
   },
+  {
+    id: 'txn_recent_003',
+    type: 'nana',
+    amount: 5.89,
+    description: 'Video earnings: Train Passenger Tongue Sticking Trend',
+    timestamp: Date.now() - 86400000 * 4, // 4 days ago
+    relatedVideoId: '6',
+    ledgerEntryId: 'ledger_tongue_trend'
+  },
+  {
+    id: 'txn_recent_004',
+    type: 'nana',
+    amount: 15.23,
+    description: 'Video earnings: BMW Night Cruise Showcase',
+    timestamp: Date.now() - 86400000 * 5, // 5 days ago
+    relatedVideoId: '2',
+    ledgerEntryId: 'ledger_bmw_cruise'
+  },
+  {
+    id: 'txn_recent_005',
+    type: 'nana',
+    amount: 6.34,
+    description: 'Video earnings: AI Video Enhancement Tool Demo',
+    timestamp: Date.now() - 86400000 * 6, // 6 days ago
+    relatedVideoId: '1',
+    ledgerEntryId: 'ledger_aigc_demo'
+  },
+  {
+    id: 'txn_recent_006',
+    type: 'nana',
+    amount: 2.12,
+    description: 'Video earnings: Sad Cat Meowing in the Rain',
+    timestamp: Date.now() - 86400000 * 7, // 7 days ago
+    relatedVideoId: '5',
+    ledgerEntryId: 'ledger_sad_cat'
+  },
+
+  // Medium-term transactions (8-30 days ago)
+  {
+    id: 'txn_medium_001',
+    type: 'nana',
+    amount: 22.45,
+    description: 'Video earnings: Creative Visual Hook Ideas for Videos',
+    timestamp: Date.now() - 86400000 * 10, // 10 days ago
+    relatedVideoId: '7',
+    ledgerEntryId: 'ledger_visual_hooks'
+  },
+  {
+    id: 'txn_medium_002',
+    type: 'nana',
+    amount: 18.92,
+    description: 'Video earnings: How Road Rollers Work - Engineering Explained',
+    timestamp: Date.now() - 86400000 * 12, // 12 days ago
+    relatedVideoId: '3',
+    ledgerEntryId: 'ledger_road_roller'
+  },
+  {
+    id: 'txn_medium_003',
+    type: 'nana',
+    amount: 9.76,
+    description: 'Video earnings: BMW Night Cruise Showcase',
+    timestamp: Date.now() - 86400000 * 14, // 14 days ago
+    relatedVideoId: '2',
+    ledgerEntryId: 'ledger_bmw_cruise'
+  },
+  {
+    id: 'txn_medium_004',
+    type: 'nana',
+    amount: 11.34,
+    description: 'Video earnings: AI Video Enhancement Tool Demo',
+    timestamp: Date.now() - 86400000 * 16, // 16 days ago
+    relatedVideoId: '1',
+    ledgerEntryId: 'ledger_aigc_demo'
+  },
+  {
+    id: 'txn_medium_005',
+    type: 'nana',
+    amount: 7.23,
+    description: 'Video earnings: Train Passenger Tongue Sticking Trend',
+    timestamp: Date.now() - 86400000 * 18, // 18 days ago
+    relatedVideoId: '6',
+    ledgerEntryId: 'ledger_tongue_trend'
+  },
+  {
+    id: 'txn_medium_006',
+    type: 'nana',
+    amount: 1.89,
+    description: 'Video earnings: Sad Cat Meowing in the Rain',
+    timestamp: Date.now() - 86400000 * 20, // 20 days ago
+    relatedVideoId: '5',
+    ledgerEntryId: 'ledger_sad_cat'
+  },
+
+  // Older transactions (30-60 days ago)
+  {
+    id: 'txn_older_001',
+    type: 'nana',
+    amount: 28.67,
+    description: 'Video earnings: Creative Visual Hook Ideas for Videos',
+    timestamp: Date.now() - 86400000 * 35, // 35 days ago
+    relatedVideoId: '7',
+    ledgerEntryId: 'ledger_visual_hooks'
+  },
+  {
+    id: 'txn_older_002',
+    type: 'nana',
+    amount: 25.89,
+    description: 'Video earnings: How Road Rollers Work - Engineering Explained',
+    timestamp: Date.now() - 86400000 * 38, // 38 days ago
+    relatedVideoId: '3',
+    ledgerEntryId: 'ledger_road_roller'
+  },
+  {
+    id: 'txn_older_003',
+    type: 'nana',
+    amount: 14.45,
+    description: 'Video earnings: BMW Night Cruise Showcase',
+    timestamp: Date.now() - 86400000 * 42, // 42 days ago
+    relatedVideoId: '2',
+    ledgerEntryId: 'ledger_bmw_cruise'
+  },
+  {
+    id: 'txn_older_004',
+    type: 'nana',
+    amount: 9.12,
+    description: 'Video earnings: AI Video Enhancement Tool Demo',
+    timestamp: Date.now() - 86400000 * 45, // 45 days ago
+    relatedVideoId: '1',
+    ledgerEntryId: 'ledger_aigc_demo'
+  },
+  {
+    id: 'txn_older_005',
+    type: 'nana',
+    amount: 6.78,
+    description: 'Video earnings: Train Passenger Tongue Sticking Trend',
+    timestamp: Date.now() - 86400000 * 48, // 48 days ago
+    relatedVideoId: '6',
+    ledgerEntryId: 'ledger_tongue_trend'
+  },
+  {
+    id: 'txn_older_006',
+    type: 'nana',
+    amount: 1.45,
+    description: 'Video earnings: Sad Cat Meowing in the Rain',
+    timestamp: Date.now() - 86400000 * 52, // 52 days ago
+    relatedVideoId: '5',
+    ledgerEntryId: 'ledger_sad_cat'
+  },
+
+  // Cash-out transaction example
+  {
+    id: 'txn_cashout_001',
+    type: 'cash_out',
+    amount: -25.00,
+    description: 'Cash-out request: $25.00',
+    timestamp: Date.now() - 86400000 * 28, // 28 days ago
+    cashOutRequestId: 'cashout_001'
+  }
 ];
 
 let kycStatus: KYCStatus = {
@@ -338,8 +497,8 @@ export const getEarningsAnalytics = async (): Promise<{
     todayEarnings: parseFloat(todayEarnings.toFixed(2)),
     weekEarnings: parseFloat(weekEarnings.toFixed(2)),
     monthEarnings: parseFloat(monthEarnings.toFixed(2)),
-    totalViews: 36680, // Mock data
-    avgQseScore: 87 // Mock data
+    totalViews: 366680, // Updated mock data based on video views
+    avgQseScore: 78 // Updated based on video analysis scores
   };
 };
 
