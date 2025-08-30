@@ -266,7 +266,7 @@ export function CashOut(
               <text className="InputLabel">PayPal Email</text>
               {/* @ts-ignore */}
               <input
-                className="FormInput"
+                className="TopUpInput"
                 type="email"
                 placeholder="your-email@example.com"
                 value={paymentDetails.paypalEmail}
@@ -280,7 +280,7 @@ export function CashOut(
               <text className="InputLabel">Account Name</text>
               {/* @ts-ignore */}
               <input
-                className="FormInput"
+                className="TopUpInput"
                 placeholder="John Doe"
                 value={paymentDetails.accountName}
                 bindinput={(e: any) => handlePaymentDetailChange('accountName', e?.detail?.value ?? e?.target?.value ?? '')}
@@ -288,7 +288,7 @@ export function CashOut(
               <text className="InputLabel">Account Number</text>
               {/* @ts-ignore */}
               <input
-                className="FormInput"
+                className="TopUpInput"
                 placeholder="1234567890"
                 value={paymentDetails.accountNumber}
                 bindinput={(e: any) => handlePaymentDetailChange('accountNumber', e?.detail?.value ?? e?.target?.value ?? '')}
