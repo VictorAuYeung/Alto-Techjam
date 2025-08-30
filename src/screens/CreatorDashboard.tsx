@@ -77,10 +77,10 @@ export function CreatorDashboard(
     return null;
   };
 
-  // Fetch TikTok video data using oEmbed API and additional data fetching
+  // Fetch TikTok video data and generate mock stats
   const fetchTikTokVideoData = async (url: string): Promise<Partial<VideoData>> => {
     try {
-      // Use TikTok oEmbed API for basic data
+      // Use TikTok oEmbed API for basic data (title, thumbnail)
       const oembedUrl = `https://www.tiktok.com/oembed?url=${encodeURIComponent(url)}`;
       const response = await fetch(oembedUrl);
       
@@ -90,44 +90,19 @@ export function CreatorDashboard(
       
       const data = await response.json();
       
-      // Try to fetch additional stats using TikTok's web scraping approach
-      let viewCount = '0';
-      let likeCount = '0';
-      
-      try {
-        // Attempt to fetch video stats from TikTok's web page
-        const videoId = extractTikTokVideoId(url);
-        if (videoId) {
-          // Use a TikTok stats API service (you may need to replace with your preferred service)
-          const statsResponse = await fetch(`https://api.tiktok.com/video/info/?video_id=${videoId}`, {
-            headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-            }
-          });
-          
-          if (statsResponse.ok) {
-            const statsData = await statsResponse.json();
-            if (statsData.stats) {
-              viewCount = statsData.stats.play_count?.toString() || '0';
-              likeCount = statsData.stats.digg_count?.toString() || '0';
-            }
-          }
-        }
-      } catch (statsError) {
-        console.log('Could not fetch detailed stats, using fallback data');
-        // Generate realistic fallback data for demo purposes
-        const randomViews = Math.floor(Math.random() * 100000) + 1000;
-        const randomLikes = Math.floor(randomViews * (Math.random() * 0.1 + 0.05)); // 5-15% like rate
-        viewCount = randomViews.toLocaleString();
-        likeCount = randomLikes.toLocaleString();
-      }
+      // Generate realistic mock stats based on video ID
+      const videoId = extractTikTokVideoId(url);
+      const seed = parseInt(videoId?.slice(-6) || '0') || 0;
+      const randomViews = Math.floor((seed % 90000) + 10000); // 10k-100k views
+      const engagementRate = (seed % 10 + 5) / 100; // 5-15% engagement
+      const randomLikes = Math.floor(randomViews * engagementRate);
       
       return {
         title: data.title || 'Untitled Video',
         thumbnail: data.thumbnail_url || altoLogo,
         url: url,
-        viewCount: viewCount,
-        likeCount: likeCount
+        viewCount: randomViews.toLocaleString(),
+        likeCount: randomLikes.toLocaleString()
       };
     } catch (error) {
       console.error('Error fetching TikTok data:', error);

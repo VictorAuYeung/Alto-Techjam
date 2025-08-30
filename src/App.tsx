@@ -12,6 +12,12 @@ import banana4 from './assets/splash-page/bananas/4.png';
 import banana5 from './assets/splash-page/bananas/5.png';
 import banana6 from './assets/splash-page/bananas/6.png';
 import banana7 from './assets/splash-page/bananas/7.png';
+import banana8 from './assets/splash-page/bananas/8.png';
+import banana9 from './assets/splash-page/bananas/9.png';
+import banana10 from './assets/splash-page/bananas/10.png';
+import banana11 from './assets/splash-page/bananas/11.png';
+import banana12 from './assets/splash-page/bananas/12.png';
+import banana13 from './assets/splash-page/bananas/13.png';
 import CreatorSignup from './screens/CreatorSignup.js';
 import { CreatorDashboard } from './screens/CreatorDashboard.js';
 
@@ -156,6 +162,14 @@ export function App(
           <view className="Hero">
             <view className="Logo">
               <image src={altoLogo} className="Logo--alto" />
+            </view>
+            <view className="BananaDivider">
+              <image src={banana8} className="BananaDividerItem" />
+              <image src={banana9} className="BananaDividerItem" />
+              <image src={banana8} className="BananaDividerItem" />
+              <image src={banana9} className="BananaDividerItem" />
+              <image src={banana8} className="BananaDividerItem" />
+              <image src={banana9} className="BananaDividerItem" />
             </view>
             <text className="Subtitle">Real-Time Value for Every View</text>
             <text className="Tagline">

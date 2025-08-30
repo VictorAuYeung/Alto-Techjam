@@ -5,7 +5,7 @@
 
 /* Global font family */
 * {
-  font-family: 'Nexa', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Helvetica Neue', 'Helvetica', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', sans-serif;
 }
 
 /* Splash Page Styles */
@@ -258,7 +258,7 @@ text {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   margin-top: 0;
 }
 
@@ -303,6 +303,36 @@ text {
 .Title {
   font-size: 36px;
   font-weight: 800;
+}
+
+.BananaDivider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.8;
+}
+
+.BananaDividerItem {
+  width: 35px;
+  height: 35px;
+  animation: bananaFloat 3s ease-in-out infinite;
+}
+
+.BananaDividerItem:nth-child(1) { animation-delay: 0s; }
+.BananaDividerItem:nth-child(2) { animation-delay: 0.5s; }
+.BananaDividerItem:nth-child(3) { animation-delay: 1s; }
+.BananaDividerItem:nth-child(4) { animation-delay: 1.5s; }
+.BananaDividerItem:nth-child(5) { animation-delay: 2s; }
+.BananaDividerItem:nth-child(6) { animation-delay: 2.5s; }
+
+@keyframes bananaFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(5deg);
+  }
 }
 
 .Subtitle {
