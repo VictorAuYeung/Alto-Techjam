@@ -2,8 +2,10 @@
 import json, os, sys, time
 from typing import Any, Dict, Tuple
 from google import genai
+from google.genai.errors import ServerError
 
-from utils import _parse_json_strict, PayoutWeights, ScoreWeights
+
+from utils import _parse_json_strict, selected_model, PayoutWeights, ScoreWeights
 from prompts import video_evaluation_prompt, video_compliance_prompt
 
 from dotenv import load_dotenv
@@ -42,7 +44,10 @@ def upload_video(client: genai.Client, video_path: str, timeout: int = 300, inte
       time.sleep(interval)
 
 def run_video_agent(client: genai.Client, model: str, video_ref: Any, prompt: str) -> Dict[str, Any]:
-    resp = client.models.generate_content(model=model, contents=[video_ref, prompt])
+    try:
+      resp = client.models.generate_content(model=model, contents=[video_ref, prompt])
+    except ServerError as e:
+      raise RuntimeError(f"Model generation failed: {e}")
     return _parse_json_strict(resp.text)
 
 
@@ -116,7 +121,7 @@ def compute_payout(overall_score: float, tier: str) -> float:
 
 def grade_and_disburse(video_ref: Any) -> Dict[str, Any]:
   client = make_client()
-  model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+  model = selected_model
   video_handle = upload_video(client, video_ref)
 
   # 1) Evaluation agent (quality & value).
@@ -161,7 +166,7 @@ def grade_and_disburse(video_ref: Any) -> Dict[str, Any]:
       "payout": payout,
       "max_payout": PayoutWeights.MAX_PAYOUT_PER_1K_VIEWS,
       "overall_score": calc["overall"],
-      "min_payout_threshold": float(os.environ.get("MIN_PAYOUT_THRESHOLD", "40")),
+      "min_payout_threshold": PayoutWeights.MIN_PAYOUT_THRESHOLD,
     },
     "model": model,
   }
@@ -175,5 +180,9 @@ if __name__ == "__main__":
   if not os.path.isfile(video_ref):
     raise FileNotFoundError(f"Video to evaluate not found: {video_ref}")
   
-  out = grade_and_disburse(video_ref)
-  print(json.dumps(out, indent=2))
+  try:
+    out = grade_and_disburse(video_ref)
+    print(json.dumps(out, indent=2))
+  except Exception as e:
+    print(f"Error: {e}")
+    sys.exit(1)

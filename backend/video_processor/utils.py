@@ -3,6 +3,13 @@ import json
 from enum import Enum
 from typing import Any, Dict
 
+class GeminiModels(str, Enum):
+  GEMINI_2_5_FLASH_PRO = "gemini-2.5-flash-pro"
+  GEMINI_2_5_FLASH = "gemini-2.5-flash"
+  GEMINI_2_5_FLASH_LITE = "gemini-2.5-flash-lite"
+  
+selected_model = GeminiModels.GEMINI_2_5_FLASH_LITE
+
 class PayoutWeights(float, Enum):
   MAX_PAYOUT_PER_1K_VIEWS = 1.0
   MIN_PAYOUT_THRESHOLD = 40.0
