@@ -46,7 +46,7 @@ Unlike existing approaches that reward only virality or raw view counts, Alto co
 
 ### Backend
 - **Language**: Python 3.11+  
-- **AI Models**: Google Gemini (`gemini-2.5-flash` for prod, `flash-lite` for dev)  
+- **AI Models**: Google Gemini (`gemini-2.5-flash` for prod, `gemini-2.5-flash-lite` for dev)  
 - **APIs**: Node/Express REST services  
 - **Batch Processing**: Bash + JSON outputs  
 
