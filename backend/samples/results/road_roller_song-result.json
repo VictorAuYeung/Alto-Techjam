@@ -1,0 +1,42 @@
+{
+  "evaluation": {
+    "summary": "This video provides a highly informative and well-animated explanation of how road rollers work, including their internal mechanisms and design improvements. It effectively blends real-world footage with clear scientific visualizations.",
+    "scores": {
+      "hook": 0.9,
+      "retention": 0.9,
+      "clarity": 1.0,
+      "usefulness_originality": 0.8,
+      "audience_specific_value": 0.8,
+      "engagement": 0.8
+    },
+    "ai_generated": true,
+    "issues": [],
+    "actionable_tips": [
+      "Consider using a more natural-sounding human voiceover to enhance relatability.",
+      "Add a brief call-to-action at the end to encourage comments or questions.",
+      "Explore showing a side-by-side comparison of the older vs. improved vibration patterns on the ground for even clearer impact."
+    ]
+  },
+  "compliance": {
+    "regulatory_flags": "none",
+    "critical_violation": false,
+    "compliance_risk": 0.0,
+    "violations": []
+  },
+  "calculation": {
+    "base": 85.5,
+    "penalty": 0.0,
+    "bonus_niche": 2.0,
+    "bonus_aigc": 5.0,
+    "overall": 92.5,
+    "tier": "high"
+  },
+  "payout": {
+    "video_grade": "high",
+    "payout": 0.77,
+    "max_payout": 1.0,
+    "overall_score": 92.5,
+    "min_payout_threshold": 40.0
+  },
+  "model": "gemini-2.5-flash"
+}

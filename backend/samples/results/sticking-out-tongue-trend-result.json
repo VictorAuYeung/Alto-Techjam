@@ -1,0 +1,42 @@
+{
+  "evaluation": {
+    "summary": "This video features a young creator engaging in light-hearted, spontaneous interactions with fellow train passengers, creating a wholesome and humorous moment that's likely to resonate positively with viewers.",
+    "scores": {
+      "hook": 0.8,
+      "retention": 0.7,
+      "clarity": 0.9,
+      "usefulness_originality": 0.7,
+      "audience_specific_value": 0.8,
+      "engagement": 0.8
+    },
+    "ai_generated": false,
+    "issues": [],
+    "actionable_tips": [
+      "Consider adding a subtle text overlay with a brief, positive message or context about the interaction.",
+      "Experiment with slightly different playful prompts to elicit varied reactions from people.",
+      "If possible, maintain a consistent lighting quality throughout the video, especially when transitioning between shots or angles."
+    ]
+  },
+  "compliance": {
+    "regulatory_flags": "none",
+    "critical_violation": false,
+    "compliance_risk": 0.0,
+    "violations": []
+  },
+  "calculation": {
+    "base": 75.5,
+    "penalty": 0.0,
+    "bonus_niche": 2.0,
+    "bonus_aigc": 0.0,
+    "overall": 77.5,
+    "tier": "medium"
+  },
+  "payout": {
+    "video_grade": "medium",
+    "payout": 0.39,
+    "max_payout": 1.0,
+    "overall_score": 77.5,
+    "min_payout_threshold": 40.0
+  },
+  "model": "gemini-2.5-flash"
+}

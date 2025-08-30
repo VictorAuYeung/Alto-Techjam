@@ -1,0 +1,41 @@
+{
+  "evaluation": {
+    "summary": "This video provides practical and creative tips for generating visual hooks in video content, demonstrating each technique clearly and effectively with good pacing and visual appeal.",
+    "scores": {
+      "hook": 0.9,
+      "retention": 0.9,
+      "clarity": 0.9,
+      "usefulness_originality": 0.9,
+      "audience_specific_value": 0.9,
+      "engagement": 0.9
+    },
+    "ai_generated": false,
+    "issues": [],
+    "actionable_tips": [
+      "Consider showing a quick glimpse of the 'effect' of each visual hook (e.g., what it looks like to the viewer) after demonstrating the setup.",
+      "Experiment with slightly faster transitions between the setup and the reveal of the 'visual hook' card to maintain dynamic pacing."
+    ]
+  },
+  "compliance": {
+    "regulatory_flags": "none",
+    "critical_violation": false,
+    "compliance_risk": 0.0,
+    "violations": []
+  },
+  "calculation": {
+    "base": 90.0,
+    "penalty": 0.0,
+    "bonus_niche": 4.0,
+    "bonus_aigc": 0.0,
+    "overall": 94.0,
+    "tier": "high"
+  },
+  "payout": {
+    "video_grade": "high",
+    "payout": 0.81,
+    "max_payout": 1.0,
+    "overall_score": 94.0,
+    "min_payout_threshold": 40.0
+  },
+  "model": "gemini-2.5-flash"
+}

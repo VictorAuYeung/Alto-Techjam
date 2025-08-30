@@ -11,3 +11,10 @@ dist/
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# Backend
+.env
+.venv
+__pycache__/
+backend/videos/*
+backend/results/*
