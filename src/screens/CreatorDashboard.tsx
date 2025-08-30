@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import '@lynx-js/react';
 import arrowIcon from '../assets/arrow.png';
 import backArrowIcon from '../assets/icons/back-arrow.png';
-import graphIcon from '../assets/icons/graph.png';
+import graphIcon from '../assets/graph-bg.png';
 import { mockAnalyzeVideoAPI } from '../services/videoAnalysis.js';
 import type { VideoAnalysisRequest } from '../services/videoAnalysis.js';
 import {
@@ -202,7 +202,7 @@ export function CreatorDashboard(
   };
 
   const formatNanas = (amount: number) => {
-    return `${amount.toFixed(3)} Nanas`;
+    return `${amount.toFixed(3)} Nana`;
   };
 
   const formatUSD = (amount: number) => {
@@ -417,9 +417,9 @@ export function CreatorDashboard(
 
   const renderOverview = () => (
     <scroll-view className="DashboardSection" scroll-y>
-      <view className="SpinningCoinContainer">
+      {/* <view className="SpinningCoinContainer">
         <image src={coinIcon} className="SpinningCoin" />
-      </view>
+      </view> */}
       <view className="WalletCard" ref={walletCardRef}>
         <image src={graphIcon} className="WalletCardBackground" />
         <view className="WalletHeader">
@@ -431,7 +431,7 @@ export function CreatorDashboard(
         <view className="WalletBalance">
           <text className="BalanceLabel">Total Wallet Balance</text>
           <text className="BalanceAmount">{formatNanas(walletBalance.nanas)}</text>
-          <text className="ExchangeRate">1 Nana = {formatUSD(exchangeRate)} USD</text>
+          <text className="ExchangeRate">Tier 1 Creator: 1 NANA = {formatUSD(exchangeRate)} USD</text>
           {walletBalance.pendingNanas > 0 && (
             <text className="PendingCredits">+{formatNanas(walletBalance.pendingNanas)} pending</text>
           )}
@@ -528,7 +528,7 @@ export function CreatorDashboard(
             <view className="ModalHeader">
               <text className="ModalTitle">Add TikTok Video</text>
               <view className="ModalClose" bindtap={() => setShowAddVideoModal(false)}>
-                <text className="ModalCloseText">×</text>
+                <text className="ModalCloseText" style={{marginTop: '-2px'}}>×</text>
               </view>
             </view>
             

@@ -20,6 +20,7 @@ import banana12 from './assets/splash-page/bananas/12.png';
 import banana13 from './assets/splash-page/bananas/13.png';
 import coinBanana from './assets/coins/coin-banana.png';
 import coinBananas from './assets/coins/coin-bananas.png';
+import groupIcon from './assets/icons/group.png';
 import CreatorSignup from './screens/CreatorSignup.js';
 import { CreatorDashboard } from './screens/CreatorDashboard.js';
 
@@ -186,13 +187,13 @@ export function App(
               <view className="Logo">
                 <image src={altoLogo} className="Logo--alto" />
               </view>
-              <text className="Subtitle">Real-Time Value for Every View</text>
+              <text className="Subtitle">Value Sharing Platform for Creators</text>
               <view className="CTACard">
                 <view className="CTACardContent">
                   {/* Stats Section */}
                   <view className="StatsSection">
                     <view className="StatCard">
-                      <image src={coinBanana} className="StatIcon" />
+                      <image src={groupIcon} className="StatIcon"/>
                       <text className="StatValue">2,847</text>
                       <text className="StatLabel">Active Creators</text>
                     </view>
@@ -203,11 +204,13 @@ export function App(
                     </view>
                   </view>
                   
-                  <text className="Tagline" style={{ marginBottom: '0', fontWeight: 'bold', fontSize: '20px' }}>
-                    Transparency. Analytics. Compliance.
+                  <text className="Tagline" style={{ marginBottom: '0px', fontWeight: 'bold', fontSize: '18px', color: 'rgba(255, 255, 255, 0.75)' }}>
+                    Transparency, Analytics, Compliance.
                   </text>
                   <text className="Tagline">
-                    Micro‑credits from viewers to you, in real time.
+                  Alto rewards creators fairly.
+                  Your content is scored for quality and converted into nanas — a transparent, secure way to earn that
+                  safeguards against fraud and rewards high quality content creators.
                   </text>
                 </view>
               </view>
@@ -216,18 +219,18 @@ export function App(
             <view className="HeroFooter">
               <view className="CTAGroup">
                 <view className="CTAButton" bindtap={onSelectCreator}>
-                  <text className="CTAButtonText">Join Now</text>
+                  <text className="CTAButtonText">Start Today</text>
                 </view>
                 <view className="CTAButton CTAButton--secondary" bindtap={onLogin}>
                   <text className="CTAButtonText">Login</text>
                 </view>
               </view>
 
-              <text className="NavHint">Start earning from your content</text>
+              <text className="NavHint">Start earning from your content today.</text>
 
-              <view className="DebugButton" bindtap={() => setStage('dashboard')}>
+              {/* <view className="DebugButton" bindtap={() => setStage('dashboard')}>
                 <text className="DebugButtonText">Debug: Creator Dashboard</text>
-              </view>
+              </view> */}
             </view>
           </view>
         )}
