@@ -3,121 +3,131 @@
 Alto is our submission for the **TikTok Value Sharing Challenge**.  
 It is a **creator-centric system** designed to make value sharing transparent, explainable, and fair.  Alto fairly rewards creators with credits (called Nanas) per video based on transparent, tamper-resistant quality & impact scores, normalized by content category and creator size, with basic AML/fraud controls for cash-out.
 
-## Value Flow
+Unlike existing approaches that reward only virality or raw view counts, Alto combines:
+- A **Frontend Dashboard** that lets creators register content and see their scores, credits, and compliance results.
+- A **Backend Pipeline** powered by **Google Gemini** and our **Quality Scoring Engine (QSE)**, which evaluates videos across retention, engagement, niche fit, and authenticity.
+- A **Compliance Layer** that flags risks like fraud, misinformation, or inappropriate content.
 
-**Viewer actions (watch, like, comment, share) + AI content/quality assessment → Score → Credits minted to creator's Alto wallet → Creator cashes out (KYC threshold) or spends in-app (gift cards / sponsorship slots).**
+---
 
-We log everything to an append-only ledger for auditability.
+## ✨ Overview & Design Decisions
 
-## MVP Features
+- **Why creator-first?**  
+  Some of our team have creator backgrounds and know the frustration of working hard on meaningful content only to be overshadowed by quick viral trends. Alto was built to highlight *quality and authenticity* as much as *popularity*. 
 
-### Creator Dashboard
-- **Video Analysis Pipeline**: Paste TikTok link → Fetch metadata → AI scoring → Credits calculation
-- **Scoring System**: 
-  - Impact Score (60%): Views + engagement metrics (likes, comments, shares)
-  - Quality Score (40%): AI analysis of content quality, safety, relevance
-  - Fairness Multiplier: Normalized by creator tier (small/mid/large) and category
-  - Public Formula: `nanas = (totalScore / 100) * (views / 10000) * 0.1`
-- **Wallet Management**: Real-time Nana balance, pending credits, transaction history
-- **Cash-Out System**: KYC verification for amounts over $50, multiple payment methods (PayPal, Bank Transfer, Gift Cards)
+- **In-app currency: Nanas 🍌**  
+  Instead of using fiat directly, Alto uses a **custom token called Nanas** (inspired by bananas).  
+  - **Two-step redemption**: Views fund wallets in credits → Nanas. Creators later redeem Nanas to real money. This extra layer prevents fraud and money laundering.  
+  - **Variable value**: We envision the value of Nanas as **not fixed** — it can inflate based on creator performance and quality scores, meaning high-value creators earn *more purchasing power per Nana*.  
+  - **Auditability**: Every transfer of Nanas is logged in the transparent ledger, making the reward ecosystem tamper-evident and regulator-friendly.   
+
+- **Explainability matters**  
+  Instead of a “black box score,” Alto provides *reasons* behind each evaluation (e.g., “strong retention, weak originality”). Creators can see what helps and hurts their rewards.  
+
+- **Balance AI + heuristics**  
+  We combined **Google Gemini** (for nuanced video analysis and compliance) with a lightweight **QSE heuristic** (Retention, Engagement, Niche, Authenticity) to keep results credible.  
+
+- **Focus on fairness + compliance**  
+  Compliance is not an afterthought — every video is analyzed not just for quality, but also for **content safety and regulatory risks**.  
+  Using Gemini models, the backend flags issues such as misinformation, financial scams, hate speech, age-inappropriate material, and other high-risk categories.  
+  This ensures that only **safe and legitimate content** is rewarded with Nanas, while keeping the reward system transparent for both creators and reviewers.
+
+- **Demo-first build**  
+  To meet hackathon timelines, we included *preloaded demo content* and mock viewer events so judges can see results instantly.
+
+**Value Flow**: Viewer actions (watch, like, comment, share) + AI content/quality assessment → Score → Credits minted to creator's Alto wallet → Creator cashes out or spends in-app (gift cards / sponsorship slots).
+
+---
+
+## 🛠️ Architecture & Tech Stack
+
+### Frontend
+- **Framework**: Lynx
+
+### Backend
+- **Language**: Python 3.11+  
+- **AI Models**: Google Gemini (`gemini-2.5-flash` for prod, `flash-lite` for dev)  
+- **APIs**: Node/Express REST services  
+- **Batch Processing**: Bash + JSON outputs  
+
+---
+
+# Frontend: Creator-Centric Value Sharing Platform
+
+## Cross-Platform Creator Dashboard Built with Lynx.js
+
+The Alto frontend is a **cross-platform application** built with **Lynx.js** that provides creators with a comprehensive dashboard for managing their content, tracking earnings, and cashing out Nanas. The interface is designed to be intuitive and transparent, giving creators full visibility into how their content is evaluated and rewarded.
+
+## 🚀 Features
+
+### 1. **Splash Screen & Landing**
+- **Animated Splash**: Coin spinning animation with Alto branding
+- **Landing Page**: Platform overview with creator stats (2,847 Active Creators, $1.2M Total Payouts)
+- **Call-to-Action**: "Start Today" and "Login" buttons for seamless onboarding
+
+### 2. **Creator Registration**
+- **Signup Flow**: Display name, email, handle (@username), and niche selection
+- **Real-time Validation**: Form validation with error handling and helpful hints
+- **Smooth Onboarding**: Seamless transition to dashboard after registration
+
+### 3. **Creator Dashboard**
+- **Video Management**: 
+  - Add TikTok videos by link and view **QSE score breakdown** (Retention, Engagement, Niche Fit, Authenticity)
+  - **Preloaded demo videos** with analyses for quick exploration
+  - **Video Analysis**: Detailed scoring with compliance checks and actionable improvement tips
+- **Wallet Management**: Track **credits and Nanas earned** with wallet + charts (24h/7d)
+- **Withdraw System**: Withdraw Nanas as USD with multiple payment methods (PayPal, Bank Transfer, Gift Cards)
 - **Analytics**: Earnings breakdown, QSE score tracking, performance insights with charts
-- **Video Management**: Add TikTok videos, view detailed analysis, track performance metrics
 - **Profile System**: Creator profile with stats, tier information, and account management
 
-### Creator Signup Flow
-- **Registration**: Display name, email, handle (@username), and niche selection
-- **Validation**: Real-time form validation with error handling
-- **Onboarding**: Seamless transition to dashboard after signup
+### 4. **In-App Currency - Nanas**
+- **Redeem Later**: Nanas are cashed out only after passing compliance checks
+- **Dynamic Value** (To Be Implemented): High-quality creators get more valuable Nanas, incentivizing good content
+- **Anti-Fraud**: Two-step redemption and full ledger logging make laundering harder
 
-### Splash Screen & Landing
-- **Animated Splash**: Coin splitting animation with Alto branding
-- **Landing Page**: Platform overview with creator stats and call-to-action
-- **Navigation**: Smooth transitions between splash, signup, and dashboard
+### 5. **Cross-Platform Support**
+- **Lynx.js Framework**: Single codebase for iOS, Android, and Web
+- **Responsive Design**: Optimized for mobile and desktop experiences
+- **Native Performance**: Near-native performance across all platforms
 
-### Technical Implementation
-- **Frontend**: React/TypeScript with Lynx.js for cross-platform (iOS/Android/Web) interface
-- **Video Analysis Service**: Complete scoring pipeline with TikTok oEmbed integration
-- **Wallet Service**: Nana management, cash-out requests, KYC integration
-- **Ledger System**: Append-only transaction recording for auditability
-- **Mock APIs**: Simulated TikTok integration and backend services for demo purposes
-- **Charts & Analytics**: Interactive charts for earnings, QSE scores, and balance history
+## 📦 Dependencies
+### You'll need:
+- **Node.js 18+**
+- **npm or yarn**
+- **Lynx.js CLI tools**
 
-## Getting Started
+## ⚡ Quickstart
 
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-
-### Installation
+### 1. **Install Dependencies**
 ```bash
 npm install
 ```
 
-### Development
+### 2. **Start Development Server**
 ```bash
 npm run dev
 ```
 
-### Build
+### 3. **Build for Production**
 ```bash
 npm run build
 ```
 
-## Demo Walkthrough
+### 4. **Run Tests**
+```bash
+npm test
+```
 
-### Creator Flow
+## 🎯 Demo Walkthrough
+
+### **Creator Journey**
 1. **Splash Screen**: Animated coin splitting with Alto branding
 2. **Landing Page**: View platform stats and creator benefits
 3. **Sign Up**: Complete registration with display name, email, handle, and niche
 4. **Dashboard**: Add TikTok videos, view analysis, and track earnings
 5. **Video Analysis**: Detailed QSE scores, compliance checks, and actionable tips
-6. **Cash Out**: Request payments with KYC verification for amounts over $50
+6. **Withdraw**: Withdraw Nanas as USD, with limits of $5 minimum and $50+ requiring KYC verification for enhanced security and compliance
 7. **Analytics**: Monitor performance with interactive charts and insights
-
-## Architecture
-
-### Services
-- `videoAnalysis.ts`: Complete scoring pipeline with TikTok oEmbed integration
-- `wallet.ts`: Nana management, cash-out, KYC, transactions
-- `CreatorDashboard.tsx`: Creator interface with video management and analytics
-- `CreatorSignup.tsx`: Registration flow with validation
-- `CashOut.tsx`: Cash-out flow with multiple payment methods
-- `App.tsx`: Main application with splash screen and navigation
-
-### Key Features
-- **Transparent Scoring**: Public formula for Nana calculation
-- **Fairness Normalization**: Creator tier and category multipliers
-- **KYC Integration**: Identity verification for large cash-outs ($50+)
-- **Ledger Recording**: All transactions logged for audit
-- **Real-Time Updates**: Live balance and transaction updates
-- **Cross-Platform**: Lynx.js for iOS, Android, and Web compatibility
-- **Interactive Analytics**: Charts for earnings, QSE scores, and balance history
-
-## Compliance & Security
-
-- **AML Controls**: Basic anti-money laundering screening
-- **Fraud Detection**: Velocity monitoring and pattern analysis
-- **KYC Threshold**: $50 minimum for identity verification
-- **Transaction Limits**: Minimum $5 cash-out, maximum based on balance
-- **Audit Trail**: Complete ledger for regulatory compliance
-- **Payment Methods**: PayPal, Bank Transfer, and Gift Card options
-
-## Future Enhancements
-
-- **On-Chain Integration**: Move to blockchain for decentralization
-- **Advanced AI**: Enhanced content quality analysis with backend pipeline
-- **Creator Marketplace**: Sponsorship and collaboration features
-- **Real TikTok API**: Direct TikTok API access for live data
-- **Enhanced Analytics**: More detailed performance insights and trends
-- **Social Features**: Creator discovery and community features
-
-## License
-
-MIT License - see LICENSE file for details.
-
----
-
-**Alto**: Transparency. Analytics. Compliance. Micro‑credits from viewers to you, in real time.
 
 ---
 
@@ -322,3 +332,7 @@ Processing videos/visual_hook_ideas.mp4 -> results/visual_hook_ideas-result.json
     ⚠️ Violations: []
 ✅ Video processed. Get full report at: results/visual_hook_ideas.mp4.json
 ```
+
+## License
+
+MIT License - see LICENSE file for details.
