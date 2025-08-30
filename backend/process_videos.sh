@@ -4,12 +4,15 @@ set -euo pipefail
 # Formatting options.
 GREEN_BOLD="\033[1;32m"
 BLUE_BOLD="\033[1;34m"
+YELLOW="\033[1;33m"
 RESET="\033[0m"
 
 # Directories.
 VIDEO_DIR="videos"
 OUTPUT_DIR="results"
 mkdir -p "$OUTPUT_DIR"
+
+echo -e "${YELLOW}NOTE:${RESET} If the programme exits before completion, an error might have occurred. See results/latest_video.json for error report.\n"
 
 for video in "$VIDEO_DIR"/*.[mM][pP]4; do
   if [ -f "$video" ]; then

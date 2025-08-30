@@ -1,0 +1,54 @@
+{
+  "evaluation": {
+    "summary": "The video features a person handling large stacks of money in what appears to be a luxury store, with an intriguing but unverified claim in the text overlay about money being weighed instead of counted. While visually engaging, it lacks proof for its central assertion.",
+    "scores": {
+      "hook": 0.9,
+      "retention": 0.5,
+      "clarity": 0.9,
+      "usefulness_originality": 0.2,
+      "audience_specific_value": 0.4,
+      "engagement": 0.8
+    },
+    "ai_generated": false,
+    "issues": [
+      {
+        "timestamp": "00:00",
+        "issue": "structure",
+        "description": "The video makes an intriguing claim ('they just weigh it') but provides no visual evidence to support it. The machine shown appears to be a money counter/detector, not a scale."
+      }
+    ],
+    "actionable_tips": [
+      "If the claim is factual, demonstrate the money actually being weighed to provide proof.",
+      "If the claim is satirical or a joke, add context or cues (e.g., humor tag) to clarify the intent.",
+      "Ensure the visual content directly supports or clarifies the textual claim to avoid misleading viewers."
+    ]
+  },
+  "compliance": {
+    "regulatory_flags": "misinformation",
+    "critical_violation": false,
+    "compliance_risk": 0.4,
+    "violations": [
+      {
+        "timestamp": "00:00",
+        "flag": "misinformation",
+        "description": "The video caption states, 'They don't even count the money at Chanel they just weigh it ???'. This claim is highly likely to be false. Legitimate businesses count money to ensure accurate transactions, for accounting, and for legal compliance. Weighing money is not a standard or accurate method for counting currency in retail and presents a factual inaccuracy regarding common business practices."
+      }
+    ]
+  },
+  "calculation": {
+    "base": 51.5,
+    "penalty": 9.6,
+    "bonus_niche": 0.0,
+    "bonus_aigc": 0.0,
+    "overall": 41.9,
+    "tier": "low"
+  },
+  "payout": {
+    "video_grade": "low",
+    "payout": 0.0,
+    "max_payout": 1.0,
+    "overall_score": 41.9,
+    "min_payout_threshold": 40.0
+  },
+  "model": "gemini-2.5-flash"
+}

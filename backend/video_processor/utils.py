@@ -4,7 +4,6 @@ from enum import Enum
 from typing import Any, Dict
 
 class GeminiModels(str, Enum):
-  GEMINI_2_5_FLASH_PRO = "gemini-2.5-flash-pro"
   GEMINI_2_5_FLASH = "gemini-2.5-flash"
   GEMINI_2_5_FLASH_LITE = "gemini-2.5-flash-lite"
   

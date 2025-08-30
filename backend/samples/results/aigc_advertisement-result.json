@@ -1,0 +1,47 @@
+{
+  "evaluation": {
+    "summary": "This video effectively showcases an AI-powered video enhancement tool with clear demonstrations and a concise explanation, providing high value for content creators looking to improve their video quality.",
+    "scores": {
+      "hook": 1.0,
+      "retention": 0.9,
+      "clarity": 1.0,
+      "usefulness_originality": 0.9,
+      "audience_specific_value": 1.0,
+      "engagement": 0.9
+    },
+    "ai_generated": false,
+    "issues": [],
+    "actionable_tips": [
+      "Consider demonstrating the AI enhancement on a wider variety of 'before' footage types (e.g., very dark, heavily pixelated) to showcase the tool's full capability.",
+      "Briefly mention another standout feature of Wondershare UniConverter that might appeal to creators to encourage further exploration of the software."
+    ]
+  },
+  "compliance": {
+    "regulatory_flags": "misinformation",
+    "critical_violation": false,
+    "compliance_risk": 0.5,
+    "violations": [
+      {
+        "timestamp": "00:00",
+        "flag": "misinformation",
+        "description": "The video promotes 'Wondershare UniConverter' and directs viewers to a link in the description. If this content is sponsored or paid promotion and is not clearly disclosed as an advertisement through TikTok's branded content tools, it could be considered misinformation regarding the commercial nature and intent of the content."
+      }
+    ]
+  },
+  "calculation": {
+    "base": 93.5,
+    "penalty": 15.0,
+    "bonus_niche": 6.0,
+    "bonus_aigc": 0.0,
+    "overall": 84.5,
+    "tier": "high"
+  },
+  "payout": {
+    "video_grade": "high",
+    "payout": 0.55,
+    "max_payout": 1.0,
+    "overall_score": 84.5,
+    "min_payout_threshold": 40.0
+  },
+  "model": "gemini-2.5-flash"
+}

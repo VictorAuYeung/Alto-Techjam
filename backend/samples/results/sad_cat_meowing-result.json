@@ -1,0 +1,48 @@
+{
+  "evaluation": {
+    "summary": "The video features a series of AI-generated images of sad, crying cartoon cats in the rain, set to melancholic 'meow-meow' music. While visually clear and emotionally evocative for its target audience, it lacks originality and narrative depth.",
+    "scores": {
+      "hook": 0.8,
+      "retention": 0.6,
+      "clarity": 0.9,
+      "usefulness_originality": 0.3,
+      "audience_specific_value": 0.7,
+      "engagement": 0.7
+    },
+    "ai_generated": true,
+    "issues": [
+      {
+        "timestamp": "00:00",
+        "issue": "structure",
+        "description": "The video is a repetitive slideshow of very similar AI-generated images, lacking narrative progression or significant variation."
+      }
+    ],
+    "actionable_tips": [
+      "Introduce a simple narrative or progression across the images to maintain engagement.",
+      "Vary the emotions or scenarios of the cats to add more depth.",
+      "Consider adding comforting text overlays or a unique story behind the 'sad cats' theme."
+    ]
+  },
+  "compliance": {
+    "regulatory_flags": "none",
+    "critical_violation": false,
+    "compliance_risk": 0.0,
+    "violations": []
+  },
+  "calculation": {
+    "base": 57.5,
+    "penalty": 0.0,
+    "bonus_niche": 0.0,
+    "bonus_aigc": 0.0,
+    "overall": 57.5,
+    "tier": "low"
+  },
+  "payout": {
+    "video_grade": "low",
+    "payout": 0.09,
+    "max_payout": 1.0,
+    "overall_score": 57.5,
+    "min_payout_threshold": 40.0
+  },
+  "model": "gemini-2.5-flash"
+}
