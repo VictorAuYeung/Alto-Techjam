@@ -158,17 +158,12 @@ export function CreatorSignup(
             className={`CTAButton ${!canSubmit ? 'CTAButton--disabled' : ''}`}
             bindtap={submit}
           >
-            <image src={arrowIcon} className="CTAButtonIcon" />
             <text className="CTAButtonText">Create account</text>
           </view>
           <view
             className="CTAButton CTAButton--secondary"
             bindtap={props.onBack}
           >
-            <image
-              src={arrowIcon}
-              className="CTAButtonIcon CTAButtonIcon--back"
-            />
             <text className="CTAButtonText">Back</text>
           </view>
         </view>

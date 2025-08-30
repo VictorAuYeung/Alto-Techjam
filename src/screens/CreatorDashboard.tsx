@@ -1,7 +1,9 @@
 /* eslint-disable react/no-unknown-property */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import '@lynx-js/react';
 import arrowIcon from '../assets/arrow.png';
+import backArrowIcon from '../assets/icons/back-arrow.png';
+import graphIcon from '../assets/icons/graph.png';
 import { mockAnalyzeVideoAPI } from '../services/videoAnalysis.js';
 import type { VideoAnalysisRequest } from '../services/videoAnalysis.js';
 import {
@@ -15,12 +17,45 @@ import {
   type BalanceHistoryPoint
 } from '../services/wallet.js';
 import altoLogo from '../assets/logos/alto-logo.png';
+import coinIcon from '../assets/coins/coin-banana.png';
 import { CashOut } from './CashOut.js';
 import { BalanceChart } from '../components/BalanceChart.js';
 import { BarChart } from '../components/BarChart.js';
 import { HorizontalBarChart } from '../components/HorizontalBarChart.js';
 
+// Navigation icons
+import homeWhite from '../assets/nav-bar/home-white.png';
+import homeYellow from '../assets/nav-bar/home-yellow.png';
+import videoWhite from '../assets/nav-bar/video-white.png';
+import videoYellow from '../assets/nav-bar/video-yellow.png';
+import receiptsWhite from '../assets/nav-bar/receipts-white.png';
+import receiptsYellow from '../assets/nav-bar/receipts-yellow.png';
+import analyticsWhite from '../assets/nav-bar/analytics-white.png';
+import analyticsYellow from '../assets/nav-bar/analytics-yellow.png';
+
 type Tab = 'overview' | 'videos' | 'receipts' | 'analytics';
+
+// Image-based icons for bottom navigation
+const HomeIcon = ({ isActive }: { isActive: boolean }) => (
+  <view className="NavIconContainer">
+    <image src={isActive ? homeYellow : homeWhite} className="NavIcon"/>
+  </view>
+);
+const VideosIcon = ({ isActive }: { isActive: boolean }) => (
+  <view className="NavIconContainer">
+    <image src={isActive ? videoYellow : videoWhite} className="NavIcon" style={{ width: '30px', height: '30px' }}/>
+  </view>
+);
+const ReceiptsIcon = ({ isActive }: { isActive: boolean }) => (
+  <view className="NavIconContainer">
+    <image src={isActive ? receiptsYellow : receiptsWhite} className="NavIcon" style={{ width: '30px', height: '30px' }}/>
+  </view>
+);
+const AnalyticsIcon = ({ isActive }: { isActive: boolean }) => (
+  <view className="NavIconContainer">
+    <image src={isActive ? analyticsYellow : analyticsWhite} className="NavIcon"/>
+  </view>
+);  
 
 interface VideoData {
   id: string;
@@ -65,9 +100,14 @@ export function CreatorDashboard(
   });
   const [lastUpdated, setLastUpdated] = useState(new Date());
   const [showCashOut, setShowCashOut] = useState(false);
+  const [showProfileScreen, setShowProfileScreen] = useState(false);
+  const walletCardRef = useRef<any>(null);
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [balanceHistory, setBalanceHistory] = useState<BalanceHistoryPoint[]>([]);
+  
+  // Exchange rate state
+  const [exchangeRate, setExchangeRate] = useState(0.25); // 1 Nana = $0.25 USD
   
   // Video management state
   const [videos, setVideos] = useState<VideoData[]>([
@@ -106,7 +146,21 @@ export function CreatorDashboard(
     const interval = setInterval(() => {
       setLastUpdated(new Date());
     }, 30000);
-    return () => clearInterval(interval);
+
+    // Scroll to wallet card after coin animation
+    const scrollTimer = setTimeout(() => {
+      if (walletCardRef.current) {
+        walletCardRef.current.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }
+    }, 2000); // Wait 2 seconds for coin spin animation
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(scrollTimer);
+    };
   }, []);
 
   const loadWalletData = async () => {
@@ -149,6 +203,19 @@ export function CreatorDashboard(
 
   const formatNanas = (amount: number) => {
     return `${amount.toFixed(3)} Nanas`;
+  };
+
+  const formatUSD = (amount: number) => {
+    return `$${amount.toFixed(2)}`;
+  };
+
+  const handleLogout = () => {
+    setShowProfileScreen(false);
+    props.onBack(); // This will take us back to the main page
+  };
+
+  const handleProfileClick = () => {
+    setShowProfileScreen(true);
   };
 
   // Extract video ID from TikTok URL
@@ -349,16 +416,13 @@ export function CreatorDashboard(
   };
 
   const renderOverview = () => (
-    <view className="DashboardSection">
-      <view className="WalletCard">
+    <scroll-view className="DashboardSection" scroll-y>
+      <view className="SpinningCoinContainer">
+        <image src={coinIcon} className="SpinningCoin" />
+      </view>
+      <view className="WalletCard" ref={walletCardRef}>
+        <image src={graphIcon} className="WalletCardBackground" />
         <view className="WalletHeader">
-          <view className="CreatorInfo">
-            <image src={altoLogo} className="CreatorAvatar" />
-            <view className="CreatorDetails">
-              <text className="CreatorName">Alex Chen</text>
-              <text className="CreatorHandle">@alexcreates</text>
-            </view>
-          </view>
           <text className="LastUpdated">
             Last updated: {lastUpdated.toLocaleTimeString()}
           </text>
@@ -367,10 +431,12 @@ export function CreatorDashboard(
         <view className="WalletBalance">
           <text className="BalanceLabel">Total Wallet Balance</text>
           <text className="BalanceAmount">{formatNanas(walletBalance.nanas)}</text>
+          <text className="ExchangeRate">1 Nana = {formatUSD(exchangeRate)} USD</text>
           {walletBalance.pendingNanas > 0 && (
             <text className="PendingCredits">+{formatNanas(walletBalance.pendingNanas)} pending</text>
           )}
           <view className="CashOutButton" bindtap={() => setShowCashOut(true)}>
+            <image src={coinIcon} className="CashOutButtonIcon" />
             <text className="CashOutButtonText">Cash Out</text>
           </view>
         </view>
@@ -403,7 +469,7 @@ export function CreatorDashboard(
           <text className="StatLabel">Avg QSE Score</text>
         </view>
       </view>
-    </view>
+    </scroll-view>
   );
 
   const renderVideos = () => (
@@ -648,45 +714,14 @@ export function CreatorDashboard(
     <view className="CreatorDashboard">
       <view className="DashboardHeader">
         <view className="HeaderLeft">
-          <view className="BackButton" bindtap={props.onBack}>
-            <image src={arrowIcon} className="BackIcon" />
-            <text className="BackText">Debug</text>
-          </view>
         </view>
         <view className="HeaderCenter">
           <image src={altoLogo} className="DashboardLogo" />
         </view>
         <view className="HeaderRight">
-          <view className="ProfileIcon">
+          <view className="ProfileIcon" bindtap={handleProfileClick}>
             <image src={altoLogo} className="ProfileAvatar" />
           </view>
-        </view>
-      </view>
-
-      <view className="TabNavigation">
-        <view 
-          className={`Tab ${activeTab === 'overview' ? 'Tab--active' : ''}`}
-          bindtap={() => setActiveTab('overview')}
-        >
-          <text className="TabText">Overview</text>
-        </view>
-        <view 
-          className={`Tab ${activeTab === 'videos' ? 'Tab--active' : ''}`}
-          bindtap={() => setActiveTab('videos')}
-        >
-          <text className="TabText">Videos</text>
-        </view>
-        <view 
-          className={`Tab ${activeTab === 'receipts' ? 'Tab--active' : ''}`}
-          bindtap={() => setActiveTab('receipts')}
-        >
-          <text className="TabText">Receipts</text>
-        </view>
-        <view 
-          className={`Tab ${activeTab === 'analytics' ? 'Tab--active' : ''}`}
-          bindtap={() => setActiveTab('analytics')}
-        >
-          <text className="TabText">Analytics</text>
         </view>
       </view>
 
@@ -695,6 +730,37 @@ export function CreatorDashboard(
         {activeTab === 'videos' && renderVideos()}
         {activeTab === 'receipts' && renderReceipts()}
         {activeTab === 'analytics' && renderAnalytics()}
+      </view>
+
+      <view className="BottomNavigation">
+        <view 
+          className={`BottomNavItem ${activeTab === 'overview' ? 'BottomNavItem--active' : ''}`}
+          bindtap={() => setActiveTab('overview')}
+        >
+          <HomeIcon isActive={activeTab === 'overview'} />
+          <text className="BottomNavText">Home</text>
+        </view>
+        <view 
+          className={`BottomNavItem ${activeTab === 'videos' ? 'BottomNavItem--active' : ''}`}
+          bindtap={() => setActiveTab('videos')}
+        >
+          <VideosIcon isActive={activeTab === 'videos'} />
+          <text className="BottomNavText">Videos</text>
+        </view>
+        <view 
+          className={`BottomNavItem ${activeTab === 'receipts' ? 'BottomNavItem--active' : ''}`}
+          bindtap={() => setActiveTab('receipts')}
+        >
+          <ReceiptsIcon isActive={activeTab === 'receipts'} />
+          <text className="BottomNavText">Receipts</text>
+        </view>
+        <view 
+          className={`BottomNavItem ${activeTab === 'analytics' ? 'BottomNavItem--active' : ''}`}
+          bindtap={() => setActiveTab('analytics')}
+        >
+          <AnalyticsIcon isActive={activeTab === 'analytics'} />
+          <text className="BottomNavText">Analytics</text>
+        </view>
       </view>
 
       {showCashOut && (
@@ -708,6 +774,62 @@ export function CreatorDashboard(
             loadBalanceHistory();
           }}
         />
+      )}
+
+      {showProfileScreen && (
+        <view className="ProfileScreen" style="background: #000; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; padding: 20px;">
+          <view className="ProfileScreenContent" style="flex: 1; display: flex; flex-direction: column; max-width: 400px; margin: 0 auto; width: 100%;">
+            <view className="ProfileHeader" style="display: flex; align-items: center; margin-bottom: 30px; position: relative; padding-top: 40px;">
+              <view className="BackButton" bindtap={() => setShowProfileScreen(false)} style="padding: 8px; cursor: pointer;">
+                <image src={backArrowIcon} style="width: 24px; height: 24px;" />
+              </view>
+              <text className="ProfileTitle" style="position: absolute; left: 50%; transform: translateX(-50%); font-size: 20px; font-weight: 700; color: #fff;">Profile</text>
+            </view>
+            
+            <view className="ProfileInfo" style="text-align: center; margin-bottom: 30px; display: flex; flex-direction: column; align-items: center;">
+              <image src={altoLogo} className="ProfileLargeAvatar" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #ffd700; margin-bottom: 16px;" />
+              <text className="ProfileName" style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 4px;">Alex Chen</text>
+              <text className="ProfileUsername" style="font-size: 16px; color: rgba(255, 255, 255, 0.7); margin-bottom: 12px;">@alexcreates</text>
+              <text className="ProfileBio" style="font-size: 14px; color: rgba(255, 255, 255, 0.8); line-height: 1.5; max-width: 300px; text-align: center;">Content creator passionate about sharing knowledge and creativity</text>
+            </view>
+
+            <view className="ProfileStats">
+              <view className="ProfileStat">
+                <text className="StatNumber">1,247</text>
+                <text className="StatLabel">Followers</text>
+              </view>
+              <view className="ProfileStat">
+                <text className="StatNumber">89</text>
+                <text className="StatLabel">Videos</text>
+              </view>
+              <view className="ProfileStat">
+                <text className="StatNumber">87%</text>
+                <text className="StatLabel">Avg QSE</text>
+              </view>
+            </view>
+
+            <view className="ProfileDetails">
+              <view className="DetailItem">
+                <text className="DetailLabel">Member Since</text>
+                <text className="DetailValue">March 2024</text>
+              </view>
+              <view className="DetailItem">
+                <text className="DetailLabel">Creator Tier</text>
+                <text className="DetailValue">Small Creator</text>
+              </view>
+              <view className="DetailItem">
+                <text className="DetailLabel">Total Earned</text>
+                <text className="DetailValue">{formatNanas(walletBalance.totalEarned)}</text>
+              </view>
+            </view>
+
+            <view className="LogoutSection" style="margin-top: 20px; padding-top: 20px;">
+              <view className="CTAButton" bindtap={handleLogout} style="width: 100%; justify-content: center;">
+                <text className="CTAButtonText">Logout</text>
+              </view>
+            </view>
+          </view>
+        </view>
       )}
     </view>
   );
