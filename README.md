@@ -250,7 +250,7 @@ vim results/your_video.json
 ## 🔍 Sample Results (Full reports can be found in `samples/reports`)
 
 ### **Sample 1** (AIGC Brainrot Content): Meow Meow Meow Meow
-[▶️ Watch Here](samples/videos/sad_cat_meowing.mp4)
+[▶️ Watch Here](backend/samples/videos/sad_cat_meowing.mp4)
 
 Output (Terminal):
 ```
@@ -262,7 +262,7 @@ Processing videos/sad_cat_meowing.mp4 -> results/sad_cat_meowing-result.json
 ```
 
 ### **Sample 2** (AIGC Promotional / Educational Content): Advertisement on AI Video Enhancer
-[▶️ Watch Here](samples/videos/advertisement_on_ai_video_enhancer.mp4)
+[▶️ Watch Here](backend/samples/videos/advertisement_on_ai_video_enhancer.mp4)
 
 Output (Terminal):
 ```
@@ -274,7 +274,7 @@ Processing videos/aigc_advertisement.MP4 -> results/aigc_advertisement-result.js
 ```
 
 ### **Sample 3** (AIGC Educational Content): Road Roller Song
-[▶️ Watch Here](samples/videos/road_roller_song.mp4)
+[▶️ Watch Here](backend/samples/videos/road_roller_song.mp4)
 
 Output (Terminal):
 ```
@@ -286,7 +286,7 @@ Processing videos/road_roller_song.mp4 -> results/road_roller_song-result.json
 ```
 
 ### Sample 4 (HGC Brainrot): Chanel Weighing Cash
-[▶️ Watch Here](samples/videos/chanel_weighing_cash.mp4)
+[▶️ Watch Here](backend/samples/videos/chanel_weighing_cash.mp4)
 
 Output (Terminal):
 ```
@@ -298,7 +298,7 @@ Processing videos/chanel_weighing_cash.mp4 -> results/chanel_weighing_cash-resul
 ```
 
 ### Sample 5 (HGC Wholesome Content): Sticking Tongue Out Trend
-[▶️ Watch Here](samples/videos/sticking_out_tongue_trend.mp4)
+[▶️ Watch Here](backend/samples/videos/sticking_out_tongue_trend.mp4)
 
 Output (Terminal):
 ```
@@ -310,7 +310,7 @@ Processing videos/sticking-out-tongue-trend.mp4 -> results/sticking-out-tongue-t
 ```
 
 ### Sample 6 (HGC Niche Content): BMWs Cruising
-[▶️ Watch Here](samples/videos/bmws_cruising.mp4)
+[▶️ Watch Here](backend/samples/videos/bmws_cruising.mp4)
 
 Output (Terminal):
 ```
@@ -322,7 +322,7 @@ Processing videos/bmws_cruising.mp4 -> results/bmws_cruising-result.json
 ```
 
 ### Sample 7 (HGC Educational Content): Visual Hook Ideas
-[▶️ Watch Here](samples/videos/visual_hook_ideas.mp4)
+[▶️ Watch Here](backend/samples/videos/visual_hook_ideas.mp4)
 
 Output (Terminal):
 ```
